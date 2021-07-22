@@ -1,0 +1,48 @@
+.header__menu {
+    align-self: center;
+    text-decoration: none;
+    list-style-type: none;
+    display: flex;
+    opacity: 1;
+}
+
+.header__button {
+    align-self: center;
+}
+
+.button {
+    border: 0;
+    background-color: inherit;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 16px;
+    transition: opacity 0.7s linear;
+}
+
+.button:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.button_signin {
+    background-color: #3DDC84;
+    color: #000000;
+    border: 0;
+    width: 76px;
+    height: 32px;
+    padding: 0;
+    border-radius: 3px;
+    margin-left: 30px;
+    transition: opacity 0.7s linear;
+}
+
+.header__menu_movies_account {
+    padding-left: 40px;
+}
+
+.button_account {
+    background-color: #313131;
+    border: 0;
+    padding: 7px 7px;
+    border-radius: 5px;
+}
