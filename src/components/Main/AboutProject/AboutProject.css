@@ -1,8 +1,117 @@
-.about-project {
+.diploma__about {
     height: 100vh;
     max-height: 608px;
+    min-height: 608px;
     background-color: #202020;
     margin: 0;
     padding: 0;
-    display: flex;
+    color:#ffffff;
+}
+
+.diploma__heading {
+    font-size: 22px;
+    line-height: 1.2em;
+    font-weight: 100;
+    margin: 0;
+    padding: 100px 0 20px 0;
+    border-bottom: 1px solid #ffffff;
+}
+
+.diploma__description {
+    display: grid;
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 80px 0 105px 0;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    column-gap: 70px;
+}
+
+.diploma__time {
+    display: grid;
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: minmax(100px, 1fr) minmax(184px, 912px);
+    grid-template-rows: 36px 1fr;
+    text-align: center;
+    align-items: center;
+}
+
+.diploma__back {
+    background-color: #3ddc84;
+    color: #000000;
+}
+
+.diploma__front {
+    background-color: #303030;
+}
+
+.diploma__description_heading {
+    font-size: 20px;
+    line-height: 1.2em;
+    font-weight: 100;
+}
+
+.diploma__description_subheading {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 100;
+}
+
+.dates {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.2em;
+    box-sizing: border-box;
+    padding-top: 9px;
+    height: 36px;
+}
+
+.backfront {
+    font-size: 14px;
+    line-height: 17px;
+    color: #8b8b8b;
+    background-color: inherit;
+    margin: 0;
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .diploma__heading {
+        padding: 75px 0 20px 0;
+    }
+    .diploma__description {
+        padding: 70px 0 95px 0;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .diploma__heading {
+        font-size: 18px;
+        padding: 75px 0 20px 0;
+    }
+    .diploma__description {
+        padding: 40px 0 71px 0;
+    }
+    .diploma__description_heading {
+        font-size: 18px;
+        padding-top: 26px;
+    }
+    .diploma__description_subheading {
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 417px) {
+    .diploma__heading {
+        padding: 50px 0 20px 0;
+    }
+    .diploma__description {
+        padding: 22px 0 50px 0;
+    }
+    .diploma__description_heading {
+        padding-top: 17px;
+    }
 }

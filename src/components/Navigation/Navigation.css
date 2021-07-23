@@ -4,6 +4,7 @@
     list-style-type: none;
     display: flex;
     opacity: 1;
+    margin: 0;
 }
 
 .header__button {
@@ -45,4 +46,26 @@
     border: 0;
     padding: 7px 7px;
     border-radius: 5px;
+}
+
+.header__menu_mobile {
+    display: none;
+    transition: opacity 0.7s linear;
+}
+
+.header__menu_mobile:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .header__menu_movies_account {
+        display: none;
+    }
+    .header__menu_movies {
+        display: none;
+    }
+    .header__menu_mobile {
+        display: block;
+    }
 }

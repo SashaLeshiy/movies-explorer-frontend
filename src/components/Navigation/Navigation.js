@@ -1,5 +1,6 @@
 import React from 'react';
-import account from '../../images/account_icon.svg';
+// import account from '../../images/account_icon.svg';
+// import burger from '../../images/burger_icon.svg';
 
 function Navigation() {
       return (
@@ -17,7 +18,8 @@ function Navigation() {
                   <li className="header__button header__menu_movies_account">
                         <button className="button">Аккаунт</button>
                         <button className="button_account"><img src={account} alt="иконка аккаунта" /></button>
-                  </li> */}
+                  </li>
+                  <li className="header__menu_mobile"><img src={burger} alt="иконка бургер" /></li> */}
             </ul>)
       );
 }
