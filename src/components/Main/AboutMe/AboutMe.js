@@ -17,23 +17,23 @@ function AboutMe() {
                                     После того, как закончил курсы по Веб-разработке планирую написать пару приложений для портфолио
                                     и найти удаленную работу.</p>
                               <ul className="about__links">
-                                    <li><a className="about__link" href="https://github.com/SashaLeshiy">Github</a></li>
-                                    <li><a className="about__link" href="https://www.facebook.com/alessandro.leshiy">Facebook</a></li>
+                                    <li><a className="about__link" target="_blank" rel="noopener noreferrer" href="https://github.com/SashaLeshiy">Github</a></li>
+                                    <li><a className="about__link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/alessandro.leshiy">Facebook</a></li>
                               </ul>
                         </div>
                         <div className="about__portfolio">
                               <h3 className="about__portfolio_heading">Портфолио</h3>
                               <ul className="about__portfolio_links">
                                     <li className="about__portfolio_link">
-                                         <a className="about__portfolio_out" href="zomlesh.nomoredomains.club">Статичный сайт</a>
+                                         <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" href="https://zomlesh.nomoredomains.club">Статичный сайт</a>
                                          <img src={arrow} alt="стрелка" />
                                     </li>
                                     <li className="about__portfolio_link">
-                                         <a className="about__portfolio_out" href="zomlesh.nomoredomains.club">Адаптивный сайт</a>
+                                         <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" href="https://zomlesh.nomoredomains.club">Адаптивный сайт</a>
                                          <img src={arrow} alt="стрелка" />
                                     </li>
                                     <li className="about__portfolio_link last-link">
-                                         <a className="about__portfolio_out" href="zomlesh.nomoredomains.club">Одностраничное приложение</a>
+                                         <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" href="https://zomlesh.nomoredomains.club">Одностраничное приложение</a>
                                          <img src={arrow} alt="стрелка" />
                                     </li>
                               </ul>
