@@ -1,8 +1,10 @@
 .about {
-    min-height: 100vh;
+    height: 100vh;
+    max-height: 1079px;
+    min-height: 1079px;
     background-color: #202020;
     margin: 0;
-    padding: 0;
+    padding: 0 0 110px;
 }
 
 .about__heading {
@@ -87,6 +89,39 @@
     color: #8b8b8b;
 }
 
+.about__portfolio_links {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.about__portfolio_link {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #424242;
+    padding: 16px 0;
+}
+
+.last-link {
+    border-bottom: 0;
+}
+
+.about__portfolio_out {
+    text-decoration: none;
+    color: #ffffff;
+    transition: opacity 0.7s linear;
+    font-size: 30px;
+    line-height: 50px;
+    font-weight: 100;
+}
+
+.about__portfolio_out:hover {
+    opacity: 0.5;
+}
+
+
 @media screen and (max-width: 768px) {
     .about__heading {
         padding: 75px 0 20px 0;
@@ -110,10 +145,16 @@
         line-height: 18px;
         max-width: 364px;
     }
-    
+    .about__portfolio_out {
+        font-size: 28px;
+    }
 }
 
 @media screen and (max-width: 550px) {
+    .about {
+        min-height: 1198px;
+        padding-bottom: 160px;
+    }
     .about__me {
         grid-template-columns: 1fr;
     }
@@ -133,6 +174,13 @@
     }
     .about__links {
         padding-top: 30px;
+    }
+}
+
+@media screen and (max-width: 488px) {
+    .about__portfolio_out {
+        font-size: 20px;
+        line-height: 28px;
     }
 }
 
@@ -161,5 +209,12 @@
     .about__career {
         font-size: 11px;
         line-height: 16px;
+    }
+    .about__portfolio_heading {
+        font-size: 14px;
+    }
+    .about__portfolio_out {
+        font-size: 18px;
+        line-height: 28px;
     }
 }
