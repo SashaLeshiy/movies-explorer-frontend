@@ -8,3 +8,5 @@
 @import url('../src/components/Main/AboutMe/AboutMe.css');
 @import url('../src/components/Navigation/Navigation.css');
 @import url('../src/components/Footer/Footer.css');
+@import url('../src/components/Movies/Movies.css');
+@import url('../src/components/Movies/SearchForm/SearchForm.css');

@@ -191,13 +191,16 @@
     }
 }
 
-@media screen and (max-width: 417px) {
+@media screen and (max-width: 417px) { 
     .about__heading {
         padding: 50px 0 20px 0;
     }
 }
 
 @media screen and (max-width: 320px) {
+    .about {
+        padding-bottom: 0;
+    }
     .about__me {
         grid-template-columns: 1fr;
         padding: 65px 0;

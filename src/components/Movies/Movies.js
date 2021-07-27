@@ -1,10 +1,11 @@
 import React from 'react';
+import SearchForm from './SearchForm/SearchForm'
 
 function Movies() {
-      return (
-            (<footer className="footer section">
-                  <p className="footer__copyright">&copy; {new Date().getFullYear()}</p>
-            </footer>)
-      );
+       return (
+            (<section className="movies">
+                  <SearchForm />
+            </section>) 
+       );
 }
 export default Movies;

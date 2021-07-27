@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
 import Header from "../Header/Header";
 import Register from "../Register/Register";
@@ -10,11 +10,16 @@ import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 
-
 function App() {
+  const history = useHistory();
+
+  function linkToMovies() {
+    history.push('/movies');
+  }
+
   return (
     <div className="page">
-      <Header />
+      <Header linkToMovies={linkToMovies} />
       <Switch >
         <Route exact path="/signup">
           <Register />
@@ -31,7 +36,8 @@ function App() {
         <Route exact path="/profile">
           <Profile />
         </Route>
-        <Route path="/" component={Main}>
+        <Route path="/" component={Main}
+        >
         </Route>
       </Switch>
       <Footer />
