@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
 import Header from "../Header/Header";
@@ -12,14 +12,17 @@ import Main from "../Main/Main";
 
 function App() {
   const history = useHistory();
+  const [loggedIn, setLoggedIn] = useState(false); 
 
   function linkToMovies() {
+    setLoggedIn(true);
     history.push('/movies');
   }
 
+
   return (
     <div className="page">
-      <Header linkToMovies={linkToMovies} />
+      <Header linkToMovies={linkToMovies} loggedIn={loggedIn} />
       <Switch >
         <Route exact path="/signup">
           <Register />
@@ -27,7 +30,7 @@ function App() {
         <Route exact path="/signin" >
           <Login />
         </Route>
-        <Route exact path="/movies">
+        <Route exact path="/movies" >
           <Movies />
         </Route>
         <Route exact path="/saved-movies">
@@ -36,8 +39,7 @@ function App() {
         <Route exact path="/profile">
           <Profile />
         </Route>
-        <Route path="/" component={Main}
-        >
+        <Route path="/" component={Main} >
         </Route>
       </Switch>
       <Footer />

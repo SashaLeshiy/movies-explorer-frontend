@@ -2,9 +2,8 @@ import React from 'react';
 
 function SearchForm() {
     return (
-        (<section className="searchForm">
-            <div className="content">
-                <form name="searchForm" className="searchForm">
+        (<div className="searchForm">
+                <form name="searchForm" className="searchForm__form">
                     <input className="searchForm__input" type="text" value="Фильм" />
                     <button className="searchForm__button" type="submit">Поиск</button>
                     <label className="searchForm__checkbox">
@@ -13,9 +12,7 @@ function SearchForm() {
                         <span className="searchForm__checkbox_heading">Короткометражки</span>
                     </label>
                 </form>
-                
-            </div>
-        </section>) 
+        </div>) 
    );
 }
 

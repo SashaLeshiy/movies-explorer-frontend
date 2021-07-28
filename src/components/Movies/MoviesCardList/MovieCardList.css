@@ -1,0 +1,13 @@
+.movieCardList {
+    padding: 50px 0 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 6px;
+}
+
+@media screen and (max-width: 665px) {
+    .movieCardList {
+        justify-content: center;
+    }
+}

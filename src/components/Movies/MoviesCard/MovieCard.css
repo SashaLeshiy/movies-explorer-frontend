@@ -1,0 +1,71 @@
+.movieCard {
+    width: 270px;
+    display: grid;
+    padding-bottom: 40px;
+}
+
+.movieCard__img {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.movieCard__heading {
+    font-size: 13px;
+    line-height: 1.2em;
+    color: #ffffff;
+    font-weight: 100;
+    padding-bottom: 30px;
+    margin: 14px 0 0 0;
+}
+
+.movieCard__like {
+    width: 24px;
+    height: 24px;
+    align-self: center;
+    justify-self: end;
+    background-color: #313131;
+    border: 0;
+    border-radius: 50%;
+    background-image: url("../../../images/heart_icon.svg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    border: 0;
+    transition: .5s linear;
+    margin-top: -17px;
+}
+
+.movieCard__like:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.movieCard__time {
+    font-size: 11px;
+    line-height: 1.2em;
+    color: #8b8b8b;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    margin: 0;
+    padding-top: 8px;
+    border-top: 1px solid #8b8b8b;
+}
+
+@media screen and (max-width: 881px) {
+    .movieCard {
+        width: 339px;
+    }
+    .movieCard__img {
+        width: 339px;
+    }
+}
+
+@media screen and (max-width: 743px) {
+    .movieCard {
+        width: 300px;
+    }
+    .movieCard__img {
+        width: 300px;
+    }
+}
+

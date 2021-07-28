@@ -10,3 +10,5 @@
 @import url('../src/components/Footer/Footer.css');
 @import url('../src/components/Movies/Movies.css');
 @import url('../src/components/Movies/SearchForm/SearchForm.css');
+@import url('../src/components/Movies/MoviesCardList/MovieCardList.css');
+@import url('../src/components/Movies/MoviesCard/MovieCard.css');

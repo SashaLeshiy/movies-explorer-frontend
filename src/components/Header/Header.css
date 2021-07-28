@@ -15,3 +15,7 @@
 .header__logo:hover {
     opacity: 0.5;
 }
+
+.header__dark {
+    background-color: #202020;
+}
