@@ -50,17 +50,26 @@ function App() {
     setMobileMenuPopupOpen(false);
   }
 
+  function linkToHome() {
+    setLoggedIn(false);
+    setMobileMenuPopupOpen(false);
+    history.push('/');
+  }
+
   function linkToMovies() {
     setLoggedIn(true);
     setSavedMoviesPage(false);
+    setMobileMenuPopupOpen(false);
     history.push('/movies');
   }
 
   function linkToSavedMovies() {
     setSavedMoviesPage(true);
     setLoggedIn(true);
+    setMobileMenuPopupOpen(false);
     history.push('/saved-movies');
   }
+
 
   return (
     <div className="page">
@@ -70,6 +79,7 @@ function App() {
         loggedIn={loggedIn} 
         isMobileMenu={isMobileMenu}
         openMobileMenu={handleMobileMenuOpen}
+        linkToHome={linkToHome}
         />
       <Switch >
         <Route exact path="/signup">
@@ -91,7 +101,13 @@ function App() {
         </Route>
       </Switch>
       <Footer />
-      <MobileMenuPopup isMobileMenu={isMobileMenu} closeMobileMenu={mobileMenuClose} />
+      <MobileMenuPopup 
+      isMobileMenu={isMobileMenu} 
+      closeMobileMenu={mobileMenuClose}
+      linkToMovies={linkToMovies}
+      linkToSavedMovies={linkToSavedMovies}
+      linkToHome={linkToHome}
+       />
     </div>
   );
 }
