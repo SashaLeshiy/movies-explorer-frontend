@@ -13,7 +13,8 @@ import MobileMenuPopup from '../MobileMenuPopup/MobileMenuPopup';
 
 function App() {
   const history = useHistory();
-  const [loggedIn, setLoggedIn] = useState(false); 
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isMobileMenu, setMobileMenuPopupOpen] = useState(false);
   const [savedMoviesPage, setSavedMoviesPage] = useState(false);
   const [movies, setMovies] = useState([
     { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
@@ -38,8 +39,16 @@ function App() {
     { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
     { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
     { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
-    
+
   ]);
+
+  function handleMobileMenuOpen () {
+    setMobileMenuPopupOpen(true);
+  }
+
+  function mobileMenuClose () {
+    setMobileMenuPopupOpen(false);
+  }
 
   function linkToMovies() {
     setLoggedIn(true);
@@ -55,7 +64,13 @@ function App() {
 
   return (
     <div className="page">
-      <Header linkToMovies={linkToMovies} linkToSavedMovies={linkToSavedMovies} loggedIn={loggedIn} />
+      <Header
+        linkToMovies={linkToMovies}
+        linkToSavedMovies={linkToSavedMovies}
+        loggedIn={loggedIn} 
+        isMobileMenu={isMobileMenu}
+        openMobileMenu={handleMobileMenuOpen}
+        />
       <Switch >
         <Route exact path="/signup">
           <Register />
@@ -76,7 +91,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
-      <MobileMenuPopup />
+      <MobileMenuPopup isMobileMenu={isMobileMenu} closeMobileMenu={mobileMenuClose} />
     </div>
   );
 }
