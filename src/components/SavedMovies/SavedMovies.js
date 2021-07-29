@@ -1,10 +1,15 @@
 import React from 'react';
+import MovieCardList from '../Movies/MoviesCardList/MovieCardList';
+import SearchForm from '../Movies/SearchForm/SearchForm';
 
-function SavedMovies() {
+function SavedMovies({ movies, savedMoviesPage }) {
       return (
-            (<footer className="footer section">
-                  <p className="footer__copyright">&copy; {new Date().getFullYear()}</p>
-            </footer>)
+            <section className="savedMovies">
+                  <div className="content">
+                  <SearchForm />
+                  <MovieCardList movies={movies} savedMoviesPage={savedMoviesPage} />
+                  </div>
+            </section>
       );
 }
 export default SavedMovies;

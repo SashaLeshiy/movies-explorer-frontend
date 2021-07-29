@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
 import Header from "../Header/Header";
@@ -9,20 +9,53 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
+import MobileMenuPopup from '../MobileMenuPopup/MobileMenuPopup';
 
 function App() {
   const history = useHistory();
   const [loggedIn, setLoggedIn] = useState(false); 
+  const [savedMoviesPage, setSavedMoviesPage] = useState(false);
+  const [movies, setMovies] = useState([
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+  ]);
+
+  const [savedMovies, setSavedMovies] = useState([
+    { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
+    { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
+    { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
+    
+  ]);
 
   function linkToMovies() {
     setLoggedIn(true);
+    setSavedMoviesPage(false);
     history.push('/movies');
   }
 
+  function linkToSavedMovies() {
+    setSavedMoviesPage(true);
+    setLoggedIn(true);
+    history.push('/saved-movies');
+  }
 
   return (
     <div className="page">
-      <Header linkToMovies={linkToMovies} loggedIn={loggedIn} />
+      <Header linkToMovies={linkToMovies} linkToSavedMovies={linkToSavedMovies} loggedIn={loggedIn} />
       <Switch >
         <Route exact path="/signup">
           <Register />
@@ -31,10 +64,10 @@ function App() {
           <Login />
         </Route>
         <Route exact path="/movies" >
-          <Movies />
+          <Movies movies={movies} savedMoviesPage={savedMoviesPage} />
         </Route>
         <Route exact path="/saved-movies">
-          <SavedMovies />
+          <SavedMovies movies={savedMovies} savedMoviesPage={savedMoviesPage} />
         </Route>
         <Route exact path="/profile">
           <Profile />
@@ -43,6 +76,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+      <MobileMenuPopup />
     </div>
   );
 }

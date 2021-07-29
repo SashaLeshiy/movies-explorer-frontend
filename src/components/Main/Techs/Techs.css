@@ -1,5 +1,4 @@
 .techs {
-    height: 100vh;
     max-height: 625px;
     min-height: 625px;
     background-color: #272727;
@@ -95,9 +94,11 @@
 @media screen and (max-width: 320px) {
     .techs {
         max-height: 651px;
+        background-color: #202020;
     }
     .techs__icons {
         grid-template-columns: repeat(2, 84px);
         justify-content: center;
+        padding-bottom: 60px;
     }
 }

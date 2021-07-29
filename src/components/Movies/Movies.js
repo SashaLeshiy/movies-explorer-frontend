@@ -3,13 +3,13 @@ import MovieCardList from './MoviesCardList/MovieCardList';
 import SearchForm from './SearchForm/SearchForm'
 // import Preloader from './Preloader/Preloader';
 
-function Movies() {
+function Movies({ movies, savedMoviesPage }) {
        return (
             (<section className="movies">
                   <div className="content">
                   <SearchForm />
                   {/* <Preloader /> */}
-                  <MovieCardList />
+                  <MovieCardList movies={movies} savedMoviesPage={savedMoviesPage} />
                   </div>
             </section>) 
        );
