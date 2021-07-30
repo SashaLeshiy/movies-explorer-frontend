@@ -5,6 +5,7 @@ function Navigation({ linkToMovies,
       linkToSavedMovies, 
       linkToProfile, 
       linkToRegister,
+      linkToLogin,
       isMainPage, 
       openMobileMenu }) {
       return (
@@ -15,7 +16,7 @@ function Navigation({ linkToMovies,
                                     <button onClick={linkToRegister} className="button button_signup">Регистрация</button>
                               </li>
                               <li className="header__button">
-                                    <button className="button button_signin">Войти</button>
+                                    <button onClick={linkToLogin} className="button button_signin">Войти</button>
                               </li>
                         </>
                         :

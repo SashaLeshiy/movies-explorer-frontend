@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../images/logo_svg.svg';
 
-function Register({ linkToHome }) {
+function Register({ linkToHome, linkToLogin }) {
       return (
             (<section className="register">
                   <div className="register__container">
@@ -23,7 +23,7 @@ function Register({ linkToHome }) {
                               <button type="submit" className="register__submit" >Зарегистрироваться</button>
                         </form>
                         <p className="register__logger">Уже зарегистрированы?
-                              <button className="register__signin" > Войти</button>
+                              <button onClick={linkToLogin} className="register__signin" > Войти</button>
                         </p>
                   </div>
             </section>)

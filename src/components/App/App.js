@@ -52,15 +52,16 @@ function App() {
     setMobileMenuPopupOpen(false);
   }
 
-  function handleHeadlessPage () {
-    setHeadlessPage(true);
-  }
+  // function handleHeadlessPage () {
+  //   setHeadlessPage(true);
+  // }
 
-  function notMainPage () {
-    setMainPage(false);
-  }
+  // function notMainPage () {
+  //   setMainPage(false);
+  // }
 
   function linkToHome() {
+    setHeadlessPage(false);
     setMainPage(true);
     setLoggedIn(false);
     setMobileMenuPopupOpen(false);
@@ -95,6 +96,11 @@ function App() {
     history.push('/signup');
   }
 
+  function linkToLogin() {
+    setMainPage(false);
+    setHeadlessPage(true);
+    history.push('/signin');
+  }
 
   return (
     <div className="page">
@@ -109,13 +115,14 @@ function App() {
         headlessPage={headlessPage}
         isMainPage={isMainPage}
         linkToRegister={linkToRegister}
+        linkToLogin={linkToLogin}
         />
       <Switch >
         <Route exact path="/signup">
-          <Register />
+          <Register linkToLogin={linkToLogin} linkToHome={linkToHome} />
         </Route>
         <Route exact path="/signin" >
-          <Login />
+          <Login linkToRegister={linkToRegister} linkToHome={linkToHome} />
         </Route>
         <Route exact path="/movies" >
           <Movies movies={movies} savedMoviesPage={savedMoviesPage} />

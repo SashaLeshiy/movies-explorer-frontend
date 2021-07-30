@@ -7,6 +7,7 @@ function Header({ linkToMovies,
       linkToHome, 
       linkToProfile, 
       linkToRegister,
+      linkToLogin,
       loggedIn, 
       isMobileMenu, 
       openMobileMenu,
@@ -25,6 +26,7 @@ function Header({ linkToMovies,
                               linkToProfile={linkToProfile}
                               isMainPage={isMainPage}
                               linkToRegister={linkToRegister}
+                              linkToLogin={linkToLogin}
                         />
                   </div>
             </header>)
