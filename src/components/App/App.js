@@ -14,8 +14,10 @@ import MobileMenuPopup from '../MobileMenuPopup/MobileMenuPopup';
 function App() {
   const history = useHistory();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isMainPage, setMainPage] = useState(true);
   const [isMobileMenu, setMobileMenuPopupOpen] = useState(false);
   const [savedMoviesPage, setSavedMoviesPage] = useState(false);
+  const [headlessPage, setHeadlessPage] = useState(false);
   const [movies, setMovies] = useState([
     { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
     { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
@@ -50,18 +52,29 @@ function App() {
     setMobileMenuPopupOpen(false);
   }
 
+  function handleHeadlessPage () {
+    setHeadlessPage(true);
+  }
+
+  function notMainPage () {
+    setMainPage(false);
+  }
+
   function linkToHome() {
+    setMainPage(true);
     setLoggedIn(false);
     setMobileMenuPopupOpen(false);
     history.push('/');
   }
 
   function linkToProfile() {
+    setMainPage(false);
     setMobileMenuPopupOpen(false);
     history.push('/profile');
   }
 
   function linkToMovies() {
+    setMainPage(false);
     setLoggedIn(true);
     setSavedMoviesPage(false);
     setMobileMenuPopupOpen(false);
@@ -69,10 +82,17 @@ function App() {
   }
 
   function linkToSavedMovies() {
+    setMainPage(false);
     setSavedMoviesPage(true);
     setLoggedIn(true);
     setMobileMenuPopupOpen(false);
     history.push('/saved-movies');
+  }
+
+  function linkToRegister() {
+    setMainPage(false);
+    setHeadlessPage(true);
+    history.push('/signup');
   }
 
 
@@ -86,6 +106,9 @@ function App() {
         openMobileMenu={handleMobileMenuOpen}
         linkToHome={linkToHome}
         linkToProfile={linkToProfile}
+        headlessPage={headlessPage}
+        isMainPage={isMainPage}
+        linkToRegister={linkToRegister}
         />
       <Switch >
         <Route exact path="/signup">
@@ -106,7 +129,7 @@ function App() {
         <Route path="/" component={Main} >
         </Route>
       </Switch>
-      <Footer />
+      <Footer headlessPage={headlessPage} />
       <MobileMenuPopup 
       isMobileMenu={isMobileMenu} 
       closeMobileMenu={mobileMenuClose}

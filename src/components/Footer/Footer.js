@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Footer() {
+function Footer({ headlessPage }) {
       return (
-            (<footer className="footer">
+            (<footer className={`footer ${headlessPage ? "hidden" : ""}`}>
                   <div className="content">
                         <h3 className="footer__heading">Учебный проект Яндекс.Практикум х BeatFilm.</h3>
                         <div className="footer__copyright">
