@@ -1,7 +1,7 @@
 import React from 'react';
 import account from '../../images/account_icon.svg';
 
-function Navigation({ linkToMovies, linkToSavedMovies, isMobileMenu, openMobileMenu }) {
+function Navigation({ linkToMovies, linkToSavedMovies, linkToProfile, isMobileMenu, openMobileMenu }) {
       return (
             (<ul className="header__menu">
                   {/* <li className="header__button">
@@ -15,7 +15,7 @@ function Navigation({ linkToMovies, linkToSavedMovies, isMobileMenu, openMobileM
                         <button onClick={linkToSavedMovies} className="button">Сохраненные фильмы</button>
                   </li>
                   <li className="header__button header__menu_movies_account">
-                        <button className="button">Аккаунт</button>
+                        <button onClick={linkToProfile} className="button">Аккаунт</button>
                         <button className="button_account"><img src={account} alt="иконка аккаунта" /></button>
                   </li>
                   <li onClick={openMobileMenu} className="header__menu_mobile">

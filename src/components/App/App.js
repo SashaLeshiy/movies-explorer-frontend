@@ -56,6 +56,11 @@ function App() {
     history.push('/');
   }
 
+  function linkToProfile() {
+    setMobileMenuPopupOpen(false);
+    history.push('/profile');
+  }
+
   function linkToMovies() {
     setLoggedIn(true);
     setSavedMoviesPage(false);
@@ -80,6 +85,7 @@ function App() {
         isMobileMenu={isMobileMenu}
         openMobileMenu={handleMobileMenuOpen}
         linkToHome={linkToHome}
+        linkToProfile={linkToProfile}
         />
       <Switch >
         <Route exact path="/signup">
@@ -107,6 +113,7 @@ function App() {
       linkToMovies={linkToMovies}
       linkToSavedMovies={linkToSavedMovies}
       linkToHome={linkToHome}
+      linkToProfile={linkToProfile}
        />
     </div>
   );

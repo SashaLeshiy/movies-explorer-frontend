@@ -1,13 +1,14 @@
 .mobileMenu {
-    visibility: hidden;
+    /* visibility: hidden; */
     opacity: 0;
     transition: all 0.5s linear;
-    background-color: rgba(0,0,0,.5);
+    /* background-color: rgba(0,0,0,.5); */
     width: 100%;
     height: 100%;
     position: fixed;
     left: 0;
     top: 0;
+    transform: translateX(100%)
 }
 
 .mobileMenu__container {
@@ -20,8 +21,13 @@
 }
 
 .mobileMenu__open {
-    visibility: visible;
+    /* visibility: visible; */
     opacity: 1;
+    transform: translateX(0%);
+}
+
+.mobileMenu__open:after {
+    background-color: rgba(0,0,0,.5);
 }
 
 .mobileMenuClose {

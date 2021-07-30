@@ -1,7 +1,7 @@
 import React from 'react';
 import account from '../../images/account_icon.svg';
 
-function MobileMenuPopup({ linkToMovies, linkToSavedMovies, linkToHome, isMobileMenu, closeMobileMenu }) {
+function MobileMenuPopup({ linkToMovies, linkToSavedMovies, linkToHome, linkToProfile, isMobileMenu, closeMobileMenu }) {
     return (
         <div className={`mobileMenu ${isMobileMenu ? "mobileMenu__open" : ""}`}>
             <div className="mobileMenu__container">
@@ -13,7 +13,7 @@ function MobileMenuPopup({ linkToMovies, linkToSavedMovies, linkToHome, isMobile
                         <button onClick={linkToSavedMovies} className="mobileMenu__button">Сохраненные фильмы</button>
                     </li>
                     <li className="mobileMenu__list_movies_account">
-                        <button className="mobileMenu__button">Аккаунт</button>
+                        <button onClick={linkToProfile} className="mobileMenu__button">Аккаунт</button>
                         <button className="button_account"><img src={account} alt="иконка аккаунта" /></button>
                     </li>
                 </ul>
