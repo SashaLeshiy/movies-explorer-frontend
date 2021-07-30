@@ -10,6 +10,7 @@ import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import MobileMenuPopup from '../MobileMenuPopup/MobileMenuPopup';
+import Error404 from '../Error404/Error404';
 
 function App() {
   const history = useHistory();
@@ -133,7 +134,10 @@ function App() {
         <Route exact path="/profile">
           <Profile />
         </Route>
-        <Route path="/" component={Main} >
+        <Route exact path="/" component={Main} >
+        </Route>
+        <Route path="/*" >
+          <Error404 setHeadlessPage={setHeadlessPage} />
         </Route>
       </Switch>
       <Footer headlessPage={headlessPage} />
