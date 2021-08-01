@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
 import Header from "../Header/Header";
@@ -19,7 +19,12 @@ function App() {
   const [isMobileMenu, setMobileMenuPopupOpen] = useState(false);
   const [savedMoviesPage, setSavedMoviesPage] = useState(false);
   const [headlessPage, setHeadlessPage] = useState(false);
-  const [movies, setMovies] = useState([
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  useEffect(() => {
+
+  setMovies([
     { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
     { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
     { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
@@ -38,12 +43,12 @@ function App() {
     { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
   ]);
 
-  const [savedMovies, setSavedMovies] = useState([
+  setSavedMovies([
     { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
     { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
     { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
-
   ]);
+}, [])
 
   function handleMobileMenuOpen () {
     setMobileMenuPopupOpen(true);
@@ -52,14 +57,6 @@ function App() {
   function mobileMenuClose () {
     setMobileMenuPopupOpen(false);
   }
-
-  // function handleHeadlessPage () {
-  //   setHeadlessPage(true);
-  // }
-
-  // function notMainPage () {
-  //   setMainPage(false);
-  // }
 
   function linkToHome() {
     setHeadlessPage(false);
@@ -103,6 +100,10 @@ function App() {
     history.push('/signin');
   }
 
+  function linkToBack() {
+    history.goBack();
+  }
+
   return (
     <div className="page">
       <Header
@@ -120,24 +121,35 @@ function App() {
         />
       <Switch >
         <Route exact path="/signup">
-          <Register linkToLogin={linkToLogin} linkToHome={linkToHome} />
+          <Register linkToLogin={linkToLogin} linkToHome={linkToHome} setHeadlessPage={setHeadlessPage}/>
         </Route>
         <Route exact path="/signin" >
-          <Login linkToRegister={linkToRegister} linkToHome={linkToHome} />
+          <Login linkToRegister={linkToRegister} linkToHome={linkToHome} setHeadlessPage={setHeadlessPage}/>
         </Route>
         <Route exact path="/movies" >
-          <Movies movies={movies} savedMoviesPage={savedMoviesPage} />
+          <Movies 
+          movies={movies} 
+          savedMoviesPage={savedMoviesPage} 
+          setLoggedIn={setLoggedIn}
+          setMainPage={setMainPage}
+          />
         </Route>
         <Route exact path="/saved-movies">
-          <SavedMovies movies={savedMovies} savedMoviesPage={savedMoviesPage} />
+          <SavedMovies 
+          movies={savedMovies}
+          savedMoviesPage={savedMoviesPage}
+          setSavedMoviesPage={setSavedMoviesPage}
+          setLoggedIn={setLoggedIn}
+          setMainPage={setMainPage}
+           />
         </Route>
         <Route exact path="/profile">
-          <Profile />
+          <Profile setLoggedIn={setLoggedIn} setMainPage={setMainPage} />
         </Route>
         <Route exact path="/" component={Main} >
         </Route>
         <Route path="/*" >
-          <Error404 setHeadlessPage={setHeadlessPage} />
+          <Error404 setHeadlessPage={setHeadlessPage} linkToBack={linkToBack} />
         </Route>
       </Switch>
       <Footer headlessPage={headlessPage} />

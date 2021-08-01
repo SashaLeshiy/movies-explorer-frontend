@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useEffect } from 'react';
 import logo from '../../images/logo_svg.svg';
 
-function Login({ linkToHome, linkToRegister }) {
+function Login({ linkToHome, linkToRegister, setHeadlessPage }) {
+      useEffect(() => {
+            setHeadlessPage(true);
+      });
       return (
             (<section className="login">
                   <div className="login__container">

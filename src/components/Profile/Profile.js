@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-function Profile() {
+function Profile({ setLoggedIn, setMainPage }) {
+      useEffect(() => {
+            setMainPage(false);
+            setLoggedIn(true);
+      });
       return (
             (<section className="profile">
                   <div className="profile__content content">

@@ -1,5 +1,4 @@
 .mobileMenu {
-    /* visibility: hidden; */
     opacity: 0;
     transition: all 0.5s linear;
     /* background-color: rgba(0,0,0,.5); */
@@ -8,7 +7,8 @@
     position: fixed;
     left: 0;
     top: 0;
-    transform: translateX(100%)
+    transform: translateX(100%);
+    z-index: 2;
 }
 
 .mobileMenu__container {
@@ -21,13 +21,8 @@
 }
 
 .mobileMenu__open {
-    /* visibility: visible; */
     opacity: 1;
     transform: translateX(0%);
-}
-
-.mobileMenu__open:after {
-    background-color: rgba(0,0,0,.5);
 }
 
 .mobileMenuClose {
@@ -86,6 +81,25 @@
     opacity: 0.5;
     cursor: pointer;
 }
+
+.mobileMenu__overlay {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all 0.5s linear;
+    background-color: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.mobileMenu__overlay_open {
+    opacity: 1;
+    visibility: visible;
+}
+
 
 @media screen and (max-width: 519px) {
     .mobileMenu__container {

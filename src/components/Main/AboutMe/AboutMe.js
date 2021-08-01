@@ -5,7 +5,7 @@ import arrow from '../../../images/arrow.svg';
 function AboutMe() {
       return (
             (<section className="about">
-                  <div className="content">
+                  <div className="about__content content">
                         <h2 className="about__heading">Студент</h2>
                         <div className="about__me">
                               <img className="about__photo" src={myPhoto} alt="фотография студента" />
@@ -18,7 +18,7 @@ function AboutMe() {
                                     и найти удаленную работу.</p>
                               <ul className="about__links">
                                     <li><a className="about__link" target="_blank" rel="noopener noreferrer" href="https://github.com/SashaLeshiy">Github</a></li>
-                                    <li><a className="about__link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/alessandro.leshiy">Facebook</a></li>
+                                    <li><a className="about__link" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com">Facebook</a></li>
                               </ul>
                         </div>
                         <div className="about__portfolio">

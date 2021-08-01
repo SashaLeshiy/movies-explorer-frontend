@@ -40,6 +40,10 @@
     cursor: pointer;
 }
 
+.movieCard__like_red {
+    background-image: url("../../../images/red_heart_icon.svg");
+}
+
 .movieCard__delete {
     width: 24px;
     height: 24px;

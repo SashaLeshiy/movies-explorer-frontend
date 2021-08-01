@@ -16,7 +16,7 @@ function Header({ linkToMovies,
 }) {
       return (
             (<header className={`header ${loggedIn ? "header__dark" : ""} ${headlessPage ? "hidden" : ""}`}>
-                  <div className="content flex">
+                  <div className="header__flex content">
                         <img onClick={linkToHome} src={logo} className="header__logo" alt="логотип Diploma" />
                         <Navigation
                               linkToMovies={linkToMovies}
