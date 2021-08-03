@@ -44,8 +44,9 @@
 
 .techs__icons {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+    grid-template-columns: repeat(auto-fit, 90px);
     gap: 14px;
+    justify-content: center;
 }
 
 .techs__button {
@@ -66,6 +67,9 @@
 }
 
 @media screen and (max-width: 460px) {
+    .techs {
+        min-height: 720px;
+    }
     .techs__heading {
         font-size: 18px;
         padding: 75px 0 20px 0;
@@ -77,6 +81,9 @@
 }
 
 @media screen and (max-width: 436px) {
+    .techs {
+        min-height: 600px;
+    }
     .techs__description {
         padding: 59px 0 42px;
     }

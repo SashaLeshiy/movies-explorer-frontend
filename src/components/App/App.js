@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
+import { moviesApi } from '../../utils/MoviesApi';
 import './App.css';
 import Header from "../Header/Header";
 import Register from "../Register/Register";
@@ -24,37 +25,50 @@ function App() {
 
   useEffect(() => {
 
-  setMovies([
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-    { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
-  ]);
+    setMovies([
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+      { nameRU: '33 слова о дизайне', thumbnail: '/src/images/movie_image.jpg', duration: '1ч42м' },
+    ]);
 
-  setSavedMovies([
-    { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
-    { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
-    { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
-  ]);
-}, [])
+    setSavedMovies([
+      { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
+      { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
+      { nameRU: 'В погоне за Бенкси', thumbnail: '/src/images/movie_image.jpg', duration: '1ч50м' },
+    ]);
+  }, [])
 
-  function handleMobileMenuOpen () {
+  // function getPhilms() {
+  //   moviesApi.getMovies()
+  //     .then((data) => {
+  //       setMovies([data]);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  // }
+  // useEffect(() => {
+  //   getPhilms();
+  // }, [])
+
+  function handleMobileMenuOpen() {
     setMobileMenuPopupOpen(true);
   }
 
-  function mobileMenuClose () {
+  function mobileMenuClose() {
     setMobileMenuPopupOpen(false);
   }
 
@@ -109,7 +123,7 @@ function App() {
       <Header
         linkToMovies={linkToMovies}
         linkToSavedMovies={linkToSavedMovies}
-        loggedIn={loggedIn} 
+        loggedIn={loggedIn}
         isMobileMenu={isMobileMenu}
         openMobileMenu={handleMobileMenuOpen}
         linkToHome={linkToHome}
@@ -118,30 +132,33 @@ function App() {
         isMainPage={isMainPage}
         linkToRegister={linkToRegister}
         linkToLogin={linkToLogin}
-        />
+      />
       <Switch >
         <Route exact path="/signup">
-          <Register linkToLogin={linkToLogin} linkToHome={linkToHome} setHeadlessPage={setHeadlessPage}/>
+          <Register linkToLogin={linkToLogin} 
+          linkToHome={linkToHome} 
+          setHeadlessPage={setHeadlessPage}
+          />
         </Route>
         <Route exact path="/signin" >
-          <Login linkToRegister={linkToRegister} linkToHome={linkToHome} setHeadlessPage={setHeadlessPage}/>
+          <Login linkToRegister={linkToRegister} linkToHome={linkToHome} setHeadlessPage={setHeadlessPage} />
         </Route>
         <Route exact path="/movies" >
-          <Movies 
-          movies={movies} 
-          savedMoviesPage={savedMoviesPage} 
-          setLoggedIn={setLoggedIn}
-          setMainPage={setMainPage}
+          <Movies
+            movies={movies}
+            savedMoviesPage={savedMoviesPage}
+            setLoggedIn={setLoggedIn}
+            setMainPage={setMainPage}
           />
         </Route>
         <Route exact path="/saved-movies">
-          <SavedMovies 
-          movies={savedMovies}
-          savedMoviesPage={savedMoviesPage}
-          setSavedMoviesPage={setSavedMoviesPage}
-          setLoggedIn={setLoggedIn}
-          setMainPage={setMainPage}
-           />
+          <SavedMovies
+            movies={savedMovies}
+            savedMoviesPage={savedMoviesPage}
+            setSavedMoviesPage={setSavedMoviesPage}
+            setLoggedIn={setLoggedIn}
+            setMainPage={setMainPage}
+          />
         </Route>
         <Route exact path="/profile">
           <Profile setLoggedIn={setLoggedIn} setMainPage={setMainPage} />
@@ -153,14 +170,14 @@ function App() {
         </Route>
       </Switch>
       <Footer headlessPage={headlessPage} />
-      <MobileMenuPopup 
-      isMobileMenu={isMobileMenu} 
-      closeMobileMenu={mobileMenuClose}
-      linkToMovies={linkToMovies}
-      linkToSavedMovies={linkToSavedMovies}
-      linkToHome={linkToHome}
-      linkToProfile={linkToProfile}
-       />
+      <MobileMenuPopup
+        isMobileMenu={isMobileMenu}
+        closeMobileMenu={mobileMenuClose}
+        linkToMovies={linkToMovies}
+        linkToSavedMovies={linkToSavedMovies}
+        linkToHome={linkToHome}
+        linkToProfile={linkToProfile}
+      />
     </div>
   );
 }
