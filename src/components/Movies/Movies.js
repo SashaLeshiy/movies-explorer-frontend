@@ -4,7 +4,7 @@ import SearchForm from './SearchForm/SearchForm'
 // import Preloader from './Preloader/Preloader';
 
 
-function Movies({ movies, savedMoviesPage, setMainPage, setLoggedIn }) {
+function Movies({ movies, savedMoviesPage, setMainPage, setLoggedIn, handleChange, isValid, errors }) {
       useEffect(() => {
       setMainPage(false);
       setLoggedIn(true);
@@ -12,9 +12,9 @@ function Movies({ movies, savedMoviesPage, setMainPage, setLoggedIn }) {
        return (
             (<section className="movies">
                   <div className="movies__content content">
-                  <SearchForm />
+                  <SearchForm handleChange={handleChange} isValid={isValid} errors={errors} />
                   {/* <Preloader /> */}
-                  <MovieCardList movies={movies} savedMoviesPage={savedMoviesPage} />
+                  <MovieCardList movies={movies} savedMoviesPage={savedMoviesPage}  isValid={isValid} />
                   </div>
             </section>) 
        );

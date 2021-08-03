@@ -52,7 +52,12 @@
 .preloader__container {
     width: 100px;
     height: 100px;
-    position: relative;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    opacity: 0.5;
 }
 
 .preloader__round {
