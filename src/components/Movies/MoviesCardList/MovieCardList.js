@@ -7,7 +7,7 @@ function MovieCardList({ movies, savedMoviesPage }) {
             {(movies.map(movie => {
                 return <MovieCard key={movie.id}
                     nameRU={movie.nameRU}
-                    thumbnail={movie.thumbnail}
+                    thumbnail={movie.image.url}
                     duration={movie.duration}
                     savedMoviesPage={savedMoviesPage}
                 />

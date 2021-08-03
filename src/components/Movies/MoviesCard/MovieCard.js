@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import movie_image from "../../../images/movie_image.jpg";
 
 
 
@@ -11,7 +10,7 @@ function MovieCard({ nameRU, thumbnail, duration, savedMoviesPage }) {
         }
         return (
                 <article className="movieCard">
-                        <img className="movieCard__img" src={movie_image} alt="Картинка фильма" />
+                        <img className="movieCard__img" src={`https://api.nomoreparties.co${thumbnail}`} alt="Картинка фильма" />
                         <h2 className="movieCard__heading">{nameRU}</h2>
                         {!savedMoviesPage ?
                                 <button onClick={heartClick} type="button" 
