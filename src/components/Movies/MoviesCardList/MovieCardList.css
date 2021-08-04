@@ -1,0 +1,37 @@
+.movieCardList {
+    padding: 50px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 6px;
+}
+
+.button__moreMovies {
+    width: 100%;
+    min-height: 36px;
+    border: 0;
+    background-color: #2f2f2f;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 1.2em;
+    font-weight: 200;
+    margin: 0;
+    transition: opacity 0.7s linear;
+}
+
+.button__moreMovies:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.movieCardList__saved {
+    justify-content: start;
+    column-gap: 16px;
+}
+
+@media screen and (max-width: 665px) {
+    .movieCardList {
+        justify-content: center;
+    }
+}

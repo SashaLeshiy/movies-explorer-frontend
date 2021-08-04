@@ -1,0 +1,124 @@
+.login {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    max-width: 396px;
+    min-width: 396px;
+}
+
+.login__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login__logo {
+    width: 38px;
+    height: 38px;
+    align-self: start;
+    transition: opacity 0.7s linear;
+}
+
+.login__logo:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+
+.login__heading {
+    font-size: 24px;
+    line-height: 1.2em;
+    font-weight: 200;
+    color: #ffffff;
+    margin: 0;
+    padding: 36px 0
+}
+
+.login__form {
+    display: grid;
+    grid-template-columns: minmax(200px, 396px);
+}
+
+.login__pole {
+    color: #8b8b8b;
+    font-size: 10px;
+    line-height: 1.2em;
+    font-weight: 100;
+    padding: 10px 0;
+}
+
+.login__input {
+    background-color: #2f2f2f;
+    border: 0;
+    border-radius: 5px;
+    min-height: 46px;
+    color: #ffffff;
+    padding-left: 10px;
+}
+
+.login__error {
+    font-size: 10px;
+    line-height: 1.2em;
+    font-weight: 100;
+    padding: 10px 0 60px;
+    color: #EE3465;
+}
+
+.login__submit {
+    background-color: #4285F4;
+    border: 0;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 1.2em;
+    font-weight: 200;
+    min-height: 45px;
+    transition: opacity 0.7s linear;
+}
+
+.login__submit:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.login__logger {
+    font-size: 14px;
+    line-height: 1.2em;
+    color: #8b8b8b;
+    text-align: center;
+}
+
+.login__signin {
+    background-color: inherit;
+    border: 0;
+    font-size: 14px;
+    line-height: 1.2em;
+    font-weight: 100;
+    color: #4285F4;
+    transition: opacity 0.7s linear;
+}
+
+.login__signin:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 470px) {
+    .login {
+        min-width: 300px;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .login {
+        min-width: 260px;
+    }
+    .login__heading {
+        text-align: center;
+    }
+    .login__logo {
+        align-self: center;
+    }
+}

@@ -1,0 +1,120 @@
+.profile {
+    min-height: 626px;
+    background-color: #202020;
+}
+
+.profile__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile__form {
+    display: grid;
+    grid-template-columns: minmax(100px, 205px) minmax(100px, 205px);
+}
+
+.profile__heading {
+    margin: 0;
+    padding: 100px 0;
+    font-size: 24px;
+    line-height: 1.2em;
+    color: #ffffff;
+    font-weight: 200;
+}
+
+.profile__account {
+    margin: 0;
+    padding-inline-start: 0;
+    display: grid;
+    grid-template-columns: minmax(200px, 410px);
+    font-size: 11px;
+    line-height: 1.2em;
+    font-weight: 100;
+    color: #ffffff;
+}
+
+.profile__name {
+    /* display: flex;
+    justify-content: space-between; */
+    border-bottom: 1px solid #424242;
+    padding-bottom: 17px;
+    font-size: 11px;
+    line-height: 1.2em;
+    font-weight: 100;
+    color: #ffffff;
+}
+
+.profile__email {
+    /* display: flex;
+    justify-content: space-between; */
+    padding-top: 17px;
+    font-size: 11px;
+    line-height: 1.2em;
+    font-weight: 100;
+    color: #ffffff;
+}
+
+.profile__input {
+    color: #ffffff;
+    background-color: inherit;
+    border: 0;
+    text-align: end;
+    font-size: 11px;
+    line-height: 1.2em;
+    font-weight: 100;
+    align-self: start;
+    
+}
+
+.profile__input_name {
+    border-bottom: 1px solid #424242;
+    padding-bottom: 17px;
+}
+
+.profile__input_email {
+    padding-top: 17px;
+}
+
+.profile__menu {
+    padding: 180px 0 0 0;
+    text-decoration: none;
+    list-style-type: none;
+    font-size: 13px;
+    line-height: 1.2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile__change {
+    color: #ffffff;
+    border: 0;
+    background-color: inherit;
+    transition: opacity 0.7s linear;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding-top: 150px;
+}
+
+.profile__change:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.profile__signout {
+    color: #EE3465;
+    padding-top: 20px;
+    border: 0;
+    background-color: inherit;
+    transition: opacity 0.7s linear;
+}
+
+.profile__signout:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 469px) {
+    .profile__account {}
+}

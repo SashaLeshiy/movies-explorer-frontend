@@ -1,0 +1,222 @@
+.about {
+    max-height: 1079px;
+    min-height: 1079px;
+    background-color: #202020;
+    margin: 0;
+    padding: 0 0 110px;
+}
+
+.about__heading {
+    font-size: 22px;
+    line-height: 1.2em;
+    font-weight: 100;
+    margin: 0;
+    padding: 100px 0 20px 0;
+    border-bottom: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.about__me {
+    color: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr 270px;
+    padding: 80px 0;
+    grid-template-rows: repeat(3, max-content);
+    grid-column-gap: 20px;
+}
+
+.about__name {
+    font-size: 50px;
+    line-height: 58px;
+    font-weight: 100;
+    margin: 0;
+}
+
+.about__career {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 200;
+    margin: 0;
+    padding-top: 12px;
+}
+
+.about__aboutMe {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 100;
+    margin: 0;
+    max-width: 600px;
+    padding-top: 24px;
+}
+
+.about__links {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-items: flex-end;
+    font-size: 14px;
+    line-height: 1.2em;
+    font-weight: 200;
+}
+
+.about__link {
+    text-decoration: none;
+    color: #ffffff;
+    padding-right: 20px;
+    transition: opacity 0.7s linear;
+}
+
+.about__link:hover {
+    opacity: 0.5;
+}
+
+.about__photo {
+    grid-column-start: -1;
+    grid-column-end: -2;
+    grid-row-start: 1;
+    grid-row-end: 5;
+    border: 0;
+    border-radius: 10px;
+}
+
+.about__portfolio_heading {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 100;
+    color: #8b8b8b;
+}
+
+.about__portfolio_links {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.about__portfolio_link {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #424242;
+    padding: 16px 0;
+}
+
+.last-link {
+    border-bottom: 0;
+}
+
+.about__portfolio_out {
+    text-decoration: none;
+    color: #ffffff;
+    transition: opacity 0.7s linear;
+    font-size: 30px;
+    line-height: 50px;
+    font-weight: 100;
+}
+
+.about__portfolio_out:hover {
+    opacity: 0.5;
+}
+
+
+@media screen and (max-width: 768px) {
+    .about__heading {
+        padding: 75px 0 20px 0;
+    }
+    .about__name {
+        font-size: 40px;
+        line-height: 40px;
+    }
+    .about__me {
+        grid-template-columns: 1fr 255px;
+    }
+    .about__photo {
+        width: 255px;
+    }
+    .about__career {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .about__aboutMe {
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 364px;
+    }
+    .about__portfolio_out {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .about {
+        min-height: 1198px;
+        padding-bottom: 160px;
+    }
+    .about__me {
+        grid-template-columns: 1fr;
+    }
+    .about__photo {
+        width: 292px;
+        justify-self: center;
+    }
+    .about__name {
+        /* font-size: 30px;
+        line-height: 1.2em; */
+        padding-top: 34px;
+    }
+    .about__career {
+        /* font-size: 11px;
+        line-height: 16px; */
+        padding-top: 16px;
+    }
+    .about__links {
+        padding-top: 30px;
+    }
+}
+
+@media screen and (max-width: 488px) {
+    .about__portfolio_out {
+        font-size: 20px;
+        line-height: 28px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .about__heading {
+        font-size: 18px;
+        padding: 75px 0 20px 0;
+    }
+}
+
+@media screen and (max-width: 417px) { 
+    .about__heading {
+        padding: 50px 0 20px 0;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .about {
+        padding-bottom: 0;
+    }
+    .about__me {
+        grid-template-columns: 1fr;
+        padding: 65px 0;
+    }
+    .about__name {
+        font-size: 30px;
+        line-height: 1.2em;
+    }
+    .about__career {
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .about__portfolio_heading {
+        font-size: 14px;
+    }
+    .about__portfolio_out {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}
