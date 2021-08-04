@@ -2,22 +2,38 @@ import React, { useEffect } from 'react';
 import logo from '../../images/logo_svg.svg';
 import * as mainApi from '../../utils/MainApi';
 
-function Login({ linkToHome, 
-      linkToRegister, 
-      setHeadlessPage, 
-      handleChange, 
-      errors, 
+function Login({ linkToHome,
+      linkToRegister,
+      setHeadlessPage,
+      handleChange,
+      errors,
       isValid,
       loginData,
-      setLoginData, 
+      setLoginData,
       setResError,
-      resError
- }) {
+      resError,
+      setCurrentUser,
+      linkToMovies,
+      setLoggedIn
+}) {
+
+      function getUserInfo() {
+            mainApi.getUserInfo()
+                  .then((res) => {
+                        setCurrentUser(res);
+                  })
+                  .catch((err) => {
+                        console.log(err);
+                  });
+      }
 
       function onLogin(data) {
             mainApi.authorize(data)
                   .then((res) => {
-                        console.log(res)
+                        if (res.token) {
+                              localStorage.setItem('token', res.token);
+                              getUserInfo();
+                        }
                   })
                   .catch((err) => {
                         setResError(true);
@@ -27,6 +43,8 @@ function Login({ linkToHome,
       function handleSubmit(event) {
             event.preventDefault();
             onLogin(loginData);
+            linkToMovies();
+            setLoggedIn(true);
       }
 
       useEffect(() => {

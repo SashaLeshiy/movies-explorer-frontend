@@ -31,3 +31,17 @@ export const register = ({email, password, name}) => {
     })
       .then(res => checkResponse(res));
   };
+
+  export const getUserInfo = () => {
+    const token = localStorage.getItem('token');
+    return fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      }
+      })  
+      .then(res => checkResponse(res))
+      .then(res => {
+            return res;
+      })
+  }

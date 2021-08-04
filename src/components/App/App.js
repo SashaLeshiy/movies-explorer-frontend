@@ -14,13 +14,13 @@ import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import MobileMenuPopup from '../MobileMenuPopup/MobileMenuPopup';
 import Error404 from '../Error404/Error404';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 
 function App() {
   const history = useHistory();
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [isMainPage, setMainPage] = useState(true);
   const [isMobileMenu, setMobileMenuPopupOpen] = useState(false);
   const [savedMoviesPage, setSavedMoviesPage] = useState(false);
   const [headlessPage, setHeadlessPage] = useState(false);
@@ -31,6 +31,7 @@ function App() {
   const [isValid, setIsValid] = useState(false);
   const [registerData, setRegisterData] = useState({ name: '', email: '', password: '' });
   const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [profileData, setProfileData] = useState({ name: '', email: '' });
   const [resError, setResError] = useState(false);
 
 
@@ -48,11 +49,13 @@ function App() {
     const target = event.target;
     const name = target.name;
     const value = target.value;
+    console.log(target, name, value);
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
     setRegisterData({ ...registerData, [event.target.name]: event.target.value });
     setLoginData({ ...loginData, [event.target.name]: event.target.value });
+    setProfileData({ ...profileData, [event.target.name]: event.target.value })
   };
 
 
@@ -79,45 +82,44 @@ function App() {
 
   function linkToHome() {
     setHeadlessPage(false);
-    setMainPage(true);
-    setLoggedIn(false);
     setMobileMenuPopupOpen(false);
     history.push('/');
   }
 
   function linkToProfile() {
-    setMainPage(false);
     setMobileMenuPopupOpen(false);
     history.push('/profile');
   }
 
   function linkToMovies() {
-    setMainPage(false);
-    setLoggedIn(true);
+    history.push('/movies');
+    setHeadlessPage(false);
     setSavedMoviesPage(false);
     setMobileMenuPopupOpen(false);
-    history.push('/movies');
   }
 
   function linkToSavedMovies() {
-    setMainPage(false);
     setSavedMoviesPage(true);
-    setLoggedIn(true);
     setMobileMenuPopupOpen(false);
     history.push('/saved-movies');
   }
 
   function linkToRegister() {
-    setMainPage(false);
     setHeadlessPage(true);
     resetForm();
     history.push('/signup');
   }
 
   function linkToLogin() {
-    setMainPage(false);
     setHeadlessPage(true);
     history.push('/signin');
+  }
+
+  function linkToSignOut() {
+    localStorage.removeItem('token');
+    setCurrentUser({});
+    setLoggedIn(false);
+    linkToHome();
   }
 
   function linkToBack() {
@@ -136,7 +138,6 @@ function App() {
           linkToHome={linkToHome}
           linkToProfile={linkToProfile}
           headlessPage={headlessPage}
-          isMainPage={isMainPage}
           linkToRegister={linkToRegister}
           linkToLogin={linkToLogin}
         />
@@ -154,6 +155,8 @@ function App() {
               setRegisterData={setRegisterData}
               setResError={setResError}
               resError={resError}
+              linkToMovies={linkToMovies}
+              setLoggedIn={setLoggedIn}
             />
           </Route>
           <Route exact path="/signin" >
@@ -167,31 +170,36 @@ function App() {
               setLoginData={setLoginData}
               setResError={setResError}
               resError={resError}
-            />
-          </Route>
-          <Route exact path="/movies" >
-            <Movies
-              movies={movies}
-              savedMoviesPage={savedMoviesPage}
+              setCurrentUser={setCurrentUser}
+              linkToMovies={linkToMovies}
               setLoggedIn={setLoggedIn}
-              setMainPage={setMainPage}
-              handleChange={handleChange}
-              errors={errors}
-              isValid={isValid}
             />
           </Route>
-          <Route exact path="/saved-movies">
-            <SavedMovies
-              movies={savedMovies}
-              savedMoviesPage={savedMoviesPage}
-              setSavedMoviesPage={setSavedMoviesPage}
-              setLoggedIn={setLoggedIn}
-              setMainPage={setMainPage}
-            />
-          </Route>
-          <Route exact path="/profile">
-            <Profile setLoggedIn={setLoggedIn} setMainPage={setMainPage} />
-          </Route>
+          <ProtectedRoute exact path="/movies" component={Movies} loggedIn={loggedIn}
+            movies={movies}
+            savedMoviesPage={savedMoviesPage}
+            setLoggedIn={setLoggedIn}
+            handleChange={handleChange}
+            errors={errors}
+            isValid={isValid}
+          >
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/saved-movies" component={SavedMovies} loggedIn={loggedIn}
+            movies={savedMovies}
+            savedMoviesPage={savedMoviesPage}
+            setSavedMoviesPage={setSavedMoviesPage}
+            setLoggedIn={setLoggedIn}
+          >
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/profile" component={Profile}
+            loggedIn={loggedIn}
+            setLoggedIn={setLoggedIn}
+            linkToSignOut={linkToSignOut} 
+            handleChange={handleChange}
+            setProfileData={setProfileData}
+            profileData={profileData}
+            >
+          </ProtectedRoute>
           <Route exact path="/" component={Main} >
           </Route>
           <Route path="/*" >

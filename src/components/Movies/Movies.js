@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MovieCardList from './MoviesCardList/MovieCardList';
 import SearchForm from './SearchForm/SearchForm'
 // import Preloader from './Preloader/Preloader';
 
 
-function Movies({ movies, savedMoviesPage, setMainPage, setLoggedIn, handleChange, isValid, errors }) {
-      useEffect(() => {
-      setMainPage(false);
-      setLoggedIn(true);
-      });
+function Movies({ movies, savedMoviesPage, handleChange, isValid, errors }) {
        return (
             (<section className="movies">
                   <div className="movies__content content">

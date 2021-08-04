@@ -7,10 +7,11 @@ function Navigation({ linkToMovies,
       linkToRegister,
       linkToLogin,
       isMainPage, 
-      openMobileMenu }) {
+      openMobileMenu,
+      loggedIn }) {
       return (
             (<ul className="header__menu">
-                  {isMainPage ?
+                  {!loggedIn ?
                         <>
                               <li className="header__button">
                                     <button onClick={linkToRegister} className="button button_signup">Регистрация</button>

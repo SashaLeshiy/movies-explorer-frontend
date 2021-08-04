@@ -12,7 +12,6 @@ function Header({ linkToMovies,
       isMobileMenu, 
       openMobileMenu,
       headlessPage,
-      isMainPage
 }) {
       return (
             (<header className={`header ${loggedIn ? "header__dark" : ""} ${headlessPage ? "hidden" : ""}`}>
@@ -24,9 +23,9 @@ function Header({ linkToMovies,
                               isMobileMenu={isMobileMenu}
                               openMobileMenu={openMobileMenu}
                               linkToProfile={linkToProfile}
-                              isMainPage={isMainPage}
                               linkToRegister={linkToRegister}
                               linkToLogin={linkToLogin}
+                              loggedIn={loggedIn}
                         />
                   </div>
             </header>)

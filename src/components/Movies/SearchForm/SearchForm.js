@@ -1,7 +1,6 @@
 import React from 'react';
 
 function SearchForm({ handleChange, errors, isValid }) {
-    console.log(errors);
     return (
         (<div className="searchForm">
                 <form name="searchForm" className="searchForm__form" noValidate>
@@ -11,7 +10,7 @@ function SearchForm({ handleChange, errors, isValid }) {
                     onChange={handleChange}
                     />
                     <button className="searchForm__button" type="submit">Поиск</button>
-                    <span className="searchForm__error">{errors.seacrh}</span>
+                    <span className="searchForm__error"></span>
                     <label className="searchForm__checkbox">
                         <input type="checkbox" />
                         <span className="searchForm__checkbox_switch"></span>

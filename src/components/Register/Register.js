@@ -12,13 +12,17 @@ function Register({ linkToHome,
       registerData,
       setRegisterData, 
       setResError,
-      resError
+      resError,
+      linkToMovies,
+      setLoggedIn
 }) {
            
       function onRegister(data) {
             mainApi.register(data)
                   .then((res) => {
+                        setLoggedIn(true);
                         setResError(false);
+                        linkToMovies();
                         console.log(res);
                   })
                   .catch((err) => {
