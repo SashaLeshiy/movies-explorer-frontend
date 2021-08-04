@@ -7,6 +7,10 @@
 .movieCard__img {
     grid-column-start: 1;
     grid-column-end: 3;
+    width: 270px;
+    height: 151px;
+    object-fit: cover;
+    object-position: left top;
 }
 
 .movieCard__heading {

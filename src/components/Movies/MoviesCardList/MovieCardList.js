@@ -1,13 +1,13 @@
 import React from 'react';
 import MovieCard from '../MoviesCard/MovieCard';
 
-function MovieCardList({ movies, savedMoviesPage }) {
+function MovieCardList({ movies, savedMoviesPage, isValid }) {
     return (
         <div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
             {(movies.map(movie => {
                 return <MovieCard key={movie.id}
                     nameRU={movie.nameRU}
-                    thumbnail={movie.thumbnail}
+                    thumbnail={movie.image.url}
                     duration={movie.duration}
                     savedMoviesPage={savedMoviesPage}
                 />
