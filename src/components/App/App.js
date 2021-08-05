@@ -46,6 +46,22 @@ function App() {
       });
   }
 
+  function onLogin(data) {
+    mainApi.authorize(data)
+          .then((res) => {
+                if (res.token) {
+                      localStorage.setItem('token', res.token);
+                      tokenCheck();
+                      linkToMovies();
+                      setLoggedIn(true);
+                }
+          })
+          .catch((err) => {
+                setLoggedIn(false);
+                setResError(true);
+          });
+};
+
   function tokenCheck() {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -182,6 +198,8 @@ function App() {
               resError={resError}
               linkToMovies={linkToMovies}
               setLoggedIn={setLoggedIn}
+              setCurrentUser={setCurrentUser}
+              onLogin={onLogin}
             />
           </Route>
           <Route exact path="/signin" >
@@ -200,6 +218,7 @@ function App() {
               setLoggedIn={setLoggedIn}
               getUserInfo={getUserInfo}
               tokenCheck={tokenCheck}
+              onLogin={onLogin}
             />
           </Route>
           <ProtectedRoute exact path="/movies" component={Movies} loggedIn={loggedIn}
@@ -230,6 +249,7 @@ function App() {
             setCurrentUser={setCurrentUser}
             setProfileMessage={setProfileMessage}
             profileMessage={profileMessage}
+            setIsValid={setIsValid}
           >
           </ProtectedRoute>
           <Route exact path="/" component={Main} >

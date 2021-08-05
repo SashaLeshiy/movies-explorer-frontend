@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import logo from '../../images/logo_svg.svg';
 import * as mainApi from '../../utils/MainApi';
 
@@ -14,17 +14,22 @@ function Register({ linkToHome,
       setResError,
       resError,
       linkToMovies,
-      setLoggedIn
+      setLoggedIn,
+      setCurrentUser,
+      onLogin
 }) {
            
       function onRegister(data) {
             mainApi.register(data)
                   .then((res) => {
+                        setCurrentUser({ name: res.name, email: res.email});
                         setLoggedIn(true);
                         setResError(false);
+                        onLogin({ email: data.email, password: data.password});
                         linkToMovies();
                   })
                   .catch((err) => {
+                        console.log(err);
                         setResError(true);
                   });
       };

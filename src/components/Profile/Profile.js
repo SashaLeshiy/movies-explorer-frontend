@@ -11,16 +11,21 @@ function Profile({ setLoggedIn,
       isValid,
       setCurrentUser,
       setProfileMessage,
-      profileMessage
+      profileMessage,
+      setIsValid
 }) {
+      const [errorMessage, setErrorMessage] = useState(false);
       
       function patchUserData(newProfile) {
             mainApi.setUser(newProfile)
             .then((res) => {
                   setCurrentUser({ name: res.name, email: res.email});
+                  setErrorMessage(false);
                   setProfileMessage('Данные аккаунта изменены');
+                  setIsValid(false);
             })
             .catch((err) => {
+                  setErrorMessage(true);
                   setProfileMessage('Что-то пошло не так...')
                   console.log(err);
                 });
@@ -54,7 +59,8 @@ function Profile({ setLoggedIn,
                                     name="email" onChange={handleChange}
                                     minLength="2" maxLength="30" value={profileData.email} required />
                               <span className="profile__error">{errors.email}</span>
-                              <span className="profile__error profile__message">{profileMessage}</span>
+                              <span className={`profile__error profile__message ${errorMessage ? 'profile__message_error' : ''}`}>
+                                    {profileMessage}</span>
                               {isValid ?
                               <button type="submit" className="profile__submit" >Редактировать</button>
                               :

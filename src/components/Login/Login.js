@@ -16,24 +16,9 @@ function Login({ linkToHome,
       linkToMovies,
       setLoggedIn,
       getUserInfo,
-      tokenCheck
+      tokenCheck,
+      onLogin
 }) {
-
-      function onLogin(data) {
-            mainApi.authorize(data)
-                  .then((res) => {
-                        if (res.token) {
-                              localStorage.setItem('token', res.token);
-                              tokenCheck();
-                              linkToMovies();
-                              setLoggedIn(true);
-                        }
-                  })
-                  .catch((err) => {
-                        setLoggedIn(false);
-                        setResError(true);
-                  });
-      };
 
       function handleSubmit(event) {
             event.preventDefault();
