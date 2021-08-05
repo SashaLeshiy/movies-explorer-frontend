@@ -1,10 +1,12 @@
 import React from 'react';
 import MovieCard from '../MoviesCard/MovieCard';
 
-function MovieCardList({ movies, savedMoviesPage, isValid }) {
+function MovieCardList({ movies, savedMoviesPage, isValid, isSearch, searchMovie }) {
     return (
-        <div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
-            {(movies.map(movie => {
+        isSearch ? 
+        (<div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
+            {(searchMovie.map(movie => {
+                console.log(movie);
                 return <MovieCard key={movie.id}
                     nameRU={movie.nameRU}
                     thumbnail={movie.image.url}
@@ -18,7 +20,9 @@ function MovieCardList({ movies, savedMoviesPage, isValid }) {
                 :
                 <span></span>
             }
-        </div>
+        </div>)
+        :
+        (<p>не искал</p>)
     );
 }
 export default MovieCardList;

@@ -35,6 +35,15 @@
     cursor: pointer;
 }
 
+.searchForm__error {
+    font-size: 10px;
+    line-height: 1.2em;
+    font-weight: 100;
+    padding: 10px 0 60px;
+    color: #EE3465;
+    min-height: 16px;
+}
+
 .searchForm__checkbox {
     display: flex;
     height: 28px;

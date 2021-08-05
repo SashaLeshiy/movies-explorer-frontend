@@ -35,6 +35,15 @@ function App() {
   const [resError, setResError] = useState(false);
   const [mainPage, setMainPage] = useState(false);
   const [profileMessage, setProfileMessage] = useState('');
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchPhrase, setSearchPhrase] = useState('');
+  const [searchMovie, setSearchMovie] = useState([]);
+
+  // function searchWord(keyWord) {
+  //   searchMovie = movies.filter((movie) => {
+  //     return movie.description.includes(keyWord);
+  //   })
+  // }
 
   function getUserInfo() {
     mainApi.getUserInfo()
@@ -90,6 +99,7 @@ function App() {
     setRegisterData({ ...registerData, [event.target.name]: event.target.value });
     setLoginData({ ...loginData, [event.target.name]: event.target.value });
     setProfileData({ ...profileData, [event.target.name]: event.target.value });
+    setSearchPhrase({ ...searchPhrase, [event.target.name]: event.target.value })
     setProfileMessage('');
   };
 
@@ -228,6 +238,13 @@ function App() {
             handleChange={handleChange}
             errors={errors}
             isValid={isValid}
+            isSearch={isSearch}
+            setIsSearch={setIsSearch}
+            setSearchPhrase={setSearchPhrase}
+            searchPhrase={searchPhrase}
+            // searchWord={searchWord}
+            setSearchMovie={setSearchMovie}
+            searchMovie={searchMovie}
           >
           </ProtectedRoute>
           <ProtectedRoute exact path="/saved-movies" component={SavedMovies} loggedIn={loggedIn}
