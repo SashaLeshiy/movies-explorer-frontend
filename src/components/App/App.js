@@ -252,7 +252,8 @@ function App() {
             setIsValid={setIsValid}
           >
           </ProtectedRoute>
-          <Route exact path="/" component={Main} >
+          <Route exact path="/" >
+            <Main setMainPage={setMainPage} mainPage={mainPage} />
           </Route>
           <Route path="/*" >
             <Error404 setHeadlessPage={setHeadlessPage} linkToBack={linkToBack} />
