@@ -45,3 +45,19 @@ export const register = ({email, password, name}) => {
             return res;
       })
   }
+
+  export const setUser = (userInfo) => {
+    const token = localStorage.getItem('token');
+    return fetch(`${BASE_URL}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      authorization: 'Bearer ' + token,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: userInfo.name,
+      email: userInfo.email
+    }),
+    })
+    .then(res => checkResponse(res))
+  }

@@ -23,7 +23,6 @@ function Register({ linkToHome,
                         setLoggedIn(true);
                         setResError(false);
                         linkToMovies();
-                        console.log(res);
                   })
                   .catch((err) => {
                         setResError(true);
@@ -38,7 +37,8 @@ function Register({ linkToHome,
       useEffect(() => {
             setHeadlessPage(true);
             setRegisterData({ name: '', email: '', password: '' });
-      }, [ setRegisterData, setHeadlessPage ]);
+            setResError(false);
+      }, [ setRegisterData, setHeadlessPage, setResError ]);
 
       return (
             (<section className="register">

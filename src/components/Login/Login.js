@@ -14,28 +14,23 @@ function Login({ linkToHome,
       resError,
       setCurrentUser,
       linkToMovies,
-      setLoggedIn
+      setLoggedIn,
+      getUserInfo,
+      tokenCheck
 }) {
-
-      function getUserInfo() {
-            mainApi.getUserInfo()
-                  .then((res) => {
-                        setCurrentUser(res);
-                  })
-                  .catch((err) => {
-                        console.log(err);
-                  });
-      }
 
       function onLogin(data) {
             mainApi.authorize(data)
                   .then((res) => {
                         if (res.token) {
                               localStorage.setItem('token', res.token);
-                              getUserInfo();
+                              tokenCheck();
+                              linkToMovies();
+                              setLoggedIn(true);
                         }
                   })
                   .catch((err) => {
+                        setLoggedIn(false);
                         setResError(true);
                   });
       };
@@ -43,14 +38,13 @@ function Login({ linkToHome,
       function handleSubmit(event) {
             event.preventDefault();
             onLogin(loginData);
-            linkToMovies();
-            setLoggedIn(true);
       }
 
       useEffect(() => {
             setHeadlessPage(true);
             setLoginData({ email: '', password: '' });
-      }, [setHeadlessPage, setLoginData]);
+            setResError(false);
+      }, [setHeadlessPage, setLoginData, setResError]);
       return (
             (<section className="login">
                   <div className="login__container">

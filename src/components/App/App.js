@@ -33,8 +33,27 @@ function App() {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [profileData, setProfileData] = useState({ name: '', email: '' });
   const [resError, setResError] = useState(false);
+  const [mainPage, setMainPage] = useState(false);
+  const [profileMessage, setProfileMessage] = useState('');
 
+  function getUserInfo() {
+    mainApi.getUserInfo()
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
+  function tokenCheck() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return;
+    }
+    getUserInfo();
+    setLoggedIn(true);
+  }
 
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
@@ -49,13 +68,13 @@ function App() {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    console.log(target, name, value);
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest("form").checkValidity());
     setRegisterData({ ...registerData, [event.target.name]: event.target.value });
     setLoginData({ ...loginData, [event.target.name]: event.target.value });
-    setProfileData({ ...profileData, [event.target.name]: event.target.value })
+    setProfileData({ ...profileData, [event.target.name]: event.target.value });
+    setProfileMessage('');
   };
 
 
@@ -69,6 +88,7 @@ function App() {
       })
   }
   useEffect(() => {
+    tokenCheck();
     getPhilms();
   }, [])
 
@@ -83,11 +103,13 @@ function App() {
   function linkToHome() {
     setHeadlessPage(false);
     setMobileMenuPopupOpen(false);
+    setMainPage(true);
     history.push('/');
   }
 
   function linkToProfile() {
     setMobileMenuPopupOpen(false);
+    setMainPage(false);
     history.push('/profile');
   }
 
@@ -96,12 +118,14 @@ function App() {
     setHeadlessPage(false);
     setSavedMoviesPage(false);
     setMobileMenuPopupOpen(false);
+    setMainPage(false);
   }
 
   function linkToSavedMovies() {
     setSavedMoviesPage(true);
     setMobileMenuPopupOpen(false);
     history.push('/saved-movies');
+    setMainPage(false);
   }
 
   function linkToRegister() {
@@ -140,6 +164,7 @@ function App() {
           headlessPage={headlessPage}
           linkToRegister={linkToRegister}
           linkToLogin={linkToLogin}
+          mainPage={mainPage}
         />
         <Switch >
           <Route exact path="/signup">
@@ -173,6 +198,8 @@ function App() {
               setCurrentUser={setCurrentUser}
               linkToMovies={linkToMovies}
               setLoggedIn={setLoggedIn}
+              getUserInfo={getUserInfo}
+              tokenCheck={tokenCheck}
             />
           </Route>
           <ProtectedRoute exact path="/movies" component={Movies} loggedIn={loggedIn}
@@ -194,11 +221,16 @@ function App() {
           <ProtectedRoute exact path="/profile" component={Profile}
             loggedIn={loggedIn}
             setLoggedIn={setLoggedIn}
-            linkToSignOut={linkToSignOut} 
+            linkToSignOut={linkToSignOut}
             handleChange={handleChange}
             setProfileData={setProfileData}
             profileData={profileData}
-            >
+            errors={errors}
+            isValid={isValid}
+            setCurrentUser={setCurrentUser}
+            setProfileMessage={setProfileMessage}
+            profileMessage={profileMessage}
+          >
           </ProtectedRoute>
           <Route exact path="/" component={Main} >
           </Route>
