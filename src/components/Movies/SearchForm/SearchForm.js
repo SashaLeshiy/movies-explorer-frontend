@@ -1,33 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function SearchForm({
     handleChange,
     errors,
+    setErrors,
     isValid,
     setSearchPhrase,
     searchPhrase,
-    // searchWord,
     setSearchMovie,
     searchMovie,
+    setMovies,
     movies,
     isSearch,
-    setIsSearch
+    setIsSearch,
+    getPhilms,
+    searсhMessage,
+    setSearchMessage,
+    setIsCheckBox,
+    isCheckBox
 }) {
-    let serMovie = [];
-    function searchWord() {
-        movies.filter((movie) => {
-            if (movie.description.includes(searchPhrase.search)) {
-                serMovie.push(movie);
-            }
-        })
+
+    
+    useEffect(() => {
+        setSearchPhrase('');
+    }, [setSearchPhrase])
+
+    function handleSearchSubmit(event) {
+        event.preventDefault();
+        if (!isValid) {
+            return
+        } else {
+            setSearchMessage('');
+            getPhilms();
+            setIsSearch(true);
+        }
     }
 
-    function handleSearchSubmit(e) {
-        e.preventDefault();
-        // searchWord(searchPhrase.search);
-        searchWord();
-        setSearchMovie(serMovie);
-        setIsSearch(true);
+    function handlerCheckBox() {
+        setIsCheckBox(!isCheckBox);
     }
 
     return (
@@ -37,12 +47,12 @@ function SearchForm({
                     type="text" placeholder="Фильм"
                     required name="search" minLength="2"
                     onChange={handleChange}
-                    value={searchPhrase.search}
+                    value={searchPhrase.search || ''}
                 />
                 <button className="searchForm__button" type="submit">Поиск</button>
                 <span className="searchForm__error">{errors.search}</span>
                 <label className="searchForm__checkbox">
-                    <input type="checkbox" />
+                    <input type="checkbox" onChange={handlerCheckBox} />
                     <span className="searchForm__checkbox_switch"></span>
                     <span className="searchForm__checkbox_heading">Короткометражки</span>
                 </label>

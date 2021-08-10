@@ -38,12 +38,10 @@ function App() {
   const [isSearch, setIsSearch] = useState(false);
   const [searchPhrase, setSearchPhrase] = useState('');
   const [searchMovie, setSearchMovie] = useState([]);
-
-  // function searchWord(keyWord) {
-  //   searchMovie = movies.filter((movie) => {
-  //     return movie.description.includes(keyWord);
-  //   })
-  // }
+  const [searсhMessage, setSearchMessage] = useState('');
+  const [newSearchMovie, setNewSearchMovie] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCheckBox, setIsCheckBox] = useState(false);
 
   function getUserInfo() {
     mainApi.getUserInfo()
@@ -57,19 +55,67 @@ function App() {
 
   function onLogin(data) {
     mainApi.authorize(data)
-          .then((res) => {
-                if (res.token) {
-                      localStorage.setItem('token', res.token);
-                      tokenCheck();
-                      linkToMovies();
-                      setLoggedIn(true);
-                }
-          })
-          .catch((err) => {
-                setLoggedIn(false);
-                setResError(true);
-          });
-};
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          tokenCheck();
+          linkToMovies();
+          setLoggedIn(true);
+        }
+      })
+      .catch((err) => {
+        setLoggedIn(false);
+        setResError(true);
+      });
+  };
+
+  function searchMov() {
+    let newMovie = [];
+    let searchMovie = JSON.parse(localStorage.getItem('movies'));
+    searchMovie.map((movie) => {
+      if (isCheckBox && movie.description.includes(searchPhrase.search)) {
+          newMovie.push(movie);
+        } else if (!isCheckBox && movie.description.includes(searchPhrase.search) 
+                  && movie.duration >=40) {
+                    newMovie.push(movie);
+        } 
+    })
+    localStorage.setItem('movies', JSON.stringify(newMovie));
+  }
+
+  useEffect(() => {
+    if (movies) {
+      getSavedMovies();
+      setSearchMovie(movies);
+      setIsLoading(false);
+    }
+  }, [movies])
+
+
+  function getPhilms() {
+    setIsLoading(true);
+    moviesApi.getMovies()
+      .then((data) => {
+        setMovies(data);
+        localStorage.setItem('movies', JSON.stringify(movies));
+      })
+      .then(() => {
+        searchMov();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  function getSavedMovies() {
+    mainApi.getSavedMovie()
+      .then((res) => {
+        setSavedMovies(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   function tokenCheck() {
     const token = localStorage.getItem('token');
@@ -100,23 +146,15 @@ function App() {
     setLoginData({ ...loginData, [event.target.name]: event.target.value });
     setProfileData({ ...profileData, [event.target.name]: event.target.value });
     setSearchPhrase({ ...searchPhrase, [event.target.name]: event.target.value })
-    setProfileMessage('');
+    setProfileMessage('')
   };
 
-
-  function getPhilms() {
-    moviesApi.getMovies()
-      .then((data) => {
-        setMovies(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
   useEffect(() => {
     tokenCheck();
     getPhilms();
   }, [])
+
+
 
   function handleMobileMenuOpen() {
     setMobileMenuPopupOpen(true);
@@ -167,6 +205,8 @@ function App() {
 
   function linkToSignOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('movies');
+    setIsSearch(false);
     setCurrentUser({});
     setLoggedIn(false);
     linkToHome();
@@ -233,25 +273,43 @@ function App() {
           </Route>
           <ProtectedRoute exact path="/movies" component={Movies} loggedIn={loggedIn}
             movies={movies}
+            setMovies={setMovies}
             savedMoviesPage={savedMoviesPage}
             setLoggedIn={setLoggedIn}
             handleChange={handleChange}
+            setErrors={setErrors}
             errors={errors}
             isValid={isValid}
             isSearch={isSearch}
             setIsSearch={setIsSearch}
             setSearchPhrase={setSearchPhrase}
             searchPhrase={searchPhrase}
-            // searchWord={searchWord}
             setSearchMovie={setSearchMovie}
             searchMovie={searchMovie}
+            getPhilms={getPhilms}
+            setSearchMessage={setSearchMessage}
+            searсhMessage={searсhMessage}
+            setNewSearchMovie={setNewSearchMovie}
+            newSearchMovie={newSearchMovie}
+            isLoading={isLoading}
+            setIsCheckBox={setIsCheckBox}
+            isCheckBox={isCheckBox}
           >
           </ProtectedRoute>
-          <ProtectedRoute exact path="/saved-movies" component={SavedMovies} loggedIn={loggedIn}
-            movies={savedMovies}
+          <ProtectedRoute exact path="/saved-movies" component={SavedMovies}
+            setErrors={setErrors}
+            errors={errors}
+            loggedIn={loggedIn}
+            savedMovies={savedMovies}
+            setSavedMovies={setSavedMovies}
             savedMoviesPage={savedMoviesPage}
             setSavedMoviesPage={setSavedMoviesPage}
             setLoggedIn={setLoggedIn}
+            getSavedMovies={getSavedMovies}
+            setSearchPhrase={setSearchPhrase}
+            searchPhrase={searchPhrase}
+            setCheckBox={setIsCheckBox}
+            isCheckBox={isCheckBox}
           >
           </ProtectedRoute>
           <ProtectedRoute exact path="/profile" component={Profile}

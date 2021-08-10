@@ -30,6 +30,14 @@
     column-gap: 16px;
 }
 
+.movieCardList__empty {
+    padding: 50px 0;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.2em;
+    color: #ffffff;
+}
+
 @media screen and (max-width: 665px) {
     .movieCardList {
         justify-content: center;
