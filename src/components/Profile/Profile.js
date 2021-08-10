@@ -19,7 +19,7 @@ function Profile({ setLoggedIn,
       function patchUserData(newProfile) {
             mainApi.setUser(newProfile)
             .then((res) => {
-                  setCurrentUser({ name: res.name, email: res.email});
+                  setCurrentUser({ name: res.name, email: res.email, id: res.id });
                   setErrorMessage(false);
                   setProfileMessage('Данные аккаунта изменены');
                   setIsValid(false);

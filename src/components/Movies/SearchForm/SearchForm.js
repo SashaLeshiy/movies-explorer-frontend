@@ -17,7 +17,8 @@ function SearchForm({
     searсhMessage,
     setSearchMessage,
     setIsCheckBox,
-    isCheckBox
+    isCheckBox,
+    compareMovies
 }) {
 
     

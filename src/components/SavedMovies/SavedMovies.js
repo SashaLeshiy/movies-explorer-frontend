@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import MovieCardList from '../Movies/MoviesCardList/MovieCardList';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 
@@ -13,8 +14,11 @@ function SavedMovies({ movies,
       setSearchPhrase,
       searchPhrase,
       setIsCheckBox,
-      isCheckBox
+      isCheckBox,
+      setCurrentUser,
+      currentUser,
 }) {
+
       useEffect(() => {
             getSavedMovies();
       }, []);
@@ -36,6 +40,8 @@ function SavedMovies({ movies,
                               setSavedMovies={setSavedMovies}
                               savedMovies={savedMovies}
                               getSavedMovies={getSavedMovies}
+                              setCurrentUser={setCurrentUser}
+                              currentUser={currentUser}
                         />
                   </div>
             </section>

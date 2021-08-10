@@ -59,8 +59,10 @@ function App() {
         if (res.token) {
           localStorage.setItem('token', res.token);
           tokenCheck();
+          setIsLoading(false);
           linkToMovies();
           setLoggedIn(true);
+          setSavedMoviesPage(false);
         }
       })
       .catch((err) => {
@@ -69,27 +71,40 @@ function App() {
       });
   };
 
+  function createMovie(props) {
+    mainApi.setMovie(props)
+      .then((res) => {
+        console.log(res.movieId);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   function searchMov() {
     let newMovie = [];
     let searchMovie = JSON.parse(localStorage.getItem('movies'));
     searchMovie.map((movie) => {
       if (isCheckBox && movie.description.includes(searchPhrase.search)) {
-          newMovie.push(movie);
-        } else if (!isCheckBox && movie.description.includes(searchPhrase.search) 
-                  && movie.duration >=40) {
-                    newMovie.push(movie);
-        } 
+        newMovie.push(movie);
+      } else if (!isCheckBox && movie.description.includes(searchPhrase.search)
+        && movie.duration >= 40) {
+        newMovie.push(movie);
+      }
     })
     localStorage.setItem('movies', JSON.stringify(newMovie));
   }
 
   useEffect(() => {
     if (movies) {
-      getSavedMovies();
-      setSearchMovie(movies);
+      setSearchMovie(JSON.parse(localStorage.getItem('movies')));
       setIsLoading(false);
     }
   }, [movies])
+
+  useEffect(() => {
+    tokenCheck();
+  }, [])
 
 
   function getPhilms() {
@@ -108,6 +123,7 @@ function App() {
   }
 
   function getSavedMovies() {
+    setIsLoading(true);
     mainApi.getSavedMovie()
       .then((res) => {
         setSavedMovies(res);
@@ -116,6 +132,10 @@ function App() {
         console.log(err);
       })
   }
+
+  // function isOwner(owner) {
+  //   if(owner === currentUser)
+  // }
 
   function tokenCheck() {
     const token = localStorage.getItem('token');
@@ -149,13 +169,7 @@ function App() {
     setProfileMessage('')
   };
 
-  useEffect(() => {
-    tokenCheck();
-    getPhilms();
-  }, [])
-
-
-
+  
   function handleMobileMenuOpen() {
     setMobileMenuPopupOpen(true);
   }
@@ -168,6 +182,7 @@ function App() {
     setHeadlessPage(false);
     setMobileMenuPopupOpen(false);
     setMainPage(true);
+    setSavedMoviesPage(false);
     history.push('/');
   }
 
@@ -183,6 +198,7 @@ function App() {
     setSavedMoviesPage(false);
     setMobileMenuPopupOpen(false);
     setMainPage(false);
+    setIsLoading(false);
   }
 
   function linkToSavedMovies() {
@@ -294,6 +310,9 @@ function App() {
             isLoading={isLoading}
             setIsCheckBox={setIsCheckBox}
             isCheckBox={isCheckBox}
+            createMovie={createMovie}
+            setCurrentUser={setCurrentUser}
+            currentUser={currentUser}
           >
           </ProtectedRoute>
           <ProtectedRoute exact path="/saved-movies" component={SavedMovies}
@@ -310,6 +329,8 @@ function App() {
             searchPhrase={searchPhrase}
             setCheckBox={setIsCheckBox}
             isCheckBox={isCheckBox}
+            setCurrentUser={setCurrentUser}
+            currentUser={currentUser}
           >
           </ProtectedRoute>
           <ProtectedRoute exact path="/profile" component={Profile}

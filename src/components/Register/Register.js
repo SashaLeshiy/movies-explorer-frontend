@@ -22,7 +22,8 @@ function Register({ linkToHome,
       function onRegister(data) {
             mainApi.register(data)
                   .then((res) => {
-                        setCurrentUser({ name: res.name, email: res.email});
+                        console.log(res);
+                        setCurrentUser({ name: res.name, email: res.email, id: res.id });
                         setLoggedIn(true);
                         setResError(false);
                         onLogin({ email: data.email, password: data.password});
