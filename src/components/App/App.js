@@ -42,6 +42,100 @@ function App() {
   const [newSearchMovie, setNewSearchMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isCheckBox, setIsCheckBox] = useState(false);
+  const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
+  
+
+  useEffect(() => {
+    tokenCheck();
+  }, [])
+
+  function tokenCheck() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return;
+    }
+    getUserInfo();
+    getSavedMovies();
+    setLoggedIn(true);
+  }
+
+  useEffect(() => {
+    if (searchMovie) {
+      // setSearchMovie(JSON.parse(localStorage.getItem('movies')));
+      setIsLoading(false);
+    }
+  }, [searchMovie])
+
+  
+
+  function getPhilms() {
+    setIsLoading(true);
+    // console.log('гетфилмс', `Чек ${isCheckBox}`);
+    moviesApi.getMovies()
+      .then((data) => {
+        localStorage.setItem('movies', JSON.stringify(data));
+        setMovies(data);
+      })
+      .then(() => {
+        movieSearch(JSON.parse(localStorage.getItem('movies')));
+      })
+        
+        // localStorage.setItem('movies', JSON.stringify(data));
+      // })
+      // .then(() => {
+        // setMovies(data);
+        // movieSearch();
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  function movieSearch(movieArray) {
+    let newMovie = [];
+    let searchingMovie = movieArray;
+    // console.log('ищем здесь', `Чек ${isCheckBox}`, searchingMovie);
+    searchingMovie.map((movie) => {
+      if (isCheckBox && movie.description.includes(searchPhrase)) {
+        newMovie.push(movie);
+      } else if (!isCheckBox && movie.description.includes(searchPhrase)
+        && movie.duration >= 40) {
+        newMovie.push(movie);
+      }
+    })
+    localStorage.setItem('movies', JSON.stringify(newMovie));
+    setSearchMovie(newMovie);
+  }
+
+  function handlerCheckBox() {
+    setIsCheckBox(!isCheckBox);
+    // if(searchMovie.length > 0) {
+    //   console.log('ищем', `Чек ${isCheckBox}`);
+    // getPhilms();
+    // } 
+  }
+
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+    setRegisterData({ ...registerData, [event.target.name]: event.target.value });
+    setLoginData({ ...loginData, [event.target.name]: event.target.value });
+    setProfileData({ ...profileData, [event.target.name]: event.target.value });
+    setProfileMessage('')
+  };
+
+  const handleChangeSearchPhrase = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+    setSearchPhrase(event.target.value);
+  }
 
   function getUserInfo() {
     mainApi.getUserInfo()
@@ -51,6 +145,24 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  function getSavedMovies() {
+    let movOwner = [];
+    mainApi.getSavedMovie()
+      .then((res) => {
+        res.map((mov) => {
+          movOwner.push(mov.movieId);
+        })
+        setSavedMovies(res);
+      })
+      .then(() => {
+        setArrayLikeMovieId(movOwner);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function onLogin(data) {
@@ -74,77 +186,13 @@ function App() {
   function createMovie(props) {
     mainApi.setMovie(props)
       .then((res) => {
-        console.log(res.movieId);
+        setSavedMovies([...savedMovies, res]);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  function searchMov() {
-    let newMovie = [];
-    let searchMovie = JSON.parse(localStorage.getItem('movies'));
-    searchMovie.map((movie) => {
-      if (isCheckBox && movie.description.includes(searchPhrase.search)) {
-        newMovie.push(movie);
-      } else if (!isCheckBox && movie.description.includes(searchPhrase.search)
-        && movie.duration >= 40) {
-        newMovie.push(movie);
-      }
-    })
-    localStorage.setItem('movies', JSON.stringify(newMovie));
-  }
-
-  useEffect(() => {
-    if (movies) {
-      setSearchMovie(JSON.parse(localStorage.getItem('movies')));
-      setIsLoading(false);
-    }
-  }, [movies])
-
-  useEffect(() => {
-    tokenCheck();
-  }, [])
-
-
-  function getPhilms() {
-    setIsLoading(true);
-    moviesApi.getMovies()
-      .then((data) => {
-        setMovies(data);
-        localStorage.setItem('movies', JSON.stringify(movies));
-      })
-      .then(() => {
-        searchMov();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  function getSavedMovies() {
-    setIsLoading(true);
-    mainApi.getSavedMovie()
-      .then((res) => {
-        setSavedMovies(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  // function isOwner(owner) {
-  //   if(owner === currentUser)
-  // }
-
-  function tokenCheck() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return;
-    }
-    getUserInfo();
-    setLoggedIn(true);
-  }
 
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
@@ -155,21 +203,7 @@ function App() {
     [setValues, setErrors, setIsValid]
   );
 
-  const handleChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(target.closest("form").checkValidity());
-    setRegisterData({ ...registerData, [event.target.name]: event.target.value });
-    setLoginData({ ...loginData, [event.target.name]: event.target.value });
-    setProfileData({ ...profileData, [event.target.name]: event.target.value });
-    setSearchPhrase({ ...searchPhrase, [event.target.name]: event.target.value })
-    setProfileMessage('')
-  };
 
-  
   function handleMobileMenuOpen() {
     setMobileMenuPopupOpen(true);
   }
@@ -225,12 +259,14 @@ function App() {
     setIsSearch(false);
     setCurrentUser({});
     setLoggedIn(false);
+    setArrayLikeMovieId([]);
     linkToHome();
   }
 
   function linkToBack() {
     history.goBack();
   }
+
 
   return (
     <div className="page">
@@ -292,6 +328,7 @@ function App() {
             setMovies={setMovies}
             savedMoviesPage={savedMoviesPage}
             setLoggedIn={setLoggedIn}
+            getSavedMovies={getSavedMovies}
             handleChange={handleChange}
             setErrors={setErrors}
             errors={errors}
@@ -313,6 +350,12 @@ function App() {
             createMovie={createMovie}
             setCurrentUser={setCurrentUser}
             currentUser={currentUser}
+            arrayLikeMovieId={arrayLikeMovieId}
+            handleChangeSearchPhrase={handleChangeSearchPhrase}
+            handlerCheckBox={handlerCheckBox}
+            savedMovies={savedMovies}
+            // setHeartRed={setHeartRed}
+            // isHeartRed={isHeartRed}
           >
           </ProtectedRoute>
           <ProtectedRoute exact path="/saved-movies" component={SavedMovies}
@@ -331,6 +374,9 @@ function App() {
             isCheckBox={isCheckBox}
             setCurrentUser={setCurrentUser}
             currentUser={currentUser}
+            arrayLikeMovieId={arrayLikeMovieId}
+            // setHeartRed={setHeartRed}
+            // isHeartRed={isHeartRed}
           >
           </ProtectedRoute>
           <ProtectedRoute exact path="/profile" component={Profile}

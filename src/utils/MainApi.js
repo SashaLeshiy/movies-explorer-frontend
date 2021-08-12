@@ -1,4 +1,6 @@
-export const BASE_URL = 'https://api.zomlesh.nomoredomains.monster';
+// export const BASE_URL = 'https://api.zomlesh.nomoredomains.monster';
+
+export const BASE_URL = 'http://localhost:8000';
 
 const checkResponse = (response) => {
   return response.ok ? response.json() :
@@ -72,14 +74,14 @@ export const register = ({email, password, name}) => {
     },
     body: JSON.stringify({
         movieId: props.movieId,
-        country: props.country,
-        director: props.director,
+        country: props.country || 'not specified',
+        director: props.director || 'not specified',
         year: props.year,
-        description: props.description,
+        description: props.description || 'not specified',
         image: `https://api.nomoreparties.co${props.image.url}`,
         trailer: props.trailer,
-        nameEN: props.nameEN,
-        nameRU: props.nameRU, 
+        nameEN: props.nameEN || 'not specified',
+        nameRU: props.nameRU || 'not specified', 
         thumbnail: `https://api.nomoreparties.co${props.thumbnail}`, 
         duration: props.duration,
     }),
@@ -101,9 +103,9 @@ export const register = ({email, password, name}) => {
       })
   }
 
-  export const deleteMovie = (movieId) => {
+  export const deleteMovie = (id) => {
     const token = localStorage.getItem('token');
-    return fetch(`${BASE_URL}/movies/${movieId}`, {
+    return fetch(`${BASE_URL}/movies/${id}`, {
       method: 'DELETE',
       headers: {
         authorization: 'Bearer ' + token,

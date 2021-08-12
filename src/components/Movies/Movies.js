@@ -6,6 +6,7 @@ import Preloader from './Preloader/Preloader';
 
 function Movies({ setMovies,
       movies,
+      savedMovies,
       savedMoviesPage,
       handleChange,
       isValid,
@@ -19,6 +20,7 @@ function Movies({ setMovies,
       setSearchMovie,
       searchMovie,
       getPhilms,
+      getSavedMovies,
       setSearchMessage,
       searchMessage,
       handleMore,
@@ -30,7 +32,12 @@ function Movies({ setMovies,
       compareMovies,
       createMovie,
       setCurrentUser,
-      currentUser
+      currentUser,
+      arrayLikeMovieId,
+      handleChangeSearchPhrase,
+      handlerCheckBox,
+      setHeartRed,
+      isHeartRed
 }) {
       return (
             (<section className="movies">
@@ -57,6 +64,8 @@ function Movies({ setMovies,
                               setIsCheckBox={setIsCheckBox}
                               isCheckBox={isCheckBox}
                               compareMovies={compareMovies}
+                              handleChangeSearchPhrase={handleChangeSearchPhrase}
+                              handlerCheckBox={handlerCheckBox}
                         />
                         {isLoading ?
                               <Preloader />
@@ -64,6 +73,8 @@ function Movies({ setMovies,
                               <span></span>
                         }
                         <MovieCardList setMovies={setMovies}
+                              getSavedMovies={getSavedMovies}
+                              savedMovies={savedMovies}
                               savedMoviesPage={savedMoviesPage}
                               isValid={isValid}
                               isSearch={isSearch}
@@ -72,6 +83,10 @@ function Movies({ setMovies,
                               createMovie={createMovie}
                               setCurrentUser={setCurrentUser}
                               currentUser={currentUser}
+                              arrayLikeMovieId={arrayLikeMovieId}
+                              setHeartRed={setHeartRed}
+                              isHeartRed={isHeartRed}
+
                         />
                   </div>
             </section>)

@@ -10,7 +10,7 @@
     width: 270px;
     height: 151px;
     object-fit: cover;
-    object-position: left top;
+    object-position: left center;
 }
 
 .movieCard__heading {

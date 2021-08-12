@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieCard from '../MoviesCard/MovieCard';
 import * as mainApi from '../../../utils/MainApi';
 import SavedMovies from '../../SavedMovies/SavedMovies';
@@ -16,9 +16,14 @@ function MovieCardList({ movies,
     getSavedMovies,
     createMovie,
     setCurrentUser,
-    currentUser
+    currentUser,
+    arrayLikeMovieId, 
+    setHeartRed,
+    isHeartRed
 }) {
     const localMovies = JSON.parse(localStorage.getItem('movies'));
+    
+
     // const [index, setIndex] = useState(0);
     
     // const handleMore = () => {
@@ -28,14 +33,15 @@ function MovieCardList({ movies,
     //   }
     //   console.log(newSearchMovie);
     // }
+    
 
     return (
         savedMoviesPage ?
         (<div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
                     {(savedMovies.map(movie => {
-                        if(movie.owner === currentUser.id) {
                         return <MovieCard key={movie._id}
-                            movieId={movie._id}
+                            id={movie._id}
+                            movieId={movie.id}
                             country={movie.country}
                             director={movie.director}
                             year={movie.year}
@@ -49,8 +55,10 @@ function MovieCardList({ movies,
                             savedMoviesPage={savedMoviesPage}
                             getSavedMovies={getSavedMovies}
                             createMovie={createMovie}
+                            arrayLikeMovieId={arrayLikeMovieId}
+                            setHeartRed={setHeartRed}
+                            isHeartRed={isHeartRed}
                         />
-                    }
                     })
                     )}
                 </div>)
@@ -70,8 +78,13 @@ function MovieCardList({ movies,
                             nameEN={smovie.nameEN}
                             thumbnail={smovie.image.url}
                             duration={smovie.duration}
+                            savedMovies={savedMovies}
+                            getSavedMovies={getSavedMovies}
                             savedMoviesPage={savedMoviesPage}
                             createMovie={createMovie}
+                            arrayLikeMovieId={arrayLikeMovieId}
+                            setHeartRed={setHeartRed}
+                            isHeartRed={isHeartRed}
                         />
                     })
                     )}

@@ -18,9 +18,12 @@ function SearchForm({
     setSearchMessage,
     setIsCheckBox,
     isCheckBox,
-    compareMovies
+    compareMovies,
+    handleChangeSearchPhrase,
+    searchMov,
+    handlerCheckBox, 
+    savedMovies
 }) {
-
     
     useEffect(() => {
         setSearchPhrase('');
@@ -28,6 +31,7 @@ function SearchForm({
 
     function handleSearchSubmit(event) {
         event.preventDefault();
+        console.log(savedMovies);
         if (!isValid) {
             return
         } else {
@@ -37,18 +41,14 @@ function SearchForm({
         }
     }
 
-    function handlerCheckBox() {
-        setIsCheckBox(!isCheckBox);
-    }
-
     return (
         <div className="searchForm">
             <form name="searchForm" className="searchForm__form" onSubmit={handleSearchSubmit} noValidate>
                 <input className="searchForm__input"
                     type="text" placeholder="Фильм"
                     required name="search" minLength="2"
-                    onChange={handleChange}
-                    value={searchPhrase.search || ''}
+                    onChange={handleChangeSearchPhrase}
+                    value={searchPhrase || ''}
                 />
                 <button className="searchForm__button" type="submit">Поиск</button>
                 <span className="searchForm__error">{errors.search}</span>
