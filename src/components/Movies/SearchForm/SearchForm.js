@@ -8,6 +8,7 @@ function SearchForm({
     setSearchPhrase,
     searchPhrase,
     setSearchMovie,
+    setSavedMovies,
     searchMovie,
     setMovies,
     movies,
@@ -22,7 +23,9 @@ function SearchForm({
     handleChangeSearchPhrase,
     searchMov,
     handlerCheckBox, 
-    savedMovies
+    savedMovies,
+    movieSearch,
+    savedMoviesPage
 }) {
     
     useEffect(() => {
@@ -31,13 +34,13 @@ function SearchForm({
 
     function handleSearchSubmit(event) {
         event.preventDefault();
-        console.log(savedMovies);
-        if (!isValid) {
-            return
-        } else {
+        if (isValid && !savedMoviesPage) {
             setSearchMessage('');
-            getPhilms();
             setIsSearch(true);
+            getPhilms();
+        } else if (isValid) {
+            movieSearch(savedMovies);
+            setSavedMovies(JSON.parse(localStorage.getItem('movies')));
         }
     }
 

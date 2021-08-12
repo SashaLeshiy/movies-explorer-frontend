@@ -3,6 +3,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { getSavedMovie } from '../../utils/MainApi';
 import MovieCardList from '../Movies/MoviesCardList/MovieCardList';
 import SearchForm from '../Movies/SearchForm/SearchForm';
+import * as mainApi from '../../utils/MainApi';
 
 function SavedMovies({ movies,
       errors,
@@ -19,6 +20,7 @@ function SavedMovies({ movies,
       setCurrentUser,
       currentUser,
       arrayLikeMovieId,
+      setArrayLikeMovieId,
       setMovies,
       handleChange,
       isValid,
@@ -38,12 +40,31 @@ function SavedMovies({ movies,
       createMovie,
       handleChangeSearchPhrase,
       handlerCheckBox,
-      setHeartRed
+      setHeartRed,
+      movieSearch
 }) {
 
       useEffect(() => {
             getSavedMovies();
       }, []);
+
+      function getSavedMovies() {
+            let movOwner = [];
+            mainApi.getSavedMovie()
+              .then((res) => {
+                res.map((mov) => {
+                  movOwner.push(mov.movieId);
+                })
+                setSavedMovies(res);
+              })
+              .then(() => {
+                setArrayLikeMovieId(movOwner);
+            //     setIsLoading(false);
+              })
+              .catch((err) => {
+                console.log(err);
+              })
+          }
 
       return (
             <section className="savedMovies">
@@ -57,6 +78,7 @@ function SavedMovies({ movies,
                               searchPhrase={searchPhrase}
                               searchWord={searchWord}
                               setSearchMovie={setSearchMovie}
+                              setSavedMovies={setSavedMovies}
                               searchMovie={searchMovie}
                               setMovies={setMovies}
                               isSearch={isSearch}
@@ -73,6 +95,8 @@ function SavedMovies({ movies,
                               handleChangeSearchPhrase={handleChangeSearchPhrase}
                               handlerCheckBox={handlerCheckBox}
                               savedMovies={savedMovies}
+                              movieSearch={movieSearch}
+                              savedMoviesPage={savedMoviesPage}
                         />
                         <MovieCardList
                               getSavedMovies={getSavedMovies}

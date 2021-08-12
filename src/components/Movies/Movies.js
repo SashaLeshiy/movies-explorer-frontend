@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MovieCardList from './MoviesCardList/MovieCardList';
 import SearchForm from './SearchForm/SearchForm'
 import Preloader from './Preloader/Preloader';
@@ -39,6 +39,11 @@ function Movies({ setMovies,
       setHeartRed,
       isHeartRed
 }) {
+      
+      // useEffect(() => {
+      //       setSearchMovie();
+      // });
+
       return (
             (<section className="movies">
                   <div className="movies__content content">

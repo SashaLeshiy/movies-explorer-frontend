@@ -44,7 +44,6 @@ function App() {
   const [isCheckBox, setIsCheckBox] = useState(false);
   const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
   
-
   useEffect(() => {
     tokenCheck();
   }, [])
@@ -55,16 +54,16 @@ function App() {
       return;
     }
     getUserInfo();
-    getSavedMovies();
+    // getSavedMovies();
     setLoggedIn(true);
   }
 
-  useEffect(() => {
-    if (searchMovie) {
-      // setSearchMovie(JSON.parse(localStorage.getItem('movies')));
-      setIsLoading(false);
-    }
-  }, [searchMovie])
+  // useEffect(() => {
+  //   if (searchMovie) {
+  //     // setSearchMovie(JSON.parse(localStorage.getItem('movies')));
+  //     setIsLoading(false);
+  //   }
+  // }, [searchMovie])
 
   
 
@@ -79,12 +78,12 @@ function App() {
       .then(() => {
         movieSearch(JSON.parse(localStorage.getItem('movies')));
       })
-        
-        // localStorage.setItem('movies', JSON.stringify(data));
-      // })
-      // .then(() => {
-        // setMovies(data);
-        // movieSearch();
+      .then(() => {
+        setIsLoading(false);
+      })  
+      .then(() => {
+        setSearchMovie(JSON.parse(localStorage.getItem('movies')));
+      })
       .catch((err) => {
         console.log(err);
       })
@@ -92,9 +91,8 @@ function App() {
 
   function movieSearch(movieArray) {
     let newMovie = [];
-    let searchingMovie = movieArray;
     // console.log('ищем здесь', `Чек ${isCheckBox}`, searchingMovie);
-    searchingMovie.map((movie) => {
+    movieArray.map((movie) => {
       if (isCheckBox && movie.description.includes(searchPhrase)) {
         newMovie.push(movie);
       } else if (!isCheckBox && movie.description.includes(searchPhrase)
@@ -102,8 +100,26 @@ function App() {
         newMovie.push(movie);
       }
     })
+    if(newMovie.length === 0) { console.log('Ничего не найдено!')}
     localStorage.setItem('movies', JSON.stringify(newMovie));
-    setSearchMovie(newMovie);
+  }
+
+  function getSavedMovies() {
+    let movOwner = [];
+    mainApi.getSavedMovie()
+      .then((res) => {
+        res.map((mov) => {
+          movOwner.push(mov.movieId);
+        })
+        setSavedMovies(res);
+      })
+      .then(() => {
+        setArrayLikeMovieId(movOwner);
+    //     setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function handlerCheckBox() {
@@ -147,23 +163,23 @@ function App() {
       });
   }
 
-  function getSavedMovies() {
-    let movOwner = [];
-    mainApi.getSavedMovie()
-      .then((res) => {
-        res.map((mov) => {
-          movOwner.push(mov.movieId);
-        })
-        setSavedMovies(res);
-      })
-      .then(() => {
-        setArrayLikeMovieId(movOwner);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
+  // function getSavedMovies() {
+  //   let movOwner = [];
+  //   mainApi.getSavedMovie()
+  //     .then((res) => {
+  //       res.map((mov) => {
+  //         movOwner.push(mov.movieId);
+  //       })
+  //       setSavedMovies(res);
+  //     })
+  //     .then(() => {
+  //       setArrayLikeMovieId(movOwner);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  // }
 
   function onLogin(data) {
     mainApi.authorize(data)
@@ -361,6 +377,7 @@ function App() {
           <ProtectedRoute exact path="/saved-movies" component={SavedMovies}
             setErrors={setErrors}
             errors={errors}
+            isValid={isValid}
             loggedIn={loggedIn}
             savedMovies={savedMovies}
             setSavedMovies={setSavedMovies}
@@ -369,12 +386,16 @@ function App() {
             setLoggedIn={setLoggedIn}
             getSavedMovies={getSavedMovies}
             setSearchPhrase={setSearchPhrase}
+            setSearchMovie={setSearchMovie}
             searchPhrase={searchPhrase}
             setCheckBox={setIsCheckBox}
             isCheckBox={isCheckBox}
             setCurrentUser={setCurrentUser}
             currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
+            setArrayLikeMovieId={setArrayLikeMovieId}
+            movieSearch={movieSearch}
+            handleChangeSearchPhrase={handleChangeSearchPhrase}
             // setHeartRed={setHeartRed}
             // isHeartRed={isHeartRed}
           >

@@ -55,7 +55,7 @@ function MovieCard({
                         });
             }
 
-        const heartClick = () => {
+        function heartClick() {
                 setHeartRed(!isHeartRed);
                 if(!isHeartRed){
                         createMovie({

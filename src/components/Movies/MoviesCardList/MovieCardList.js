@@ -21,7 +21,7 @@ function MovieCardList({ movies,
     setHeartRed,
     isHeartRed
 }) {
-    const localMovies = JSON.parse(localStorage.getItem('movies'));
+    // const localMovies = JSON.parse(localStorage.getItem('movies'));
     
 
     // const [index, setIndex] = useState(0);
@@ -63,9 +63,9 @@ function MovieCardList({ movies,
                     )}
                 </div>)
             :
-            localMovies ?
+            searchMovie ?
                 (<div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
-                    {(localMovies.map(smovie => {
+                    {(searchMovie.map(smovie => {
                             return <MovieCard key={smovie.id}
                             movieId={smovie.id}
                             country={smovie.country}
@@ -88,7 +88,7 @@ function MovieCardList({ movies,
                         />
                     })
                     )}
-                    {localMovies.length === 0 ?
+                    {searchMovie.length === 0 ?
                     <span></span>
                     :
                     <button  className="button__moreMovies">Еще</button>
