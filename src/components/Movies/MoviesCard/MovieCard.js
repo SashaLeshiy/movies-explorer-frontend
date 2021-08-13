@@ -20,9 +20,7 @@ function MovieCard({
         getSavedMovies,
         createMovie,
         arrayLikeMovieId,
-        savedMovies
-        // setHeartRed,
-        // isHeartRed
+        savedMovies,
 }) {
 
         const [isHeartRed, setHeartRed] = useState(false);
@@ -81,7 +79,7 @@ function MovieCard({
                         
                 }
         }
-
+        
         return ( 
                 (<article className="movieCard">
                         <img className="movieCard__img"

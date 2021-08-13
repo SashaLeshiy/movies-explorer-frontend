@@ -43,6 +43,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isCheckBox, setIsCheckBox] = useState(false);
   const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
+  const [index, setIndex] = useState(11);
+  const [buttonMore, setButtonMore] = useState(true);
+
   
   useEffect(() => {
     tokenCheck();
@@ -370,8 +373,10 @@ function App() {
             handleChangeSearchPhrase={handleChangeSearchPhrase}
             handlerCheckBox={handlerCheckBox}
             savedMovies={savedMovies}
-            // setHeartRed={setHeartRed}
-            // isHeartRed={isHeartRed}
+            setIndex={setIndex}
+            index={index}
+            setButtonMore={setButtonMore}
+            buttonMore={buttonMore}
           >
           </ProtectedRoute>
           <ProtectedRoute exact path="/saved-movies" component={SavedMovies}

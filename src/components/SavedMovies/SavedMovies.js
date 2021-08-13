@@ -48,23 +48,6 @@ function SavedMovies({ movies,
             getSavedMovies();
       }, []);
 
-      function getSavedMovies() {
-            let movOwner = [];
-            mainApi.getSavedMovie()
-              .then((res) => {
-                res.map((mov) => {
-                  movOwner.push(mov.movieId);
-                })
-                setSavedMovies(res);
-              })
-              .then(() => {
-                setArrayLikeMovieId(movOwner);
-            //     setIsLoading(false);
-              })
-              .catch((err) => {
-                console.log(err);
-              })
-          }
 
       return (
             <section className="savedMovies">

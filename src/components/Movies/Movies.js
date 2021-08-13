@@ -37,9 +37,13 @@ function Movies({ setMovies,
       handleChangeSearchPhrase,
       handlerCheckBox,
       setHeartRed,
-      isHeartRed
+      isHeartRed,
+      setIndex,
+      index,
+      setButtonMore,
+      buttonMore,
 }) {
-      
+
       // useEffect(() => {
       //       setSearchMovie();
       // });
@@ -71,6 +75,10 @@ function Movies({ setMovies,
                               compareMovies={compareMovies}
                               handleChangeSearchPhrase={handleChangeSearchPhrase}
                               handlerCheckBox={handlerCheckBox}
+                              setIndex={setIndex}
+                              index={index}
+                              setButtonMore={setButtonMore}
+                              buttonMore={buttonMore}
                         />
                         {isLoading ?
                               <Preloader />
@@ -91,6 +99,10 @@ function Movies({ setMovies,
                               arrayLikeMovieId={arrayLikeMovieId}
                               setHeartRed={setHeartRed}
                               isHeartRed={isHeartRed}
+                              setIndex={setIndex}
+                              index={index}
+                              setButtonMore={setButtonMore}
+                              buttonMore={buttonMore}
 
                         />
                   </div>

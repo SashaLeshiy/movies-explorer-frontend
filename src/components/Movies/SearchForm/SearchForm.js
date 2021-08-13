@@ -25,7 +25,11 @@ function SearchForm({
     handlerCheckBox, 
     savedMovies,
     movieSearch,
-    savedMoviesPage
+    savedMoviesPage,
+    setIndex,
+    index,
+    setButtonMore,
+    buttonMore,
 }) {
     
     useEffect(() => {
@@ -38,6 +42,8 @@ function SearchForm({
             setSearchMessage('');
             setIsSearch(true);
             getPhilms();
+            setButtonMore(true);
+            setIndex(11);
         } else if (isValid) {
             movieSearch(savedMovies);
             setSavedMovies(JSON.parse(localStorage.getItem('movies')));

@@ -4,11 +4,11 @@ import * as mainApi from '../../../utils/MainApi';
 import SavedMovies from '../../SavedMovies/SavedMovies';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
-function MovieCardList({ movies, 
-    savedMoviesPage, 
-    isValid, 
-    isSearch, 
-    searchMovie, 
+function MovieCardList({ movies,
+    savedMoviesPage,
+    isValid,
+    isSearch,
+    searchMovie,
     setNewSearchMovie,
     newSearchMovie,
     setSavedMovies,
@@ -17,56 +17,75 @@ function MovieCardList({ movies,
     createMovie,
     setCurrentUser,
     currentUser,
-    arrayLikeMovieId, 
+    arrayLikeMovieId,
     setHeartRed,
-    isHeartRed
+    isHeartRed,
+    setIndex,
+    index,
+    setButtonMore,
+    buttonMore,
 }) {
     // const localMovies = JSON.parse(localStorage.getItem('movies'));
-    
 
-    // const [index, setIndex] = useState(0);
-    
-    // const handleMore = () => {
-    //   if (localMovies.length !== newSearchMovie.length) {
-    //     setIndex(i => i + 1);
-    //     setNewSearchMovie([...newSearchMovie, localMovies[index]]);
-    //   }
-    //   console.log(newSearchMovie);
-    // }
-    
+
+    // const [index, setIndex] = useState(11);
+    const [inputMovie, setInputMovie] = useState([]);
+
+
+    function handleMore() {
+        setIndex(i => i + 3);
+    }
+
+    useEffect(() => {
+        if (!savedMoviesPage) {
+            let renderMovie = [];
+            searchMovie.map(mov => {
+                if (renderMovie.length <= index) {
+                    renderMovie.push(mov);
+                    if (renderMovie.length === searchMovie.length) {
+                        setButtonMore(false);
+                    }
+                }
+            })
+            setInputMovie(renderMovie);
+        }
+    }, [setInputMovie, index, searchMovie, savedMoviesPage]);
+
+
 
     return (
         savedMoviesPage ?
-        (<div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
-                    {(savedMovies.map(movie => {
-                        return <MovieCard key={movie._id}
-                            id={movie._id}
-                            movieId={movie.id}
-                            country={movie.country}
-                            director={movie.director}
-                            year={movie.year}
-                            description={movie.description}
-                            image={movie.image}
-                            trailer={movie.trailerLink}
-                            nameRU={movie.nameRU}
-                            nameEN={movie.nameEN}
-                            thumbnail={movie.image.url || movie.thumbnail}
-                            duration={movie.duration}
-                            savedMoviesPage={savedMoviesPage}
-                            getSavedMovies={getSavedMovies}
-                            createMovie={createMovie}
-                            arrayLikeMovieId={arrayLikeMovieId}
-                            setHeartRed={setHeartRed}
-                            isHeartRed={isHeartRed}
-                        />
-                    })
-                    )}
-                </div>)
+            (<div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
+                {(savedMovies.map(movie => {
+                    return <MovieCard key={movie._id}
+                        id={movie._id}
+                        movieId={movie.id}
+                        country={movie.country}
+                        director={movie.director}
+                        year={movie.year}
+                        description={movie.description}
+                        image={movie.image}
+                        trailer={movie.trailerLink}
+                        nameRU={movie.nameRU}
+                        nameEN={movie.nameEN}
+                        thumbnail={movie.image.url || movie.thumbnail}
+                        duration={movie.duration}
+                        savedMoviesPage={savedMoviesPage}
+                        getSavedMovies={getSavedMovies}
+                        createMovie={createMovie}
+                        arrayLikeMovieId={arrayLikeMovieId}
+                        setHeartRed={setHeartRed}
+                        isHeartRed={isHeartRed}
+                    />
+
+                })
+                )}
+            </div>)
             :
             searchMovie ?
                 (<div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
-                    {(searchMovie.map(smovie => {
-                            return <MovieCard key={smovie.id}
+                    {(inputMovie.map(smovie => {
+                        return <MovieCard key={smovie.id}
                             movieId={smovie.id}
                             country={smovie.country}
                             director={smovie.director}
@@ -86,12 +105,13 @@ function MovieCardList({ movies,
                             setHeartRed={setHeartRed}
                             isHeartRed={isHeartRed}
                         />
+
                     })
                     )}
-                    {searchMovie.length === 0 ?
-                    <span></span>
-                    :
-                    <button  className="button__moreMovies">Еще</button>
+                    {searchMovie.length === 0 || !buttonMore ?
+                        <span></span>
+                        :
+                        <button onClick={handleMore} className="button__moreMovies">Еще</button>
                     }
                 </div>)
                 :
