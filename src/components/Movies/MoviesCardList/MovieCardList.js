@@ -61,6 +61,7 @@ function MovieCardList({ movies,
         savedMoviesPage ?
             (<div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
                 {(savedMovies.map(movie => {
+                    console.log(movie);
                     return <MovieCard key={movie._id}
                         id={movie._id}
                         movieId={movie.id}
@@ -69,7 +70,7 @@ function MovieCardList({ movies,
                         year={movie.year}
                         description={movie.description || 'not specified'}
                         image={movie.image}
-                        trailer={movie.trailerLink}
+                        trailer={movie.trailer}
                         nameRU={movie.nameRU || 'not specified'}
                         nameEN={movie.nameEN || 'not specified'}
                         thumbnail={movie.image.url || movie.thumbnail}

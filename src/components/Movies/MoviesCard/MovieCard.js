@@ -23,6 +23,8 @@ function MovieCard({
         savedMovies,
 }) {
 
+        console.log(trailer);
+
         const [isHeartRed, setHeartRed] = useState(false);
 
         useState(() => {
@@ -79,13 +81,16 @@ function MovieCard({
 
                 }
         }
-
+        
         return (
-                (<article className="movieCard" href={trailer} target="_blank" rel="noopener noreferrer">
+                (<article className="movieCard" >
+                        <a href={trailer} className="movieCard__link" target="_blank" rel="noopener noreferrer">
                         <img className="movieCard__img"
                                 src={savedMoviesPage ? `${thumbnail}` : `https://api.nomoreparties.co${thumbnail}`}
                                 alt="Картинка фильма" />
                         <h2 className="movieCard__heading">{nameRU}</h2>
+                        <p className="movieCard__time">{newDuration}</p>
+                        </a>
                         {!savedMoviesPage ?
                                 (<button onClick={heartClick} type="button"
                                         className={`movieCard__like ${isHeartRed ? "movieCard__like_red" : ""}`}>
@@ -93,7 +98,6 @@ function MovieCard({
                                 :
                                 (<button type="button" onClick={deleteMovieByClick} className="movieCard__delete"></button>)
                         }
-                        <p className="movieCard__time">{newDuration}</p>
                 </article>)
         );
 }
