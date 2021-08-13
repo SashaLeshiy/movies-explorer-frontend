@@ -2,6 +2,7 @@
     width: 270px;
     display: grid;
     padding-bottom: 40px;
+    text-decoration: none;
 }
 
 .movieCard__img {

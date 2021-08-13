@@ -42,8 +42,10 @@ function Movies({ setMovies,
       index,
       setButtonMore,
       buttonMore,
-}) {
+      indexByWidth
 
+}) {
+      console.log(searchMessage);
       // useEffect(() => {
       //       setSearchMovie();
       // });
@@ -79,6 +81,7 @@ function Movies({ setMovies,
                               index={index}
                               setButtonMore={setButtonMore}
                               buttonMore={buttonMore}
+                              indexByWidth={indexByWidth}
                         />
                         {isLoading ?
                               <Preloader />
@@ -103,6 +106,7 @@ function Movies({ setMovies,
                               index={index}
                               setButtonMore={setButtonMore}
                               buttonMore={buttonMore}
+                              searchMessage={searchMessage}
 
                         />
                   </div>

@@ -43,13 +43,28 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isCheckBox, setIsCheckBox] = useState(false);
   const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
-  const [index, setIndex] = useState(11);
+  const [index, setIndex] = useState(null);
   const [buttonMore, setButtonMore] = useState(true);
+  const [clientWidth, setClientWidth] = useState(window.innerWidth);
 
-  
+  function indexByWidth() {
+    if(window.innerWidth >= 1158) {
+      setIndex(3);
+      } else if (window.innerWidth >= 882) {
+          setIndex(2);
+      } else if (window.innerWidth >= 666) {
+          setIndex(1);
+      } else {
+          setIndex(0);
+      }
+  }
+
+
   useEffect(() => {
     tokenCheck();
+    indexByWidth();
   }, [])
+
 
   function tokenCheck() {
     const token = localStorage.getItem('token');
@@ -62,13 +77,9 @@ function App() {
   }
 
   // useEffect(() => {
-  //   if (searchMovie) {
-  //     // setSearchMovie(JSON.parse(localStorage.getItem('movies')));
-  //     setIsLoading(false);
-  //   }
-  // }, [searchMovie])
-
-  
+  //   setClientWidth(window.innerWidth);
+  //   console.log(clientWidth);
+  // },[clientWidth])
 
   function getPhilms() {
     setIsLoading(true);
@@ -80,12 +91,10 @@ function App() {
       })
       .then(() => {
         movieSearch(JSON.parse(localStorage.getItem('movies')));
-      })
-      .then(() => {
-        setIsLoading(false);
       })  
       .then(() => {
         setSearchMovie(JSON.parse(localStorage.getItem('movies')));
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -103,11 +112,11 @@ function App() {
         newMovie.push(movie);
       }
     })
-    if(newMovie.length === 0) { console.log('Ничего не найдено!')}
+    if(newMovie.length === 0) { setSearchMessage('Ничего не найдено!')}
     localStorage.setItem('movies', JSON.stringify(newMovie));
   }
 
-  function getSavedMovies() {
+ function getSavedMovies() {
     let movOwner = [];
     mainApi.getSavedMovie()
       .then((res) => {
@@ -377,8 +386,10 @@ function App() {
             index={index}
             setButtonMore={setButtonMore}
             buttonMore={buttonMore}
+            indexByWidth={indexByWidth}
           >
           </ProtectedRoute>
+
           <ProtectedRoute exact path="/saved-movies" component={SavedMovies}
             setErrors={setErrors}
             errors={errors}

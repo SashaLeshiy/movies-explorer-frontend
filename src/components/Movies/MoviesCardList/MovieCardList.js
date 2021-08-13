@@ -24,16 +24,21 @@ function MovieCardList({ movies,
     index,
     setButtonMore,
     buttonMore,
+    searchMessage
 }) {
-    // const localMovies = JSON.parse(localStorage.getItem('movies'));
-
-
-    // const [index, setIndex] = useState(11);
     const [inputMovie, setInputMovie] = useState([]);
 
-
+    console.log(searchMessage);
     function handleMore() {
-        setIndex(i => i + 3);
+        if(window.innerWidth >= 1158) {
+        setIndex(i => i + 4);
+        } else if (window.innerWidth >= 882) {
+            setIndex(i => i + 3);
+        } else if (window.innerWidth >= 666) {
+            setIndex(i => i + 2);
+        } else {
+            setIndex(i => i + 1);
+        }
     }
 
     useEffect(() => {
@@ -115,7 +120,7 @@ function MovieCardList({ movies,
                     }
                 </div>)
                 :
-                (<p className="movieCardList__empty">Введите ключевое слово в поисковую строку</p>)
+                <p className="movieCardList__empty">{searchMessage}</p>
     );
 }
 export default MovieCardList;

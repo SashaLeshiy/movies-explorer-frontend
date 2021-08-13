@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, history } from 'react';
 import * as mainApi from '../../../utils/MainApi';
 import SavedMovies from '../../SavedMovies/SavedMovies';
 
@@ -25,16 +25,18 @@ function MovieCard({
 
         const [isHeartRed, setHeartRed] = useState(false);
 
+        console.log(trailer);
+
         useState(() => {
-                if(arrayLikeMovieId) {
+                if (arrayLikeMovieId) {
                         arrayLikeMovieId.forEach(id => {
-                                if(id === movieId) {
+                                if (id === movieId) {
                                         setHeartRed(true);
                                 }
                         })
                 }
         }, [arrayLikeMovieId])
-        
+
         function getTimeFromMins(duration) {
                 let hours = Math.trunc(duration / 60);
                 let minutes = duration % 60;
@@ -51,11 +53,11 @@ function MovieCard({
                         .catch((err) => {
                                 console.log(err);
                         });
-            }
+        }
 
         function heartClick() {
                 setHeartRed(!isHeartRed);
-                if(!isHeartRed){
+                if (!isHeartRed) {
                         createMovie({
                                 movieId,
                                 country,
@@ -71,22 +73,22 @@ function MovieCard({
                         });
                 } else {
                         savedMovies.map(mov => {
-                                if(mov.movieId === movieId) {
-                                id = mov._id;
-                                deleteMovieByClick();
+                                if (mov.movieId === movieId) {
+                                        id = mov._id;
+                                        deleteMovieByClick();
                                 };
                         })
-                        
+
                 }
         }
-        
-        return ( 
-                (<article className="movieCard">
+
+        return (
+                (<article className="movieCard" href={trailer} target="_blank" rel="noopener noreferrer">
                         <img className="movieCard__img"
                                 src={savedMoviesPage ? `${thumbnail}` : `https://api.nomoreparties.co${thumbnail}`}
                                 alt="Картинка фильма" />
                         <h2 className="movieCard__heading">{nameRU}</h2>
-                        {!savedMoviesPage ? 
+                        {!savedMoviesPage ?
                                 (<button onClick={heartClick} type="button"
                                         className={`movieCard__like ${isHeartRed ? "movieCard__like_red" : ""}`}>
                                 </button>)
