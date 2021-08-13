@@ -1,48 +1,49 @@
 import React, { useEffect } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { getSavedMovie } from '../../utils/MainApi';
+// import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+// import { getSavedMovie } from '../../utils/MainApi';
 import MovieCardList from '../Movies/MoviesCardList/MovieCardList';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import Preloader from '../Movies/Preloader/Preloader';
-import * as mainApi from '../../utils/MainApi';
+// import * as mainApi from '../../utils/MainApi';
 
-function SavedMovies({ movies,
+function SavedMovies({ 
+      // movies,
       errors,
-      setErrors,
-      setSavedMoviesPage,
+      // setErrors,
+      // setSavedMoviesPage,
       savedMoviesPage,
-      setSavedMovies,
+      // setSavedMovies,
       savedMovies,
       getSavedMovies,
       setSearchPhrase,
       searchPhrase,
-      setIsCheckBox,
-      isCheckBox,
-      setCurrentUser,
-      currentUser,
+      // setIsCheckBox,
+      // isCheckBox,
+      // setCurrentUser,
+      // currentUser,
       arrayLikeMovieId,
-      setArrayLikeMovieId,
+      // setArrayLikeMovieId,
       setMovies,
-      handleChange,
+      // handleChange,
       isValid,
       setIsSearch,
-      isSearch,
+      // isSearch,
       searchWord,
-      setSearchMovie,
+      // setSearchMovie,
       searchMovie,
       getPhilms,
-      setSearchMessage,
+      // setSearchMessage,
       searchMessage,
       handleMore,
       setNewSearchMovie,
       newSearchMovie,
       isLoading,
-      compareMovies,
+      // compareMovies,
       createMovie,
       handleChangeSearchPhrase,
       handlerCheckBox,
       setHeartRed,
-      movieSearch
+      movieSearch,
 }) {
 
       useEffect(() => {
@@ -54,28 +55,28 @@ function SavedMovies({ movies,
             <section className="savedMovies">
                   <div className="content">
                         <SearchForm
-                              handleChange={handleChange}
+                              // handleChange={handleChange}
                               isValid={isValid}
                               errors={errors}
-                              setErrors={setErrors}
+                              // setErrors={setErrors}
                               setSearchPhrase={setSearchPhrase}
                               searchPhrase={searchPhrase}
                               searchWord={searchWord}
-                              setSearchMovie={setSearchMovie}
-                              setSavedMovies={setSavedMovies}
-                              searchMovie={searchMovie}
-                              setMovies={setMovies}
-                              isSearch={isSearch}
+                              // setSearchMovie={setSearchMovie}
+                              // setSavedMovies={setSavedMovies}
+                              // searchMovie={searchMovie}
+                              // setMovies={setMovies}
+                              // isSearch={isSearch}
                               setIsSearch={setIsSearch}
-                              movies={movies}
+                              // movies={movies}
                               getPhilms={getPhilms}
-                              setSearchMessage={setSearchMessage}
-                              searchMessage={searchMessage}
+                              // setSearchMessage={setSearchMessage}
+                              // searchMessage={searchMessage}
                               setNewSearchMovie={setNewSearchMovie}
                               newSearchMovie={newSearchMovie}
-                              setIsCheckBox={setIsCheckBox}
-                              isCheckBox={isCheckBox}
-                              compareMovies={compareMovies}
+                              // setIsCheckBox={setIsCheckBox}
+                              // isCheckBox={isCheckBox}
+                              // compareMovies={compareMovies}
                               handleChangeSearchPhrase={handleChangeSearchPhrase}
                               handlerCheckBox={handlerCheckBox}
                               savedMovies={savedMovies}
@@ -90,18 +91,19 @@ function SavedMovies({ movies,
                         <MovieCardList
                               getSavedMovies={getSavedMovies}
                               savedMovies={savedMovies}
-                              setSavedMovies={setSavedMovies}
+                              // setSavedMovies={setSavedMovies}
                               setMovies={setMovies}
                               savedMoviesPage={savedMoviesPage}
-                              isValid={isValid}
-                              isSearch={isSearch}
+                              // isValid={isValid}
+                              // isSearch={isSearch}
                               searchMovie={searchMovie}
                               handleMore={handleMore}
                               createMovie={createMovie}
-                              setCurrentUser={setCurrentUser}
-                              currentUser={currentUser}
+                              // setCurrentUser={setCurrentUser}
+                              // currentUser={currentUser}
                               arrayLikeMovieId={arrayLikeMovieId}
                               setHeartRed={setHeartRed}
+                              searchMessage={searchMessage}
                         />
                   </div>
             </section>

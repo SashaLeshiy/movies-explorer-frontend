@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 function SearchForm({
-    handleChange,
+    // handleChange,
     errors,
-    setErrors,
+    // setErrors,
     isValid,
     setSearchPhrase,
     searchPhrase,
-    setSearchMovie,
-    setSavedMovies,
-    searchMovie,
-    setMovies,
-    movies,
-    isSearch,
+    // setSearchMovie,
+    // setSavedMovies,
+    // searchMovie,
+    // setMovies,
+    // movies,
+    // isSearch,
     setIsSearch,
     getPhilms,
-    searсhMessage,
-    setSearchMessage,
-    setIsCheckBox,
-    isCheckBox,
-    compareMovies,
+    // searchMessage,
+    // setSearchMessage,
+    // setIsCheckBox,
+    // isCheckBox,
+    // compareMovies,
     handleChangeSearchPhrase,
-    searchMov,
+    // searchMov,
     handlerCheckBox, 
     savedMovies,
     movieSearch,
     savedMoviesPage,
-    setIndex,
-    index,
+    // setIndex,
+    // index,
     setButtonMore,
-    buttonMore,
+    // buttonMore,
     indexByWidth
 }) {
     
@@ -40,7 +40,7 @@ function SearchForm({
     function handleSearchSubmit(event) {
         event.preventDefault();
         if (isValid && !savedMoviesPage) {
-            setSearchMessage('');
+            // setSearchMessage('');
             setIsSearch(true);
             getPhilms();
             setButtonMore(true);

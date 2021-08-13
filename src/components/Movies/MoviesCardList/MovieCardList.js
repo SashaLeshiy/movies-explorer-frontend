@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import MovieCard from '../MoviesCard/MovieCard';
-import * as mainApi from '../../../utils/MainApi';
-import SavedMovies from '../../SavedMovies/SavedMovies';
-import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
+// import * as mainApi from '../../../utils/MainApi';
+// import SavedMovies from '../../SavedMovies/SavedMovies';
+// import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
-function MovieCardList({ movies,
+function MovieCardList({ 
+    // movies,
     savedMoviesPage,
-    isValid,
-    isSearch,
+    // isValid,
+    // isSearch,
     searchMovie,
-    setNewSearchMovie,
-    newSearchMovie,
-    setSavedMovies,
+    // setNewSearchMovie,
+    // newSearchMovie,
+    // setSavedMovies,
     savedMovies,
     getSavedMovies,
     createMovie,
-    setCurrentUser,
-    currentUser,
+    // setCurrentUser,
+    // currentUser,
     arrayLikeMovieId,
     setHeartRed,
     isHeartRed,
@@ -27,6 +28,7 @@ function MovieCardList({ movies,
     searchMessage
 }) {
     const [inputMovie, setInputMovie] = useState([]);
+
 
     function handleMore() {
         if(window.innerWidth >= 1158) {
@@ -58,10 +60,10 @@ function MovieCardList({ movies,
 
 
     return (
-        savedMoviesPage ?
+        <>
+            {savedMoviesPage ?
             (<div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
                 {(savedMovies.map(movie => {
-                    console.log(movie);
                     return <MovieCard key={movie._id}
                         id={movie._id}
                         movieId={movie.id}
@@ -79,8 +81,8 @@ function MovieCardList({ movies,
                         getSavedMovies={getSavedMovies}
                         createMovie={createMovie}
                         arrayLikeMovieId={arrayLikeMovieId}
-                        setHeartRed={setHeartRed}
-                        isHeartRed={isHeartRed}
+                        // setHeartRed={setHeartRed}
+                        // isHeartRed={isHeartRed}
                     />
 
                 })
@@ -107,8 +109,8 @@ function MovieCardList({ movies,
                             savedMoviesPage={savedMoviesPage}
                             createMovie={createMovie}
                             arrayLikeMovieId={arrayLikeMovieId}
-                            setHeartRed={setHeartRed}
-                            isHeartRed={isHeartRed}
+                            // setHeartRed={setHeartRed}
+                            // isHeartRed={isHeartRed}
                         />
 
                     })
@@ -120,7 +122,9 @@ function MovieCardList({ movies,
                     }
                 </div>)
                 :
-                <p className="movieCardList__empty">{searchMessage}</p>
+                <span></span>}
+                <div className="movieCardList__empty">{searchMessage}</div>
+        </>        
     );
 }
 export default MovieCardList;

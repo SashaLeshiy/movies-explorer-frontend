@@ -19,7 +19,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const history = useHistory();
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('logged')));
   const [currentUser, setCurrentUser] = useState({});
   const [isMobileMenu, setMobileMenuPopupOpen] = useState(false);
   const [savedMoviesPage, setSavedMoviesPage] = useState(false);
@@ -38,14 +38,15 @@ function App() {
   const [isSearch, setIsSearch] = useState(false);
   const [searchPhrase, setSearchPhrase] = useState('');
   const [searchMovie, setSearchMovie] = useState(JSON.parse(localStorage.getItem('searchMovies')) || []);
-  const [searсhMessage, setSearchMessage] = useState('');
+  const [searchMessage, setSearchMessage] = useState('');
   const [newSearchMovie, setNewSearchMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isCheckBox, setIsCheckBox] = useState(false);
   const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
   const [index, setIndex] = useState(null);
   const [buttonMore, setButtonMore] = useState(true);
-  const [clientWidth, setClientWidth] = useState(window.innerWidth);
+
+  console.log(loggedIn);
 
   function indexByWidth() {
     if(window.innerWidth >= 1158) {
@@ -106,7 +107,9 @@ function App() {
         newMovie.push(movie);
       }
     })
-    if(newMovie.length === 0) { setSearchMessage('Ничего не найдено!')}
+    if(newMovie.length === 0) { 
+      setSearchMessage('Ничего не найдено!')
+    }
     localStorage.setItem('searchMovies', JSON.stringify(newMovie));
     setSavedMovies(newMovie);
   }
@@ -197,7 +200,8 @@ function App() {
           tokenCheck();
           setIsLoading(false);
           linkToMovies();
-          setLoggedIn(true);
+          localStorage.setItem('logged', true);
+          // setLoggedIn(true);
           setSavedMoviesPage(false);
         }
       })
@@ -241,6 +245,7 @@ function App() {
     setMobileMenuPopupOpen(false);
     setMainPage(true);
     setSavedMoviesPage(false);
+    setSearchMessage('');
     history.push('/');
   }
 
@@ -257,11 +262,13 @@ function App() {
     setMobileMenuPopupOpen(false);
     setMainPage(false);
     setIsLoading(false);
+    setSearchMessage('');
   }
 
   function linkToSavedMovies() {
     setSavedMoviesPage(true);
     setMobileMenuPopupOpen(false);
+    setSearchMessage('');
     history.push('/saved-movies');
     setMainPage(false);
   }
@@ -281,6 +288,8 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('movies');
     localStorage.removeItem('searchMovies');
+    localStorage.removeItem('logged');
+    setSearchMessage('');
     setIsSearch(false);
     setCurrentUser({});
     setLoggedIn(false);
@@ -349,32 +358,32 @@ function App() {
             />
           </Route>
           <ProtectedRoute exact path="/movies" component={Movies} loggedIn={loggedIn}
-            movies={movies}
+            // movies={movies}
             setMovies={setMovies}
             savedMoviesPage={savedMoviesPage}
             setLoggedIn={setLoggedIn}
             getSavedMovies={getSavedMovies}
-            handleChange={handleChange}
-            setErrors={setErrors}
+            // handleChange={handleChange}
+            // setErrors={setErrors}
             errors={errors}
             isValid={isValid}
             isSearch={isSearch}
             setIsSearch={setIsSearch}
             setSearchPhrase={setSearchPhrase}
             searchPhrase={searchPhrase}
-            setSearchMovie={setSearchMovie}
+            // setSearchMovie={setSearchMovie}
             searchMovie={searchMovie}
             getPhilms={getPhilms}
-            setSearchMessage={setSearchMessage}
-            searсhMessage={searсhMessage}
+            // setSearchMessage={setSearchMessage}
+            searchMessage={searchMessage}
             setNewSearchMovie={setNewSearchMovie}
             newSearchMovie={newSearchMovie}
             isLoading={isLoading}
-            setIsCheckBox={setIsCheckBox}
-            isCheckBox={isCheckBox}
+            // setIsCheckBox={setIsCheckBox}
+            // isCheckBox={isCheckBox}
             createMovie={createMovie}
-            setCurrentUser={setCurrentUser}
-            currentUser={currentUser}
+            // setCurrentUser={setCurrentUser}
+            // currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
             handleChangeSearchPhrase={handleChangeSearchPhrase}
             handlerCheckBox={handlerCheckBox}
@@ -388,7 +397,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/saved-movies" component={SavedMovies}
-            setErrors={setErrors}
+            // setErrors={setErrors}
             errors={errors}
             isValid={isValid}
             loggedIn={loggedIn}
@@ -397,14 +406,16 @@ function App() {
             savedMoviesPage={savedMoviesPage}
             setSavedMoviesPage={setSavedMoviesPage}
             setLoggedIn={setLoggedIn}
+            // setSearchMessage={setSearchMessage}
+            searchMessage={searchMessage}
             getSavedMovies={getSavedMovies}
             setSearchPhrase={setSearchPhrase}
-            setSearchMovie={setSearchMovie}
+            // setSearchMovie={setSearchMovie}
             searchPhrase={searchPhrase}
-            setCheckBox={setIsCheckBox}
-            isCheckBox={isCheckBox}
-            setCurrentUser={setCurrentUser}
-            currentUser={currentUser}
+            // setCheckBox={setIsCheckBox}
+            // isCheckBox={isCheckBox}
+            // setCurrentUser={setCurrentUser}
+            // currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
             setArrayLikeMovieId={setArrayLikeMovieId}
             movieSearch={movieSearch}

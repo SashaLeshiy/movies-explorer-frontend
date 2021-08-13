@@ -1,38 +1,38 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MovieCardList from './MoviesCardList/MovieCardList';
 import SearchForm from './SearchForm/SearchForm'
 import Preloader from './Preloader/Preloader';
 
 
 function Movies({ setMovies,
-      movies,
+      // movies,
       savedMovies,
       savedMoviesPage,
-      handleChange,
+      // handleChange,
       isValid,
       errors,
-      setErrors,
+      // setErrors,
       setIsSearch,
       isSearch,
       setSearchPhrase,
       searchPhrase,
       searchWord,
-      setSearchMovie,
+      // setSearchMovie,
       searchMovie,
       getPhilms,
       getSavedMovies,
-      setSearchMessage,
+      // setSearchMessage,
       searchMessage,
       handleMore,
       setNewSearchMovie,
       newSearchMovie,
       isLoading,
-      isCheckBox,
-      setIsCheckBox,
-      compareMovies,
+      // isCheckBox,
+      // setIsCheckBox,
+      // compareMovies,
       createMovie,
-      setCurrentUser,
-      currentUser,
+      // setCurrentUser,
+      // currentUser,
       arrayLikeMovieId,
       handleChangeSearchPhrase,
       handlerCheckBox,
@@ -45,38 +45,37 @@ function Movies({ setMovies,
       indexByWidth
 
 }) {
-     
       return (
             (<section className="movies">
                   <div className="movies__content content">
                         <SearchForm
-                              handleChange={handleChange}
+                              // handleChange={handleChange}
                               isValid={isValid}
                               errors={errors}
-                              setErrors={setErrors}
+                              // setErrors={setErrors}
                               setSearchPhrase={setSearchPhrase}
                               searchPhrase={searchPhrase}
                               searchWord={searchWord}
-                              setSearchMovie={setSearchMovie}
-                              searchMovie={searchMovie}
-                              setMovies={setMovies}
+                              // setSearchMovie={setSearchMovie}
+                              // searchMovie={searchMovie}
+                              // setMovies={setMovies}
                               isSearch={isSearch}
                               setIsSearch={setIsSearch}
-                              movies={movies}
+                              // movies={movies}
                               getPhilms={getPhilms}
-                              setSearchMessage={setSearchMessage}
-                              searchMessage={searchMessage}
+                              // setSearchMessage={setSearchMessage}
+                              // searchMessage={searchMessage}
                               setNewSearchMovie={setNewSearchMovie}
                               newSearchMovie={newSearchMovie}
-                              setIsCheckBox={setIsCheckBox}
-                              isCheckBox={isCheckBox}
-                              compareMovies={compareMovies}
+                              // setIsCheckBox={setIsCheckBox}
+                              // isCheckBox={isCheckBox}
+                              // compareMovies={compareMovies}
                               handleChangeSearchPhrase={handleChangeSearchPhrase}
                               handlerCheckBox={handlerCheckBox}
-                              setIndex={setIndex}
-                              index={index}
+                              // setIndex={setIndex}
+                              // index={index}
                               setButtonMore={setButtonMore}
-                              buttonMore={buttonMore}
+                              // buttonMore={buttonMore}
                               indexByWidth={indexByWidth}
                         />
                         {isLoading ?
@@ -88,13 +87,13 @@ function Movies({ setMovies,
                               getSavedMovies={getSavedMovies}
                               savedMovies={savedMovies}
                               savedMoviesPage={savedMoviesPage}
-                              isValid={isValid}
-                              isSearch={isSearch}
+                              // isValid={isValid}
+                              // isSearch={isSearch}
                               searchMovie={searchMovie}
                               handleMore={handleMore}
                               createMovie={createMovie}
-                              setCurrentUser={setCurrentUser}
-                              currentUser={currentUser}
+                              // setCurrentUser={setCurrentUser}
+                              // currentUser={currentUser}
                               arrayLikeMovieId={arrayLikeMovieId}
                               setHeartRed={setHeartRed}
                               isHeartRed={isHeartRed}
