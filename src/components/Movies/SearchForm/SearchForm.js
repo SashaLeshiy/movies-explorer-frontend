@@ -32,7 +32,7 @@ function SearchForm({
     buttonMore,
     indexByWidth
 }) {
-    console.log(searсhMessage);
+    
     useEffect(() => {
         setSearchPhrase('');
     }, [setSearchPhrase])
@@ -47,7 +47,6 @@ function SearchForm({
             indexByWidth();
         } else if (isValid) {
             movieSearch(savedMovies);
-            setSavedMovies(JSON.parse(localStorage.getItem('movies')));
         }
     }
 

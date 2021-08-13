@@ -25,8 +25,6 @@ function MovieCard({
 
         const [isHeartRed, setHeartRed] = useState(false);
 
-        console.log(trailer);
-
         useState(() => {
                 if (arrayLikeMovieId) {
                         arrayLikeMovieId.forEach(id => {

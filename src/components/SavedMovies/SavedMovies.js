@@ -3,6 +3,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { getSavedMovie } from '../../utils/MainApi';
 import MovieCardList from '../Movies/MoviesCardList/MovieCardList';
 import SearchForm from '../Movies/SearchForm/SearchForm';
+import Preloader from '../Movies/Preloader/Preloader';
 import * as mainApi from '../../utils/MainApi';
 
 function SavedMovies({ movies,
@@ -81,6 +82,11 @@ function SavedMovies({ movies,
                               movieSearch={movieSearch}
                               savedMoviesPage={savedMoviesPage}
                         />
+                        {isLoading ?
+                              <Preloader />
+                              :
+                              <span></span>
+                        }
                         <MovieCardList
                               getSavedMovies={getSavedMovies}
                               savedMovies={savedMovies}

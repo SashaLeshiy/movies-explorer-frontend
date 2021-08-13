@@ -28,7 +28,6 @@ function MovieCardList({ movies,
 }) {
     const [inputMovie, setInputMovie] = useState([]);
 
-    console.log(searchMessage);
     function handleMore() {
         if(window.innerWidth >= 1158) {
         setIndex(i => i + 4);
@@ -65,14 +64,14 @@ function MovieCardList({ movies,
                     return <MovieCard key={movie._id}
                         id={movie._id}
                         movieId={movie.id}
-                        country={movie.country}
-                        director={movie.director}
+                        country={movie.country || 'not specified'}
+                        director={movie.director || 'not specified'}
                         year={movie.year}
-                        description={movie.description}
+                        description={movie.description || 'not specified'}
                         image={movie.image}
                         trailer={movie.trailerLink}
-                        nameRU={movie.nameRU}
-                        nameEN={movie.nameEN}
+                        nameRU={movie.nameRU || 'not specified'}
+                        nameEN={movie.nameEN || 'not specified'}
                         thumbnail={movie.image.url || movie.thumbnail}
                         duration={movie.duration}
                         savedMoviesPage={savedMoviesPage}

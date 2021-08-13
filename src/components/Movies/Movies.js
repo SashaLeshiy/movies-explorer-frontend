@@ -45,11 +45,7 @@ function Movies({ setMovies,
       indexByWidth
 
 }) {
-      console.log(searchMessage);
-      // useEffect(() => {
-      //       setSearchMovie();
-      // });
-
+     
       return (
             (<section className="movies">
                   <div className="movies__content content">
