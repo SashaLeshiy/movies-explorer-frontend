@@ -1,6 +1,6 @@
-import React, { useEffect, useState, history } from 'react';
+import React, { useState } from 'react';
 import * as mainApi from '../../../utils/MainApi';
-import SavedMovies from '../../SavedMovies/SavedMovies';
+// import SavedMovies from '../../SavedMovies/SavedMovies';
 
 
 function MovieCard({

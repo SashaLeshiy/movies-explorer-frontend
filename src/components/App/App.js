@@ -41,24 +41,25 @@ function App() {
   const [searchMessage, setSearchMessage] = useState('');
   const [newSearchMovie, setNewSearchMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCheckBox, setIsCheckBox] = useState(false);
+  const [isCheckBox, setIsCheckBox] = useState(JSON.parse(localStorage.getItem('isCheck')));
   const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
   const [index, setIndex] = useState(null);
   const [buttonMore, setButtonMore] = useState(true);
 
-  console.log(loggedIn);
 
   function indexByWidth() {
-    if(window.innerWidth >= 1158) {
+    if (window.innerWidth >= 1158) {
       setIndex(3);
-      } else if (window.innerWidth >= 882) {
-          setIndex(2);
-      } else if (window.innerWidth >= 666) {
-          setIndex(1);
-      } else {
-          setIndex(0);
-      }
+    } else if (window.innerWidth >= 882) {
+      setIndex(2);
+    } else if (window.innerWidth >= 666) {
+      setIndex(1);
+    } else {
+      setIndex(0);
+    }
   }
+
+
 
   useEffect(() => {
     tokenCheck();
@@ -74,6 +75,7 @@ function App() {
     getUserInfo();
     getMovieFromApi()
     setLoggedIn(true);
+    localStorage.setItem('isCheck', false)
   }
 
   function getMovieFromApi() {
@@ -83,6 +85,7 @@ function App() {
         setMovies(data);
       })
       .catch((err) => {
+        setSearchMessage('Что-то пошло не так...');
         console.log(err);
       })
   }
@@ -90,31 +93,31 @@ function App() {
 
   function getPhilms() {
     setIsLoading(true);
-    // console.log('гетфилмс', `Чек ${isCheckBox}`);
-        movieSearch(JSON.parse(localStorage.getItem('movies')));
-        setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
-        setIsLoading(false);
+    movieSearch(JSON.parse(localStorage.getItem('movies')));
+    setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
+    setIsLoading(false);
   }
 
   function movieSearch(movieArray) {
     let newMovie = [];
-    // console.log('ищем здесь', `Чек ${isCheckBox}`, searchingMovie);
     movieArray.map((movie) => {
-      if (isCheckBox && movie.description.includes(searchPhrase)) {
+      if (isCheckBox && movie.nameRU.includes(searchPhrase)) {
+        console.log(isCheckBox);
         newMovie.push(movie);
-      } else if (!isCheckBox && movie.description.includes(searchPhrase)
+      } else if (!isCheckBox && movie.nameRU.includes(searchPhrase)
         && movie.duration >= 40) {
+        console.log(isCheckBox);
         newMovie.push(movie);
       }
     })
-    if(newMovie.length === 0) { 
+    if (newMovie.length === 0) {
       setSearchMessage('Ничего не найдено!')
     }
     localStorage.setItem('searchMovies', JSON.stringify(newMovie));
     setSavedMovies(newMovie);
   }
 
- function getSavedMovies() {
+  function getSavedMovies() {
     let movOwner = [];
     mainApi.getSavedMovie()
       .then((res) => {
@@ -125,7 +128,7 @@ function App() {
       })
       .then(() => {
         setArrayLikeMovieId(movOwner);
-    //     setIsLoading(false);
+        //     setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -134,12 +137,17 @@ function App() {
 
   function handlerCheckBox() {
     setIsCheckBox(!isCheckBox);
-    if(!savedMoviesPage) {
+    localStorage.setItem('isCheck', !isCheckBox);
+    setIsCheckBox(JSON.parse(localStorage.getItem('isCheck')));
+    if (!savedMoviesPage) {
       movieSearch(JSON.parse(localStorage.getItem('searchMovies')));
+      getPhilms();
     } else {
       movieSearch(savedMovies);
+      console.log(savedMovies);
     }
   }
+
 
   const handleChange = (event) => {
     const target = event.target;
@@ -212,6 +220,9 @@ function App() {
   };
 
   function createMovie(props) {
+    if (!props.trailer.match(/^(http|https):\/\/(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\-._~:/?#[\]@!$&'()*+,;=]*)*#?$/)) {
+      props.trailer = 'https://www.youtube.com/';
+    }
     mainApi.setMovie(props)
       .then((res) => {
         setSavedMovies([...savedMovies, res]);
@@ -289,6 +300,7 @@ function App() {
     localStorage.removeItem('movies');
     localStorage.removeItem('searchMovies');
     localStorage.removeItem('logged');
+    localStorage.removeItem('isCheck');
     setSearchMessage('');
     setIsSearch(false);
     setCurrentUser({});
@@ -374,7 +386,7 @@ function App() {
             // setSearchMovie={setSearchMovie}
             searchMovie={searchMovie}
             getPhilms={getPhilms}
-            // setSearchMessage={setSearchMessage}
+            setSearchMessage={setSearchMessage}
             searchMessage={searchMessage}
             setNewSearchMovie={setNewSearchMovie}
             newSearchMovie={newSearchMovie}
@@ -420,8 +432,8 @@ function App() {
             setArrayLikeMovieId={setArrayLikeMovieId}
             movieSearch={movieSearch}
             handleChangeSearchPhrase={handleChangeSearchPhrase}
-            // setHeartRed={setHeartRed}
-            // isHeartRed={isHeartRed}
+          // setHeartRed={setHeartRed}
+          // isHeartRed={isHeartRed}
           >
           </ProtectedRoute>
           <ProtectedRoute exact path="/profile" component={Profile}

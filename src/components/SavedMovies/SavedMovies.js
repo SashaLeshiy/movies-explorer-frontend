@@ -10,7 +10,7 @@ function SavedMovies({
       // movies,
       errors,
       // setErrors,
-      // setSavedMoviesPage,
+      setSavedMoviesPage,
       savedMoviesPage,
       // setSavedMovies,
       savedMovies,
@@ -46,6 +46,7 @@ function SavedMovies({
       movieSearch,
 }) {
 
+      
       useEffect(() => {
             getSavedMovies();
       }, []);

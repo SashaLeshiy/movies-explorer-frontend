@@ -79,7 +79,7 @@ export const register = ({email, password, name}) => {
         year: props.year,
         description: props.description || 'not specified',
         image: `https://api.nomoreparties.co${props.image.url}`,
-        trailer: props.trailer,
+        trailer: props.trailer || 'https://www.youtube.com/',
         nameEN: props.nameEN || 'not specified',
         nameRU: props.nameRU || 'not specified', 
         thumbnail: `https://api.nomoreparties.co${props.thumbnail}`, 

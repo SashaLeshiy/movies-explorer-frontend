@@ -21,7 +21,7 @@ function Movies({ setMovies,
       searchMovie,
       getPhilms,
       getSavedMovies,
-      // setSearchMessage,
+      setSearchMessage,
       searchMessage,
       handleMore,
       setNewSearchMovie,
@@ -63,7 +63,7 @@ function Movies({ setMovies,
                               setIsSearch={setIsSearch}
                               // movies={movies}
                               getPhilms={getPhilms}
-                              // setSearchMessage={setSearchMessage}
+                              setSearchMessage={setSearchMessage}
                               // searchMessage={searchMessage}
                               setNewSearchMovie={setNewSearchMovie}
                               newSearchMovie={newSearchMovie}

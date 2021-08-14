@@ -16,7 +16,7 @@ function SearchForm({
     setIsSearch,
     getPhilms,
     // searchMessage,
-    // setSearchMessage,
+    setSearchMessage,
     // setIsCheckBox,
     // isCheckBox,
     // compareMovies,
@@ -40,7 +40,7 @@ function SearchForm({
     function handleSearchSubmit(event) {
         event.preventDefault();
         if (isValid && !savedMoviesPage) {
-            // setSearchMessage('');
+            setSearchMessage('');
             setIsSearch(true);
             getPhilms();
             setButtonMore(true);

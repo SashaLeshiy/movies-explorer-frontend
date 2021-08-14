@@ -19,8 +19,8 @@ function MovieCardList({
     // setCurrentUser,
     // currentUser,
     arrayLikeMovieId,
-    setHeartRed,
-    isHeartRed,
+    // setHeartRed,
+    // isHeartRed,
     setIndex,
     index,
     setButtonMore,
@@ -40,7 +40,7 @@ function MovieCardList({
         } else {
             setIndex(i => i + 1);
         }
-    }
+    } 
 
     useEffect(() => {
         if (!savedMoviesPage) {
