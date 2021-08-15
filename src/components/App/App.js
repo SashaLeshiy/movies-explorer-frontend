@@ -257,6 +257,7 @@ function App() {
     setMainPage(true);
     setSavedMoviesPage(false);
     setSearchMessage('');
+    setErrors('');
     history.push('/');
   }
 
@@ -273,6 +274,7 @@ function App() {
     setMainPage(false);
     setIsLoading(false);
     setSearchMessage('');
+    setErrors('');
     history.push('/movies');
   }
 
@@ -281,6 +283,7 @@ function App() {
     setMobileMenuPopupOpen(false);
     setSearchMessage('');
     setMainPage(false);
+    setErrors('');
     history.push('/saved-movies');
 
   }
