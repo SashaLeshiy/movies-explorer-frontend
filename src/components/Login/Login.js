@@ -12,11 +12,11 @@ function Login({ linkToHome,
       setLoginData,
       setResError,
       resError,
-      setCurrentUser,
-      linkToMovies,
-      setLoggedIn,
-      getUserInfo,
-      tokenCheck,
+      // setCurrentUser,
+      // linkToMovies,
+      // setLoggedIn,
+      // getUserInfo,
+      // tokenCheck,
       onLogin
 }) {
 

@@ -102,11 +102,9 @@ function App() {
     let newMovie = [];
     movieArray.map((movie) => {
       if (isCheckBox && movie.nameRU.includes(searchPhrase)) {
-        console.log(isCheckBox);
         newMovie.push(movie);
       } else if (!isCheckBox && movie.nameRU.includes(searchPhrase)
         && movie.duration >= 40) {
-        console.log(isCheckBox);
         newMovie.push(movie);
       }
     })
@@ -167,7 +165,7 @@ function App() {
     const name = target.name;
     const value = target.value;
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
+    setErrors(target.validationMessage);
     setIsValid(target.closest("form").checkValidity());
     setSearchPhrase(event.target.value);
   }
@@ -181,6 +179,7 @@ function App() {
         console.log(err);
       });
   }
+
 
   // function getSavedMovies() {
   //   let movOwner = [];
@@ -206,10 +205,8 @@ function App() {
         if (res.token) {
           localStorage.setItem('token', res.token);
           tokenCheck();
-          setIsLoading(false);
-          linkToMovies();
           localStorage.setItem('logged', true);
-          // setLoggedIn(true);
+          setIsLoading(false);
           setSavedMoviesPage(false);
         }
       })
@@ -217,6 +214,9 @@ function App() {
         setLoggedIn(false);
         setResError(true);
       });
+    setLoggedIn(true);
+    setErrors('');
+    linkToMovies();
   };
 
   function createMovie(props) {
@@ -267,21 +267,22 @@ function App() {
   }
 
   function linkToMovies() {
-    history.push('/movies');
     setHeadlessPage(false);
     setSavedMoviesPage(false);
     setMobileMenuPopupOpen(false);
     setMainPage(false);
     setIsLoading(false);
     setSearchMessage('');
+    history.push('/movies');
   }
 
   function linkToSavedMovies() {
     setSavedMoviesPage(true);
     setMobileMenuPopupOpen(false);
     setSearchMessage('');
-    history.push('/saved-movies');
     setMainPage(false);
+    history.push('/saved-movies');
+
   }
 
   function linkToRegister() {

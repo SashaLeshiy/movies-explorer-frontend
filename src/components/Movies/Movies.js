@@ -31,8 +31,8 @@ function Movies({ setMovies,
       // setIsCheckBox,
       // compareMovies,
       createMovie,
-      // setCurrentUser,
-      // currentUser,
+      //setCurrentUser,
+      //currentUser,
       arrayLikeMovieId,
       handleChangeSearchPhrase,
       handlerCheckBox,
@@ -45,6 +45,7 @@ function Movies({ setMovies,
       indexByWidth
 
 }) {
+      
       return (
             (<section className="movies">
                   <div className="movies__content content">

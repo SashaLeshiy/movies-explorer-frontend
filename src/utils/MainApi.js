@@ -1,6 +1,4 @@
-// export const BASE_URL = 'https://api.zomlesh.nomoredomains.monster';
-
-export const BASE_URL = 'http://localhost:8000';
+export const BASE_URL = 'https://api.zomlesh.nomoredomains.monster';
 
 const checkResponse = (response) => {
   return response.ok ? response.json() :

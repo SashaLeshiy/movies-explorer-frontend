@@ -28,8 +28,6 @@ function MovieCardList({
     searchMessage
 }) {
     const [inputMovie, setInputMovie] = useState([]);
-
-
     function handleMore() {
         if(window.innerWidth >= 1158) {
         setIndex(i => i + 4);

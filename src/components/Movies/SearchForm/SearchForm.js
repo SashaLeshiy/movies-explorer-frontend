@@ -60,7 +60,7 @@ function SearchForm({
                     value={searchPhrase || ''}
                 />
                 <button className="searchForm__button" type="submit">Поиск</button>
-                <span className="searchForm__error">{errors.search}</span>
+                <span className="searchForm__error">{errors}</span>
                 <label className="searchForm__checkbox">
                     <input type="checkbox" onChange={handlerCheckBox} />
                     <span className="searchForm__checkbox_switch"></span>

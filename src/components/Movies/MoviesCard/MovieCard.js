@@ -23,7 +23,7 @@ function MovieCard({
         savedMovies,
 }) {
 
-
+        
         const [isHeartRed, setHeartRed] = useState(false);
 
         useState(() => {
