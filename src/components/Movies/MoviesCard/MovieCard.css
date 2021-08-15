@@ -21,6 +21,10 @@
     font-weight: 100;
     padding-bottom: 30px;
     margin: 14px 0 0 0;
+    max-width: 230px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .movieCard__link {
