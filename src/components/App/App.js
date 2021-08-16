@@ -41,12 +41,12 @@ function App() {
   const [searchMessage, setSearchMessage] = useState('');
   const [newSearchMovie, setNewSearchMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCheckBox, setIsCheckBox] = useState(JSON.parse(localStorage.getItem('isCheck')));
+  const [isCheckBox, setIsCheckBox] = useState(false);
   const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
   const [index, setIndex] = useState(null);
   const [buttonMore, setButtonMore] = useState(true);
 
-
+console.log(isCheckBox);
   function indexByWidth() {
     if (window.innerWidth >= 1158) {
       setIndex(3);
@@ -90,21 +90,22 @@ function App() {
       })
   }
 
-
   function getPhilms() {
     setIsLoading(true);
     movieSearch(JSON.parse(localStorage.getItem('movies')));
     setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
-    setIsLoading(false);
-  }
+    }
 
   function movieSearch(movieArray) {
+    console.log(isCheckBox);
     let newMovie = [];
-    movieArray.map((movie) => {
-      if (isCheckBox && movie.nameRU.includes(searchPhrase)) {
+    movieArray.filter((movie) => {
+      let nameRU = movie.nameRU.toLowerCase();
+      if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
         newMovie.push(movie);
-      } else if (!isCheckBox && movie.nameRU.includes(searchPhrase)
+      } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
         && movie.duration >= 40) {
+          console.log(nameRU);
         newMovie.push(movie);
       }
     })
@@ -113,6 +114,12 @@ function App() {
     }
     localStorage.setItem('searchMovies', JSON.stringify(newMovie));
     setSavedMovies(newMovie);
+    setTimeout(showmessage, 1000);
+    
+  }
+
+  function showmessage(){
+    setIsLoading(false);
   }
 
   function getSavedMovies() {
@@ -133,18 +140,27 @@ function App() {
       })
   }
 
-  function handlerCheckBox() {
-    setIsCheckBox(!isCheckBox);
-    localStorage.setItem('isCheck', !isCheckBox);
-    setIsCheckBox(JSON.parse(localStorage.getItem('isCheck')));
-    if (!savedMoviesPage) {
-      movieSearch(JSON.parse(localStorage.getItem('searchMovies')));
-      getPhilms();
-    } else {
-      movieSearch(savedMovies);
-      console.log(savedMovies);
-    }
-  }
+  // function handlerCheckBox() {
+  //   setIsCheckBox(!isCheckBox);
+  //   localStorage.setItem('isCheck', !isCheckBox);
+  //   setIsCheckBox(JSON.parse(localStorage.getItem('isCheck')));
+  //   console.log(isCheckBox);
+  //   if (!savedMoviesPage) {
+  //     movieSearch(JSON.parse(localStorage.getItem('searchMovies')));
+  //     getPhilms();
+  //   } else {
+  //     movieSearch(savedMovies);
+  //   }
+  //       if (!savedMoviesPage) {
+  //           setSearchMessage('');
+  //           setIsSearch(true);
+  //           getPhilms();
+  //           setButtonMore(true);
+  //           indexByWidth();
+  //       } else {
+  //           movieSearch(savedMovies);
+  //       }
+  // }
 
 
   const handleChange = (event) => {
@@ -395,14 +411,14 @@ function App() {
             setNewSearchMovie={setNewSearchMovie}
             newSearchMovie={newSearchMovie}
             isLoading={isLoading}
-            // setIsCheckBox={setIsCheckBox}
-            // isCheckBox={isCheckBox}
+            setIsCheckBox={setIsCheckBox}
+            isCheckBox={isCheckBox}
             createMovie={createMovie}
             // setCurrentUser={setCurrentUser}
             // currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
             handleChangeSearchPhrase={handleChangeSearchPhrase}
-            handlerCheckBox={handlerCheckBox}
+            // handlerCheckBox={handlerCheckBox}
             savedMovies={savedMovies}
             setIndex={setIndex}
             index={index}

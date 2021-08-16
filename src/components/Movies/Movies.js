@@ -27,8 +27,8 @@ function Movies({ setMovies,
       setNewSearchMovie,
       newSearchMovie,
       isLoading,
-      // isCheckBox,
-      // setIsCheckBox,
+      isCheckBox,
+      setIsCheckBox,
       // compareMovies,
       createMovie,
       //setCurrentUser,
@@ -45,7 +45,7 @@ function Movies({ setMovies,
       indexByWidth
 
 }) {
-      
+      console.log(isCheckBox);
       return (
             (<section className="movies">
                   <div className="movies__content content">
@@ -68,8 +68,8 @@ function Movies({ setMovies,
                               // searchMessage={searchMessage}
                               setNewSearchMovie={setNewSearchMovie}
                               newSearchMovie={newSearchMovie}
-                              // setIsCheckBox={setIsCheckBox}
-                              // isCheckBox={isCheckBox}
+                              setIsCheckBox={setIsCheckBox}
+                              isCheckBox={isCheckBox}
                               // compareMovies={compareMovies}
                               handleChangeSearchPhrase={handleChangeSearchPhrase}
                               handlerCheckBox={handlerCheckBox}

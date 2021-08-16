@@ -17,12 +17,12 @@ function SearchForm({
     getPhilms,
     // searchMessage,
     setSearchMessage,
-    // setIsCheckBox,
-    // isCheckBox,
+    setIsCheckBox,
+    isCheckBox,
     // compareMovies,
     handleChangeSearchPhrase,
     // searchMov,
-    handlerCheckBox, 
+    // handlerCheckBox, 
     savedMovies,
     movieSearch,
     savedMoviesPage,
@@ -50,6 +50,33 @@ function SearchForm({
         }
     }
 
+    function handlerCheckBox() {
+        setIsCheckBox(!isCheckBox);
+        localStorage.setItem('isCheck', !isCheckBox);
+        // setIsCheckBox(JSON.parse(localStorage.getItem('isCheck')));
+        // console.log(isCheckBox);
+        // if (!savedMoviesPage) {
+        //   movieSearch(JSON.parse(localStorage.getItem('searchMovies')));
+        //   getPhilms();
+        // } else {
+        //   movieSearch(savedMovies);
+        //   console.log(savedMovies);
+        // }
+    }
+
+    function searchByCheck() {
+        handlerCheckBox();
+            if (!savedMoviesPage) {
+                setIsSearch(true);
+                console.log(isCheckBox);
+                getPhilms();
+                setButtonMore(true);
+                indexByWidth();
+            } else {
+                movieSearch(savedMovies);
+            }
+      }
+
     return (
         <div className="searchForm">
             <form name="searchForm" className="searchForm__form" onSubmit={handleSearchSubmit} noValidate>
@@ -62,7 +89,7 @@ function SearchForm({
                 <button className="searchForm__button" type="submit">Поиск</button>
                 <span className="searchForm__error">{errors}</span>
                 <label className="searchForm__checkbox">
-                    <input type="checkbox" onChange={handlerCheckBox} />
+                    <input type="checkbox" onChange={searchByCheck} />
                     <span className="searchForm__checkbox_switch"></span>
                     <span className="searchForm__checkbox_heading">Короткометражки</span>
                 </label>
