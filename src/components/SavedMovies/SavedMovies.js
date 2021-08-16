@@ -17,8 +17,8 @@ function SavedMovies({
       getSavedMovies,
       setSearchPhrase,
       searchPhrase,
-      // setIsCheckBox,
-      // isCheckBox,
+      setIsCheckBox,
+      isCheckBox,
       // setCurrentUser,
       // currentUser,
       arrayLikeMovieId,
@@ -43,14 +43,14 @@ function SavedMovies({
       handleChangeSearchPhrase,
       handlerCheckBox,
       setHeartRed,
-      movieSearch,
+      movieSearch
 }) {
-
+      
       
       useEffect(() => {
             getSavedMovies();
+            setSavedMoviesPage(true);
       }, []);
-
 
       return (
             <section className="savedMovies">
@@ -75,8 +75,8 @@ function SavedMovies({
                               // searchMessage={searchMessage}
                               setNewSearchMovie={setNewSearchMovie}
                               newSearchMovie={newSearchMovie}
-                              // setIsCheckBox={setIsCheckBox}
-                              // isCheckBox={isCheckBox}
+                              setIsCheckBox={setIsCheckBox}
+                              isCheckBox={isCheckBox}
                               // compareMovies={compareMovies}
                               handleChangeSearchPhrase={handleChangeSearchPhrase}
                               handlerCheckBox={handlerCheckBox}

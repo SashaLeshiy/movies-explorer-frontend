@@ -7,7 +7,7 @@ function SearchForm({
     isValid,
     setSearchPhrase,
     searchPhrase,
-    // setSearchMovie,
+    setSearchMovie,
     // setSavedMovies,
     // searchMovie,
     // setMovies,
@@ -50,32 +50,49 @@ function SearchForm({
         }
     }
 
-    function handlerCheckBox() {
+    useEffect(() => {
+        console.log(isCheckBox);
+        if (!savedMoviesPage) {
+          setIsSearch(true);
+          getPhilms();
+          setButtonMore(true);
+          indexByWidth();
+      } else if(savedMoviesPage){
+          movieSearch(savedMovies);
+      }
+      },[isCheckBox]);
+
+      function handlerCheckBox() {
         setIsCheckBox(!isCheckBox);
-        localStorage.setItem('isCheck', !isCheckBox);
-        // setIsCheckBox(JSON.parse(localStorage.getItem('isCheck')));
-        // console.log(isCheckBox);
-        // if (!savedMoviesPage) {
-        //   movieSearch(JSON.parse(localStorage.getItem('searchMovies')));
-        //   getPhilms();
-        // } else {
-        //   movieSearch(savedMovies);
-        //   console.log(savedMovies);
-        // }
     }
 
-    function searchByCheck() {
-        handlerCheckBox();
-            if (!savedMoviesPage) {
-                setIsSearch(true);
-                console.log(isCheckBox);
-                getPhilms();
-                setButtonMore(true);
-                indexByWidth();
-            } else {
-                movieSearch(savedMovies);
-            }
-      }
+    // function handlerCheckBox() {
+    //     setIsCheckBox(!isCheckBox);
+    //     localStorage.setItem('isCheck', !isCheckBox);
+    //     // setIsCheckBox(JSON.parse(localStorage.getItem('isCheck')));
+    //     // console.log(isCheckBox);
+    //     // if (!savedMoviesPage) {
+    //     //   movieSearch(JSON.parse(localStorage.getItem('searchMovies')));
+    //     //   getPhilms();
+    //     // } else {
+    //     //   movieSearch(savedMovies);
+    //     //   console.log(savedMovies);
+    //     // }
+    // }
+
+    // function handlerCheckBox() {
+    //         console.log('запрос на перещелкивание', isCheckBox)
+    //         setIsCheckBox(!isCheckBox);
+    //         console.log('перещелкнули', isCheckBox)
+    //         if (!savedMoviesPage) {
+    //             setIsSearch(true);
+    //             getPhilms();
+    //             setButtonMore(true);
+    //             indexByWidth();
+    //         } else {
+    //             movieSearch(savedMovies);
+    //         }
+    //   }
 
     return (
         <div className="searchForm">
@@ -89,7 +106,7 @@ function SearchForm({
                 <button className="searchForm__button" type="submit">Поиск</button>
                 <span className="searchForm__error">{errors}</span>
                 <label className="searchForm__checkbox">
-                    <input type="checkbox" onChange={searchByCheck} />
+                    <input type="checkbox" onChange={handlerCheckBox} checked={isCheckBox}/>
                     <span className="searchForm__checkbox_switch"></span>
                     <span className="searchForm__checkbox_heading">Короткометражки</span>
                 </label>

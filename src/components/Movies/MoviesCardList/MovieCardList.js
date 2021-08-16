@@ -25,9 +25,15 @@ function MovieCardList({
     index,
     setButtonMore,
     buttonMore,
-    searchMessage
+    searchMessage,
+    setSearchMessage
 }) {
     const [inputMovie, setInputMovie] = useState([]);
+
+    // if(!savedMoviesPage && searchMovie.length === 0) {
+    //     setSearchMessage('Введите ключевое слово');
+    // }
+
     function handleMore() {
         if(window.innerWidth >= 1158) {
         setIndex(i => i + 4);
@@ -43,6 +49,7 @@ function MovieCardList({
     useEffect(() => {
         if (!savedMoviesPage) {
             let renderMovie = [];
+            if(searchMovie){
             searchMovie.map(mov => {
                 if (renderMovie.length <= index) {
                     renderMovie.push(mov);
@@ -52,7 +59,10 @@ function MovieCardList({
                 }
             })
             setInputMovie(renderMovie);
+        } else {
+            setSearchMessage('Введите ключевое слово');
         }
+    }
     }, [setInputMovie, index, searchMovie, savedMoviesPage]);
 
 

@@ -22,7 +22,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('logged')));
   const [currentUser, setCurrentUser] = useState({});
   const [isMobileMenu, setMobileMenuPopupOpen] = useState(false);
-  const [savedMoviesPage, setSavedMoviesPage] = useState(false);
+  const [savedMoviesPage, setSavedMoviesPage] = useState(JSON.parse(localStorage.getItem('savedMoviePage')));
   const [headlessPage, setHeadlessPage] = useState(false);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -41,12 +41,11 @@ function App() {
   const [searchMessage, setSearchMessage] = useState('');
   const [newSearchMovie, setNewSearchMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCheckBox, setIsCheckBox] = useState(false);
+  const [isCheckBox, setIsCheckBox] = useState(true);
   const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
   const [index, setIndex] = useState(null);
   const [buttonMore, setButtonMore] = useState(true);
 
-console.log(isCheckBox);
   function indexByWidth() {
     if (window.innerWidth >= 1158) {
       setIndex(3);
@@ -90,6 +89,17 @@ console.log(isCheckBox);
       })
   }
 
+  // useEffect(() => {
+  //   if (!savedMoviesPage) {
+  //     setIsSearch(true);
+  //     getPhilms();
+  //     setButtonMore(true);
+  //     indexByWidth();
+  // } else if(savedMoviesPage){
+  //     movieSearch(savedMovies);
+  // }
+  // },[isCheckBox]);
+
   function getPhilms() {
     setIsLoading(true);
     movieSearch(JSON.parse(localStorage.getItem('movies')));
@@ -97,8 +107,8 @@ console.log(isCheckBox);
     }
 
   function movieSearch(movieArray) {
-    console.log(isCheckBox);
     let newMovie = [];
+    if(movieArray) {
     movieArray.filter((movie) => {
       let nameRU = movie.nameRU.toLowerCase();
       if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
@@ -114,7 +124,7 @@ console.log(isCheckBox);
     localStorage.setItem('searchMovies', JSON.stringify(newMovie));
     setSavedMovies(newMovie);
     setTimeout(showmessage, 1000);
-    
+  }
   }
 
   function showmessage(){
@@ -139,27 +149,9 @@ console.log(isCheckBox);
       })
   }
 
-  // function handlerCheckBox() {
-  //   setIsCheckBox(!isCheckBox);
-  //   localStorage.setItem('isCheck', !isCheckBox);
-  //   setIsCheckBox(JSON.parse(localStorage.getItem('isCheck')));
-  //   console.log(isCheckBox);
-  //   if (!savedMoviesPage) {
-  //     movieSearch(JSON.parse(localStorage.getItem('searchMovies')));
-  //     getPhilms();
-  //   } else {
-  //     movieSearch(savedMovies);
-  //   }
-  //       if (!savedMoviesPage) {
-  //           setSearchMessage('');
-  //           setIsSearch(true);
-  //           getPhilms();
-  //           setButtonMore(true);
-  //           indexByWidth();
-  //       } else {
-  //           movieSearch(savedMovies);
-  //       }
-  // }
+//   function handlerCheckBox() {
+//     setIsCheckBox(!isCheckBox);
+// }
 
 
   const handleChange = (event) => {
@@ -277,6 +269,7 @@ console.log(isCheckBox);
   }
 
   function linkToProfile() {
+    localStorage.setItem('savedMoviePage', false);
     setMobileMenuPopupOpen(false);
     setMainPage(false);
     history.push('/profile');
@@ -285,6 +278,7 @@ console.log(isCheckBox);
   function linkToMovies() {
     setHeadlessPage(false);
     setSavedMoviesPage(false);
+    localStorage.setItem('savedMoviePage', false);
     setMobileMenuPopupOpen(false);
     setMainPage(false);
     setIsLoading(false);
@@ -295,6 +289,7 @@ console.log(isCheckBox);
 
   function linkToSavedMovies() {
     setSavedMoviesPage(true);
+    localStorage.setItem('savedMoviePage', true);
     setMobileMenuPopupOpen(false);
     setSearchMessage('');
     setMainPage(false);
@@ -304,12 +299,14 @@ console.log(isCheckBox);
   }
 
   function linkToRegister() {
+    localStorage.setItem('savedMoviePage', false);
     setHeadlessPage(true);
     resetForm();
     history.push('/signup');
   }
 
   function linkToLogin() {
+    localStorage.setItem('savedMoviePage', false);
     setHeadlessPage(true);
     history.push('/signin');
   }
@@ -320,6 +317,7 @@ console.log(isCheckBox);
     localStorage.removeItem('searchMovies');
     localStorage.removeItem('logged');
     localStorage.removeItem('isCheck');
+    localStorage.removeItem('savedMoviePage');
     setSearchMessage('');
     setIsSearch(false);
     setCurrentUser({});
@@ -402,7 +400,8 @@ console.log(isCheckBox);
             setIsSearch={setIsSearch}
             setSearchPhrase={setSearchPhrase}
             searchPhrase={searchPhrase}
-            // setSearchMovie={setSearchMovie}
+            setSearchMovie={setSearchMovie}
+            movieSearch={movieSearch}
             searchMovie={searchMovie}
             getPhilms={getPhilms}
             setSearchMessage={setSearchMessage}

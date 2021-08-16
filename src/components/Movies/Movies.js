@@ -17,7 +17,7 @@ function Movies({ setMovies,
       setSearchPhrase,
       searchPhrase,
       searchWord,
-      // setSearchMovie,
+      setSearchMovie,
       searchMovie,
       getPhilms,
       getSavedMovies,
@@ -42,10 +42,10 @@ function Movies({ setMovies,
       index,
       setButtonMore,
       buttonMore,
-      indexByWidth
+      indexByWidth,
+      movieSearch
 
 }) {
-      console.log(isCheckBox);
       return (
             (<section className="movies">
                   <div className="movies__content content">
@@ -57,7 +57,7 @@ function Movies({ setMovies,
                               setSearchPhrase={setSearchPhrase}
                               searchPhrase={searchPhrase}
                               searchWord={searchWord}
-                              // setSearchMovie={setSearchMovie}
+                              setSearchMovie={setSearchMovie}
                               // searchMovie={searchMovie}
                               // setMovies={setMovies}
                               isSearch={isSearch}
@@ -78,6 +78,7 @@ function Movies({ setMovies,
                               setButtonMore={setButtonMore}
                               // buttonMore={buttonMore}
                               indexByWidth={indexByWidth}
+                              movieSearch={movieSearch}
                         />
                         {isLoading ?
                               <Preloader />
@@ -95,6 +96,7 @@ function Movies({ setMovies,
                               createMovie={createMovie}
                               // setCurrentUser={setCurrentUser}
                               // currentUser={currentUser}
+                              setSearchMessage={setSearchMessage}
                               arrayLikeMovieId={arrayLikeMovieId}
                               setHeartRed={setHeartRed}
                               isHeartRed={isHeartRed}
