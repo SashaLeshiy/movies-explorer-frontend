@@ -105,7 +105,6 @@ console.log(isCheckBox);
         newMovie.push(movie);
       } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
         && movie.duration >= 40) {
-          console.log(nameRU);
         newMovie.push(movie);
       }
     })

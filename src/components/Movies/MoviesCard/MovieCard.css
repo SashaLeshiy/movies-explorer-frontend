@@ -3,6 +3,7 @@
     display: grid;
     padding-bottom: 40px;
     /* text-decoration: none; */
+    grid-template-columns: minmax(270px, 270px);
 }
 
 .movieCard__img {
@@ -93,6 +94,7 @@
 @media screen and (max-width: 881px) {
     .movieCard {
         width: 339px;
+        grid-template-columns: minmax(339px, 339px);
     }
     .movieCard__img {
         width: 339px;
@@ -102,6 +104,7 @@
 @media screen and (max-width: 743px) {
     .movieCard {
         width: 300px;
+        grid-template-columns: minmax(300px, 300px);
     }
     .movieCard__img {
         width: 300px;
