@@ -37,7 +37,7 @@ function App() {
   const [profileMessage, setProfileMessage] = useState('');
   const [isSearch, setIsSearch] = useState(false);
   const [searchPhrase, setSearchPhrase] = useState('');
-  const [searchMovie, setSearchMovie] = useState(JSON.parse(localStorage.getItem('searchMovies')) || []);
+  const [searchMovie, setSearchMovie] = useState([]);
   const [searchMessage, setSearchMessage] = useState('');
   const [newSearchMovie, setNewSearchMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
