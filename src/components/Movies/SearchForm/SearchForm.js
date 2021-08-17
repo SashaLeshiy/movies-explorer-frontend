@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
+import SavedMovies from '../../SavedMovies/SavedMovies';
 
 function SearchForm({
+    movies,
     // handleChange,
     errors,
     // setErrors,
     isValid,
+    setIsValid,
     setSearchPhrase,
     searchPhrase,
     setSearchMovie,
-    // setSavedMovies,
+    setSavedMovies,
     // searchMovie,
     // setMovies,
     // movies,
@@ -22,7 +25,7 @@ function SearchForm({
     // compareMovies,
     handleChangeSearchPhrase,
     // searchMov,
-    // handlerCheckBox, 
+    handlerCheckBox, 
     savedMovies,
     movieSearch,
     savedMoviesPage,
@@ -30,69 +33,44 @@ function SearchForm({
     // index,
     setButtonMore,
     // buttonMore,
-    indexByWidth
+    indexByWidth,
+    savedMovieSearch,
+    setSearchSavedMovies,
+    searchSavedMovies
 }) {
-    
+
     useEffect(() => {
-        setSearchPhrase('');
-    }, [setSearchPhrase])
+        // setSearchPhrase('');
+        setIsValid(false);
+    }, [])
 
     function handleSearchSubmit(event) {
         event.preventDefault();
-        if (isValid && !savedMoviesPage) {
-            setSearchMessage('');
-            setIsSearch(true);
-            getPhilms();
-            setButtonMore(true);
-            indexByWidth();
-        } else if (isValid) {
-            movieSearch(savedMovies);
+        if (isValid) {
+            searchSubmitAndCheck();
         }
     }
 
-    useEffect(() => {
-        console.log(isCheckBox);
+    function searchSubmitAndCheck () {
         if (!savedMoviesPage) {
-          setIsSearch(true);
-          getPhilms();
-          setButtonMore(true);
-          indexByWidth();
-      } else if(savedMoviesPage){
-          movieSearch(savedMovies);
-      }
-      },[isCheckBox]);
-
-      function handlerCheckBox() {
-        setIsCheckBox(!isCheckBox);
+            setIsSearch(true);
+            movieSearch(JSON.parse(localStorage.getItem('movies')));
+            setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
+            setButtonMore(true);
+            indexByWidth();
+            setIsValid(false);
+        } else if (savedMoviesPage) {
+            savedMovieSearch();
+            setSavedMovies(JSON.parse(localStorage.getItem('searchSavedMovies')));
+            setIsValid(false);
+        }
+        setSearchMessage('');
     }
 
-    // function handlerCheckBox() {
-    //     setIsCheckBox(!isCheckBox);
-    //     localStorage.setItem('isCheck', !isCheckBox);
-    //     // setIsCheckBox(JSON.parse(localStorage.getItem('isCheck')));
-    //     // console.log(isCheckBox);
-    //     // if (!savedMoviesPage) {
-    //     //   movieSearch(JSON.parse(localStorage.getItem('searchMovies')));
-    //     //   getPhilms();
-    //     // } else {
-    //     //   movieSearch(savedMovies);
-    //     //   console.log(savedMovies);
-    //     // }
-    // }
+    useEffect(() => {
+            searchSubmitAndCheck();
+    }, [isCheckBox]);
 
-    // function handlerCheckBox() {
-    //         console.log('запрос на перещелкивание', isCheckBox)
-    //         setIsCheckBox(!isCheckBox);
-    //         console.log('перещелкнули', isCheckBox)
-    //         if (!savedMoviesPage) {
-    //             setIsSearch(true);
-    //             getPhilms();
-    //             setButtonMore(true);
-    //             indexByWidth();
-    //         } else {
-    //             movieSearch(savedMovies);
-    //         }
-    //   }
 
     return (
         <div className="searchForm">
@@ -106,7 +84,7 @@ function SearchForm({
                 <button className="searchForm__button" type="submit">Поиск</button>
                 <span className="searchForm__error">{errors}</span>
                 <label className="searchForm__checkbox">
-                    <input type="checkbox" onChange={handlerCheckBox} checked={isCheckBox}/>
+                    <input type="checkbox" onChange={handlerCheckBox} checked={isCheckBox} />
                     <span className="searchForm__checkbox_switch"></span>
                     <span className="searchForm__checkbox_heading">Короткометражки</span>
                 </label>

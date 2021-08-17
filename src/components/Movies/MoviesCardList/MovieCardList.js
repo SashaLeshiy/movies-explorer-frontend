@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SavedMovies from '../../SavedMovies/SavedMovies';
 import MovieCard from '../MoviesCard/MovieCard';
 // import * as mainApi from '../../../utils/MainApi';
 // import SavedMovies from '../../SavedMovies/SavedMovies';
@@ -26,13 +27,11 @@ function MovieCardList({
     setButtonMore,
     buttonMore,
     searchMessage,
-    setSearchMessage
+    setSearchMessage,
+    searchSavedMovies,
+    setSearchSavedMovies
 }) {
     const [inputMovie, setInputMovie] = useState([]);
-
-    // if(!savedMoviesPage && searchMovie.length === 0) {
-    //     setSearchMessage('Введите ключевое слово');
-    // }
 
     function handleMore() {
         if(window.innerWidth >= 1158) {
@@ -65,7 +64,7 @@ function MovieCardList({
     }
     }, [setInputMovie, index, searchMovie, savedMoviesPage]);
 
-
+    console.log(savedMovies);
 
     return (
         <>

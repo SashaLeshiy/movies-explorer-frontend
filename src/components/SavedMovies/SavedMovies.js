@@ -12,7 +12,7 @@ function SavedMovies({
       // setErrors,
       setSavedMoviesPage,
       savedMoviesPage,
-      // setSavedMovies,
+      setSavedMovies,
       savedMovies,
       getSavedMovies,
       setSearchPhrase,
@@ -26,13 +26,14 @@ function SavedMovies({
       setMovies,
       // handleChange,
       isValid,
+      setIsValid,
       setIsSearch,
       // isSearch,
       searchWord,
       // setSearchMovie,
       searchMovie,
       getPhilms,
-      // setSearchMessage,
+      setSearchMessage,
       searchMessage,
       handleMore,
       setNewSearchMovie,
@@ -43,12 +44,13 @@ function SavedMovies({
       handleChangeSearchPhrase,
       handlerCheckBox,
       setHeartRed,
-      movieSearch
+      movieSearch,
+      savedMovieSearch,
+      setSearchSavedMovies,
+      searchSavedMovies
 }) {
-      
-      
       useEffect(() => {
-            getSavedMovies();
+            // getSavedMovies();
             setSavedMoviesPage(true);
       }, []);
 
@@ -58,21 +60,22 @@ function SavedMovies({
                         <SearchForm
                               // handleChange={handleChange}
                               isValid={isValid}
+                              setIsValid={setIsValid}
                               errors={errors}
                               // setErrors={setErrors}
                               setSearchPhrase={setSearchPhrase}
                               searchPhrase={searchPhrase}
                               searchWord={searchWord}
                               // setSearchMovie={setSearchMovie}
-                              // setSavedMovies={setSavedMovies}
+                              setSavedMovies={setSavedMovies}
                               // searchMovie={searchMovie}
                               // setMovies={setMovies}
                               // isSearch={isSearch}
                               setIsSearch={setIsSearch}
                               // movies={movies}
                               getPhilms={getPhilms}
-                              // setSearchMessage={setSearchMessage}
-                              // searchMessage={searchMessage}
+                              setSearchMessage={setSearchMessage}
+                              searchMessage={searchMessage}
                               setNewSearchMovie={setNewSearchMovie}
                               newSearchMovie={newSearchMovie}
                               setIsCheckBox={setIsCheckBox}
@@ -83,6 +86,9 @@ function SavedMovies({
                               savedMovies={savedMovies}
                               movieSearch={movieSearch}
                               savedMoviesPage={savedMoviesPage}
+                              savedMovieSearch={savedMovieSearch}
+                              setSearchSavedMovies={setSearchSavedMovies}
+                              searchSavedMovies={searchSavedMovies}
                         />
                         {isLoading ?
                               <Preloader />
@@ -105,6 +111,8 @@ function SavedMovies({
                               arrayLikeMovieId={arrayLikeMovieId}
                               setHeartRed={setHeartRed}
                               searchMessage={searchMessage}
+                              searchSavedMovies={searchSavedMovies}
+                              setSearchSavedMovies={setSearchSavedMovies}
                         />
                   </div>
             </section>

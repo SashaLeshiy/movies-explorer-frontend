@@ -5,11 +5,12 @@ import Preloader from './Preloader/Preloader';
 
 
 function Movies({ setMovies,
-      // movies,
+      movies,
       savedMovies,
       savedMoviesPage,
       // handleChange,
       isValid,
+      setIsValid,
       errors,
       // setErrors,
       setIsSearch,
@@ -19,7 +20,7 @@ function Movies({ setMovies,
       searchWord,
       setSearchMovie,
       searchMovie,
-      getPhilms,
+      // getPhilms,
       getSavedMovies,
       setSearchMessage,
       searchMessage,
@@ -46,12 +47,15 @@ function Movies({ setMovies,
       movieSearch
 
 }) {
+
       return (
             (<section className="movies">
                   <div className="movies__content content">
                         <SearchForm
+                              movies={movies}
                               // handleChange={handleChange}
                               isValid={isValid}
+                              setIsValid={setIsValid}
                               errors={errors}
                               // setErrors={setErrors}
                               setSearchPhrase={setSearchPhrase}
@@ -63,7 +67,7 @@ function Movies({ setMovies,
                               isSearch={isSearch}
                               setIsSearch={setIsSearch}
                               // movies={movies}
-                              getPhilms={getPhilms}
+                              // getPhilms={getPhilms}
                               setSearchMessage={setSearchMessage}
                               // searchMessage={searchMessage}
                               setNewSearchMovie={setNewSearchMovie}

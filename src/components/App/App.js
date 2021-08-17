@@ -45,6 +45,7 @@ function App() {
   const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
   const [index, setIndex] = useState(null);
   const [buttonMore, setButtonMore] = useState(true);
+  const [searchSavedMovies, setSearchSavedMovies] = useState([]);
 
   function indexByWidth() {
     if (window.innerWidth >= 1158) {
@@ -58,8 +59,6 @@ function App() {
     }
   }
 
-
-
   useEffect(() => {
     tokenCheck();
     indexByWidth();
@@ -72,7 +71,7 @@ function App() {
       return;
     }
     getUserInfo();
-    getMovieFromApi()
+    getMovieFromApi();
     setLoggedIn(true);
     localStorage.setItem('isCheck', false)
   }
@@ -89,45 +88,67 @@ function App() {
       })
   }
 
-  // useEffect(() => {
-  //   if (!savedMoviesPage) {
-  //     setIsSearch(true);
-  //     getPhilms();
-  //     setButtonMore(true);
-  //     indexByWidth();
-  // } else if(savedMoviesPage){
-  //     movieSearch(savedMovies);
-  // }
-  // },[isCheckBox]);
 
-  function getPhilms() {
-    setIsLoading(true);
-    movieSearch(JSON.parse(localStorage.getItem('movies')));
-    setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
-    }
+  // function getPhilms() {
+  //   setIsLoading(true);
+  //   // movieSearch(JSON.parse(localStorage.getItem('movies')));
+  //   movieSearch(movies);
+  //   setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
+  //   }
+
+  console.log(savedMovies);
+  console.log(isValid);
 
   function movieSearch(movieArray) {
     let newMovie = [];
-    if(movieArray) {
-    movieArray.filter((movie) => {
-      let nameRU = movie.nameRU.toLowerCase();
-      if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
-        newMovie.push(movie);
-      } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
-        && movie.duration >= 40) {
-        newMovie.push(movie);
-      }
-    })
-    if (newMovie.length === 0) {
-      setSearchMessage('Ничего не найдено!')
+    setIsLoading(true);
+    if(!searchPhrase) {
+      movieArray = searchMovie;
     }
-    localStorage.setItem('searchMovies', JSON.stringify(newMovie));
-    setSavedMovies(newMovie);
-    setTimeout(showmessage, 1000);
-  }
+      if (movieArray || (JSON.parse(localStorage.getItem('searchMovies'))).length === 0) {
+        movieArray.forEach((movie) => {
+          let nameRU = movie.nameRU.toLowerCase();
+          if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
+            newMovie.push(movie);
+          } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
+            && movie.duration >= 40) {
+            newMovie.push(movie);
+          }
+        })
+        if (newMovie.length === 0) {
+          setSearchMessage('Ничего не найдено!')
+        }
+        localStorage.setItem('searchMovies', JSON.stringify(newMovie));
+        setTimeout(showmessage, 500);
+        setIsLoading(false);
+      }
   }
 
-  function showmessage(){
+  function savedMovieSearch() {
+    setIsLoading(true);
+    getSavedMovies();
+    let newMovie = [];
+    if (savedMovies) {
+      savedMovies.filter((movie) => {
+        let nameRU = movie.nameRU.toLowerCase();
+        if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
+          newMovie.push(movie);
+        } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
+          && movie.duration >= 40) {
+          newMovie.push(movie);
+        }
+      })
+      if (newMovie.length === 0) {
+        setSearchMessage('Ничего не найдено!')
+      }
+      localStorage.setItem('searchSavedMovies', JSON.stringify(newMovie));
+      setTimeout(showmessage, 1000);
+      setIsLoading(false);
+      setSearchPhrase('');
+    }
+  }
+
+  function showmessage() {
     setIsLoading(false);
   }
 
@@ -148,10 +169,6 @@ function App() {
         console.log(err);
       })
   }
-
-//   function handlerCheckBox() {
-//     setIsCheckBox(!isCheckBox);
-// }
 
 
   const handleChange = (event) => {
@@ -187,25 +204,6 @@ function App() {
       });
   }
 
-
-  // function getSavedMovies() {
-  //   let movOwner = [];
-  //   mainApi.getSavedMovie()
-  //     .then((res) => {
-  //       res.map((mov) => {
-  //         movOwner.push(mov.movieId);
-  //       })
-  //       setSavedMovies(res);
-  //     })
-  //     .then(() => {
-  //       setArrayLikeMovieId(movOwner);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  // }
-
   function onLogin(data) {
     mainApi.authorize(data)
       .then((res) => {
@@ -239,6 +237,9 @@ function App() {
       });
   }
 
+  function handlerCheckBox() {
+    setIsCheckBox(!isCheckBox);
+  }
 
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
@@ -318,6 +319,7 @@ function App() {
     localStorage.removeItem('logged');
     localStorage.removeItem('isCheck');
     localStorage.removeItem('savedMoviePage');
+    localStorage.removeItem('searchSavedMovies');
     setSearchMessage('');
     setIsSearch(false);
     setCurrentUser({});
@@ -396,6 +398,7 @@ function App() {
             // setErrors={setErrors}
             errors={errors}
             isValid={isValid}
+            setIsValid={setIsValid}
             isSearch={isSearch}
             setIsSearch={setIsSearch}
             setSearchPhrase={setSearchPhrase}
@@ -403,7 +406,7 @@ function App() {
             setSearchMovie={setSearchMovie}
             movieSearch={movieSearch}
             searchMovie={searchMovie}
-            getPhilms={getPhilms}
+            // getPhilms={getPhilms}
             setSearchMessage={setSearchMessage}
             searchMessage={searchMessage}
             setNewSearchMovie={setNewSearchMovie}
@@ -416,7 +419,7 @@ function App() {
             // currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
             handleChangeSearchPhrase={handleChangeSearchPhrase}
-            // handlerCheckBox={handlerCheckBox}
+            handlerCheckBox={handlerCheckBox}
             savedMovies={savedMovies}
             setIndex={setIndex}
             index={index}
@@ -430,26 +433,31 @@ function App() {
             // setErrors={setErrors}
             errors={errors}
             isValid={isValid}
+            setIsValid={setIsValid}
             loggedIn={loggedIn}
             savedMovies={savedMovies}
             setSavedMovies={setSavedMovies}
             savedMoviesPage={savedMoviesPage}
             setSavedMoviesPage={setSavedMoviesPage}
             setLoggedIn={setLoggedIn}
-            // setSearchMessage={setSearchMessage}
+            setSearchMessage={setSearchMessage}
             searchMessage={searchMessage}
             getSavedMovies={getSavedMovies}
             setSearchPhrase={setSearchPhrase}
             // setSearchMovie={setSearchMovie}
             searchPhrase={searchPhrase}
-            // setCheckBox={setIsCheckBox}
-            // isCheckBox={isCheckBox}
+            setCheckBox={setIsCheckBox}
+            isCheckBox={isCheckBox}
             // setCurrentUser={setCurrentUser}
             // currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
             setArrayLikeMovieId={setArrayLikeMovieId}
             movieSearch={movieSearch}
             handleChangeSearchPhrase={handleChangeSearchPhrase}
+            savedMovieSearch={savedMovieSearch}
+            handlerCheckBox={handlerCheckBox}
+            setSearchSavedMovies={setSearchSavedMovies}
+            searchSavedMovies={searchSavedMovies}
           // setHeartRed={setHeartRed}
           // isHeartRed={isHeartRed}
           >
