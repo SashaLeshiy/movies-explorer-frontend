@@ -2,6 +2,7 @@ import React from 'react';
 import globus from '../../../images/text-logo.svg';
 
 function Promo() {
+
       return (
             (<section className="promo">
                   <div className="promo__grid content">

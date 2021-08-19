@@ -11,6 +11,7 @@ function MovieCardList({
     // isValid,
     // isSearch,
     searchMovie,
+    setSearchMovie,
     // setNewSearchMovie,
     // newSearchMovie,
     // setSavedMovies,
@@ -29,9 +30,15 @@ function MovieCardList({
     searchMessage,
     setSearchMessage,
     searchSavedMovies,
-    setSearchSavedMovies
+    setSearchSavedMovies,
+    movieSearch,
+    setSearchPhrase,
+    searchPhrase
 }) {
+    
     const [inputMovie, setInputMovie] = useState([]);
+
+    console.log('savedMovies in MovieCardList-->', savedMovies)
 
     function handleMore() {
         if(window.innerWidth >= 1158) {
@@ -44,6 +51,13 @@ function MovieCardList({
             setIndex(i => i + 1);
         }
     } 
+
+    // useEffect(() => {
+    //     if(!savedMoviesPage) {
+    //     setSearchPhrase('ла');
+    //     console.log('useeffect movicardlist searchPhrase ->', searchPhrase);
+    //     }
+    // }, [])
 
     useEffect(() => {
         if (!savedMoviesPage) {
@@ -63,8 +77,6 @@ function MovieCardList({
         }
     }
     }, [setInputMovie, index, searchMovie, savedMoviesPage]);
-
-    console.log(savedMovies);
 
     return (
         <>

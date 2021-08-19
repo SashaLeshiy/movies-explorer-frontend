@@ -36,8 +36,8 @@ function App() {
   const [mainPage, setMainPage] = useState(false);
   const [profileMessage, setProfileMessage] = useState('');
   const [isSearch, setIsSearch] = useState(false);
-  const [searchPhrase, setSearchPhrase] = useState('');
-  const [searchMovie, setSearchMovie] = useState([]);
+  const [searchPhrase, setSearchPhrase] = useState(localStorage.getItem('searchPhrase'));
+  // const [searchMovie, setSearchMovie] = useState([]);
   const [searchMessage, setSearchMessage] = useState('');
   const [newSearchMovie, setNewSearchMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -62,8 +62,33 @@ function App() {
   useEffect(() => {
     tokenCheck();
     indexByWidth();
+    getSavedMovies();
   }, [])
 
+  console.log('app', savedMovies);
+
+//   useEffect(() => {
+//     if(!savedMoviesPage) {
+//     movieSearch();
+//     }
+// }, [savedMoviesPage]);
+
+  // useEffect(() => {
+  //   if(movies && !savedMoviesPage) {
+  //   console.log('useEffect 1');
+  //   setSearchPhrase(localStorage.getItem('searchPhrase'));
+  //   movieSearch()
+  //   setSearchMessage('');
+  //   };
+  // }, [movies, savedMoviesPage]);
+
+  // useEffect(() => {
+  //   if(!savedMoviesPage) {
+  //     console.log('монтирую апп');
+    
+  //   setSearchMessage('');
+  // }
+  // }, []);
 
   function tokenCheck() {
     const token = localStorage.getItem('token');
@@ -73,6 +98,7 @@ function App() {
     getUserInfo();
     getMovieFromApi();
     setLoggedIn(true);
+    // setSearchPhrase(localStorage.getItem('searchPhrase'));
     localStorage.setItem('isCheck', false)
   }
 
@@ -88,67 +114,58 @@ function App() {
       })
   }
 
-
-  // function getPhilms() {
+  // function movieSearch() {
+  //   console.log('search');
+  //   console.log('searchPhrase', searchPhrase);
   //   setIsLoading(true);
-  //   // movieSearch(JSON.parse(localStorage.getItem('movies')));
-  //   movieSearch(movies);
-  //   setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
+  //   let newMovie = [];
+  //     if (movies) {
+  //       movies.map((movie) => {
+  //         let nameRU = movie.nameRU.toLowerCase();
+  //         if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
+  //           // setSearchMovie([...searchMovie, movie]);
+  //           newMovie.push(movie);
+  //         } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
+  //           && movie.duration >= 40) {
+  //           newMovie.push(movie);
+  //           // setSearchMovie([...searchMovie, movie]);
+  //         }
+  //       })
+  //       if (newMovie.length === 0) {
+  //         console.log('ошибка');
+  //         setSearchMessage('Ничего не найдено!')
+  //       }
+  //       localStorage.setItem('searchMovies', JSON.stringify(newMovie));
+  //       setSearchMovie(newMovie);
+  //     }
+  //     setTimeout(showLoader, 1500);
+  //       setIsLoading(false);
+  // }
+
+  // function savedMovieSearch() {
+  //   setIsLoading(true);
+  //   let newMovie = [];
+  //   if (savedMovies) {
+  //     savedMovies.filter((movie) => {
+  //       let nameRU = movie.nameRU.toLowerCase();
+  //       if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
+  //         newMovie.push(movie);
+  //       } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
+  //         && movie.duration >= 40) {
+  //         newMovie.push(movie);
+  //       }
+  //     })
+  //     if (newMovie.length === 0) {
+  //       setSearchMessage('Ничего не найдено!')
+  //     }
+  //     localStorage.setItem('searchSavedMovies', JSON.stringify(newMovie));
+  //     setTimeout(showLoader, 1000);
+  //     setIsLoading(false);
+  //     setSearchPhrase('');
   //   }
-
-  console.log(savedMovies);
-  console.log(isValid);
-
-  function movieSearch(movieArray) {
-    let newMovie = [];
-    setIsLoading(true);
-    if(!searchPhrase) {
-      movieArray = searchMovie;
-    }
-      if (movieArray || (JSON.parse(localStorage.getItem('searchMovies'))).length === 0) {
-        movieArray.forEach((movie) => {
-          let nameRU = movie.nameRU.toLowerCase();
-          if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
-            newMovie.push(movie);
-          } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
-            && movie.duration >= 40) {
-            newMovie.push(movie);
-          }
-        })
-        if (newMovie.length === 0) {
-          setSearchMessage('Ничего не найдено!')
-        }
-        localStorage.setItem('searchMovies', JSON.stringify(newMovie));
-        setTimeout(showmessage, 500);
-        setIsLoading(false);
-      }
-  }
-
-  function savedMovieSearch() {
-    setIsLoading(true);
-    getSavedMovies();
-    let newMovie = [];
-    if (savedMovies) {
-      savedMovies.filter((movie) => {
-        let nameRU = movie.nameRU.toLowerCase();
-        if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
-          newMovie.push(movie);
-        } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
-          && movie.duration >= 40) {
-          newMovie.push(movie);
-        }
-      })
-      if (newMovie.length === 0) {
-        setSearchMessage('Ничего не найдено!')
-      }
-      localStorage.setItem('searchSavedMovies', JSON.stringify(newMovie));
-      setTimeout(showmessage, 1000);
-      setIsLoading(false);
-      setSearchPhrase('');
-    }
-  }
-
-  function showmessage() {
+  // }
+  
+  function showLoader() {
     setIsLoading(false);
   }
 
@@ -184,15 +201,15 @@ function App() {
     setProfileMessage('')
   };
 
-  const handleChangeSearchPhrase = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    setValues({ ...values, [name]: value });
-    setErrors(target.validationMessage);
-    setIsValid(target.closest("form").checkValidity());
-    setSearchPhrase(event.target.value);
-  }
+  // const handleChangeSearchPhrase = (event) => {
+  //   const target = event.target;
+  //   const name = target.name;
+  //   const value = target.value;
+  //   setValues({ ...values, [name]: value });
+  //   setErrors(target.validationMessage);
+  //   setIsValid(target.closest("form").checkValidity());
+  //   setSearchPhrase(event.target.value);
+  // }
 
   function getUserInfo() {
     mainApi.getUserInfo()
@@ -313,13 +330,7 @@ function App() {
   }
 
   function linkToSignOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('movies');
-    localStorage.removeItem('searchMovies');
-    localStorage.removeItem('logged');
-    localStorage.removeItem('isCheck');
-    localStorage.removeItem('savedMoviePage');
-    localStorage.removeItem('searchSavedMovies');
+    localStorage.clear();
     setSearchMessage('');
     setIsSearch(false);
     setCurrentUser({});
@@ -389,7 +400,7 @@ function App() {
             />
           </Route>
           <ProtectedRoute exact path="/movies" component={Movies} loggedIn={loggedIn}
-            // movies={movies}
+            movies={movies}
             setMovies={setMovies}
             savedMoviesPage={savedMoviesPage}
             setLoggedIn={setLoggedIn}
@@ -403,22 +414,23 @@ function App() {
             setIsSearch={setIsSearch}
             setSearchPhrase={setSearchPhrase}
             searchPhrase={searchPhrase}
-            setSearchMovie={setSearchMovie}
-            movieSearch={movieSearch}
-            searchMovie={searchMovie}
+            // setSearchMovie={setSearchMovie}
+            // movieSearch={movieSearch}
+            // searchMovie={searchMovie}
             // getPhilms={getPhilms}
             setSearchMessage={setSearchMessage}
             searchMessage={searchMessage}
             setNewSearchMovie={setNewSearchMovie}
             newSearchMovie={newSearchMovie}
             isLoading={isLoading}
+            setIsLoading={setIsLoading}
             setIsCheckBox={setIsCheckBox}
             isCheckBox={isCheckBox}
             createMovie={createMovie}
             // setCurrentUser={setCurrentUser}
             // currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
-            handleChangeSearchPhrase={handleChangeSearchPhrase}
+            // handleChangeSearchPhrase={handleChangeSearchPhrase}
             handlerCheckBox={handlerCheckBox}
             savedMovies={savedMovies}
             setIndex={setIndex}
@@ -426,6 +438,7 @@ function App() {
             setButtonMore={setButtonMore}
             buttonMore={buttonMore}
             indexByWidth={indexByWidth}
+            
           >
           </ProtectedRoute>
 
@@ -445,16 +458,16 @@ function App() {
             getSavedMovies={getSavedMovies}
             setSearchPhrase={setSearchPhrase}
             // setSearchMovie={setSearchMovie}
-            searchPhrase={searchPhrase}
+            // searchPhrase={searchPhrase}
             setCheckBox={setIsCheckBox}
             isCheckBox={isCheckBox}
             // setCurrentUser={setCurrentUser}
             // currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
             setArrayLikeMovieId={setArrayLikeMovieId}
-            movieSearch={movieSearch}
-            handleChangeSearchPhrase={handleChangeSearchPhrase}
-            savedMovieSearch={savedMovieSearch}
+            // movieSearch={movieSearch}
+            // handleChangeSearchPhrase={handleChangeSearchPhrase}
+            // savedMovieSearch={savedMovieSearch}
             handlerCheckBox={handlerCheckBox}
             setSearchSavedMovies={setSearchSavedMovies}
             searchSavedMovies={searchSavedMovies}

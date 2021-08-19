@@ -80,7 +80,6 @@ function MovieCard({
 
                 }
         }
-        
         return (
                 (<article className="movieCard" >
                         <a href={trailer} className="movieCard__link" target="_blank" rel="noopener noreferrer">

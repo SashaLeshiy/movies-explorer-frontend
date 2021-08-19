@@ -12,7 +12,7 @@ function SearchForm({
     searchPhrase,
     setSearchMovie,
     setSavedMovies,
-    // searchMovie,
+    searchMovie,
     // setMovies,
     // movies,
     // isSearch,
@@ -36,9 +36,12 @@ function SearchForm({
     indexByWidth,
     savedMovieSearch,
     setSearchSavedMovies,
-    searchSavedMovies
+    searchSavedMovies,
+    setIsLoading,
+    isLoading
 }) {
 
+    
     useEffect(() => {
         // setSearchPhrase('');
         setIsValid(false);
@@ -47,21 +50,20 @@ function SearchForm({
     function handleSearchSubmit(event) {
         event.preventDefault();
         if (isValid) {
+            localStorage.setItem('searchPhrase', searchPhrase);
             searchSubmitAndCheck();
         }
     }
 
     function searchSubmitAndCheck () {
         if (!savedMoviesPage) {
-            setIsSearch(true);
-            movieSearch(JSON.parse(localStorage.getItem('movies')));
-            setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
+            movieSearch();
             setButtonMore(true);
             indexByWidth();
             setIsValid(false);
         } else if (savedMoviesPage) {
             savedMovieSearch();
-            setSavedMovies(JSON.parse(localStorage.getItem('searchSavedMovies')));
+            // setSavedMovies(JSON.parse(localStorage.getItem('searchSavedMovies')));
             setIsValid(false);
         }
         setSearchMessage('');

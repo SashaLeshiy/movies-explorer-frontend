@@ -6,7 +6,7 @@ import SearchForm from '../Movies/SearchForm/SearchForm';
 import Preloader from '../Movies/Preloader/Preloader';
 // import * as mainApi from '../../utils/MainApi';
 
-function SavedMovies({ 
+function SavedMovies({
       // movies,
       errors,
       // setErrors,
@@ -45,14 +45,42 @@ function SavedMovies({
       handlerCheckBox,
       setHeartRed,
       movieSearch,
-      savedMovieSearch,
+      // savedMovieSearch,
       setSearchSavedMovies,
-      searchSavedMovies
+      searchSavedMovies,
 }) {
-      useEffect(() => {
-            // getSavedMovies();
-            setSavedMoviesPage(true);
-      }, []);
+      // useEffect(() => {
+      //       console.log('savedMovies useeffect searchPhrase -->', searchPhrase);
+      //       // getSavedMovies();
+      //       setSavedMoviesPage(true);
+      // }, []);
+
+      console.log(savedMovies, 'isCheckbox -->', isCheckBox);
+
+      function savedMovieSearch() {
+            // //     setIsLoading(true);
+            let newMovie = [];
+            if (savedMovies && searchPhrase) {
+                  savedMovies.filter((movie) => {
+                        let nameRU = movie.nameRU.toLowerCase();
+                        if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
+                              newMovie.push(movie);
+                        } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
+                              && movie.duration >= 40) {
+                              newMovie.push(movie);
+                        }
+                  })
+                  if (newMovie.length === 0) {
+                        setSearchMessage('Ничего не найдено!')
+                  }
+                  localStorage.setItem('searchSavedMovies', JSON.stringify(newMovie));
+                  setSearchSavedMovies(newMovie);
+                  console.log(newMovie);
+                  // setTimeout(showLoader, 1000);
+                  // setIsLoading(false);
+                  setSearchPhrase('');
+            }
+      }
 
       return (
             <section className="savedMovies">
@@ -113,6 +141,7 @@ function SavedMovies({
                               searchMessage={searchMessage}
                               searchSavedMovies={searchSavedMovies}
                               setSearchSavedMovies={setSearchSavedMovies}
+                              movieSearch={movieSearch}
                         />
                   </div>
             </section>

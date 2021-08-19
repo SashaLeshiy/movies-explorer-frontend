@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieCardList from './MoviesCardList/MovieCardList';
 import SearchForm from './SearchForm/SearchForm'
 import Preloader from './Preloader/Preloader';
@@ -11,15 +11,15 @@ function Movies({ setMovies,
       // handleChange,
       isValid,
       setIsValid,
-      errors,
+      // errors,
       // setErrors,
       setIsSearch,
       isSearch,
       setSearchPhrase,
       searchPhrase,
       searchWord,
-      setSearchMovie,
-      searchMovie,
+      // setSearchMovie,
+      // searchMovie,
       // getPhilms,
       getSavedMovies,
       setSearchMessage,
@@ -28,6 +28,7 @@ function Movies({ setMovies,
       setNewSearchMovie,
       newSearchMovie,
       isLoading,
+      setIsLoading,
       isCheckBox,
       setIsCheckBox,
       // compareMovies,
@@ -35,7 +36,7 @@ function Movies({ setMovies,
       //setCurrentUser,
       //currentUser,
       arrayLikeMovieId,
-      handleChangeSearchPhrase,
+      // handleChangeSearchPhrase,
       handlerCheckBox,
       setHeartRed,
       isHeartRed,
@@ -44,9 +45,63 @@ function Movies({ setMovies,
       setButtonMore,
       buttonMore,
       indexByWidth,
-      movieSearch
+      // movieSearch
 
 }) {
+
+      // const [searchPhrase, setSearchPhrase] = useState(null);
+      const [values, setValues] = useState({});
+      const [errors, setErrors] = useState('');
+      const [searchMovie, setSearchMovie] = useState([]);
+
+      useEffect(() => {
+            setSearchPhrase(localStorage.getItem('searchPhrase'));
+      }, [])
+
+      useEffect(() => {
+            if (movies) {
+                  // setSearchPhrase(localStorage.getItem('searchPhrase'));
+                  movieSearch()
+                  setSearchMessage('');
+            };
+      }, [movies]);
+
+      function movieSearch() {
+            setIsLoading(true);
+            let newMovie = [];
+            if (movies && searchPhrase) {
+                  movies.map((movie) => {
+                        let nameRU = movie.nameRU.toLowerCase();
+                        if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
+                              newMovie.push(movie);
+                        } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
+                              && movie.duration >= 40) {
+                              newMovie.push(movie);
+                        }
+                  })
+                  if (newMovie.length === 0) {
+                        console.log('ошибка');
+                        setSearchMessage('Ничего не найдено!')
+                  }
+                  localStorage.setItem('searchMovies', JSON.stringify(newMovie));
+                  setSearchMovie(newMovie);
+            }
+            //   setTimeout(showLoader, 1500);
+            setIsLoading(false);
+      }
+
+
+
+      const handleChangeSearchPhrase = (event) => {
+            const target = event.target;
+            const name = target.name;
+            const value = target.value;
+            setValues({ ...values, [name]: value });
+            setErrors(target.validationMessage);
+            setIsValid(target.closest("form").checkValidity());
+            setSearchPhrase(event.target.value);
+      }
+
 
       return (
             (<section className="movies">
@@ -62,7 +117,7 @@ function Movies({ setMovies,
                               searchPhrase={searchPhrase}
                               searchWord={searchWord}
                               setSearchMovie={setSearchMovie}
-                              // searchMovie={searchMovie}
+                              searchMovie={searchMovie}
                               // setMovies={setMovies}
                               isSearch={isSearch}
                               setIsSearch={setIsSearch}
@@ -83,6 +138,8 @@ function Movies({ setMovies,
                               // buttonMore={buttonMore}
                               indexByWidth={indexByWidth}
                               movieSearch={movieSearch}
+                              setIsLoading={setIsLoading}
+                              isLoading={isLoading}
                         />
                         {isLoading ?
                               <Preloader />
@@ -96,6 +153,9 @@ function Movies({ setMovies,
                               // isValid={isValid}
                               // isSearch={isSearch}
                               searchMovie={searchMovie}
+                              setSearchMovie={setSearchMovie}
+                              setSearchPhrase={setSearchPhrase}
+                              earchPhrase={searchPhrase}
                               handleMore={handleMore}
                               createMovie={createMovie}
                               // setCurrentUser={setCurrentUser}
@@ -109,7 +169,7 @@ function Movies({ setMovies,
                               setButtonMore={setButtonMore}
                               buttonMore={buttonMore}
                               searchMessage={searchMessage}
-
+                              movieSearch={movieSearch}
                         />
                   </div>
             </section>)
