@@ -51,7 +51,9 @@ function Movies({ setMovies,
 
 }) {
 
-
+      useEffect(() => {
+            setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
+      }, [setSearchMovie]);
 
       // const [searchMovie, setSearchMovie] = useState(JSON.parse(localStorage.getItem('searchMovie')) || []);
       

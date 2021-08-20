@@ -37,7 +37,7 @@ function App() {
   const [mainPage, setMainPage] = useState(false);
   const [profileMessage, setProfileMessage] = useState('');
   const [isSearch, setIsSearch] = useState(false);
-  const [searchPhrase, setSearchPhrase] = useState(localStorage.getItem('searchPhrase'));
+  const [searchPhrase, setSearchPhrase] = useState(localStorage.getItem('searchPhrase') || []);
   const [searchMovie, setSearchMovie] = useState(JSON.parse(localStorage.getItem('searchMovie')) || []);
   const [searchMessage, setSearchMessage] = useState('');
   const [newSearchMovie, setNewSearchMovie] = useState([]);
@@ -63,7 +63,7 @@ function App() {
   useEffect(() => {
     tokenCheck();
     indexByWidth();
-    getMovieFromApi();
+    // getMovieFromApi();
   }, [])
 
   useEffect(() => {
@@ -145,7 +145,7 @@ function App() {
 
   function movieSearch() {
     let newMovie = [];
-    if (movies) {
+    if (movies && searchPhrase) {
       movies.map((movie) => {
         let nameRU = movie.nameRU.toLowerCase();
         if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
@@ -166,7 +166,6 @@ function App() {
   }
 
   function savedMovieSearch() {
-    console.log(savedMovies);
     // setSearchSavedMovies([]);
     let newMovie = [];
     if (savedMovies) {
