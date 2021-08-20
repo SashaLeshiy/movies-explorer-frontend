@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as mainApi from '../../../utils/MainApi';
 // import SavedMovies from '../../SavedMovies/SavedMovies';
 

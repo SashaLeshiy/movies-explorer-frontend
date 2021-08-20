@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import MovieCardList from '../Movies/MoviesCardList/MovieCardList';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import Preloader from '../Movies/Preloader/Preloader';
+import { getSavedMovie } from '../../utils/MainApi';
 // import * as mainApi from '../../utils/MainApi';
 
 function SavedMovies({
@@ -45,42 +46,16 @@ function SavedMovies({
       handlerCheckBox,
       setHeartRed,
       movieSearch,
-      // savedMovieSearch,
+      savedMovieSearch,
       setSearchSavedMovies,
       searchSavedMovies,
+      handleSearchSubmit,
+      searchSubmitAndCheck
 }) {
-      // useEffect(() => {
-      //       console.log('savedMovies useeffect searchPhrase -->', searchPhrase);
-      //       // getSavedMovies();
-      //       setSavedMoviesPage(true);
-      // }, []);
 
-      console.log(savedMovies, 'isCheckbox -->', isCheckBox);
-
-      function savedMovieSearch() {
-            // //     setIsLoading(true);
-            let newMovie = [];
-            if (savedMovies && searchPhrase) {
-                  savedMovies.filter((movie) => {
-                        let nameRU = movie.nameRU.toLowerCase();
-                        if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
-                              newMovie.push(movie);
-                        } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
-                              && movie.duration >= 40) {
-                              newMovie.push(movie);
-                        }
-                  })
-                  if (newMovie.length === 0) {
-                        setSearchMessage('Ничего не найдено!')
-                  }
-                  localStorage.setItem('searchSavedMovies', JSON.stringify(newMovie));
-                  setSearchSavedMovies(newMovie);
-                  console.log(newMovie);
-                  // setTimeout(showLoader, 1000);
-                  // setIsLoading(false);
-                  setSearchPhrase('');
-            }
-      }
+      useEffect(() => {
+            getSavedMovie();
+      }, [getSavedMovie]);
 
       return (
             <section className="savedMovies">
@@ -117,6 +92,8 @@ function SavedMovies({
                               savedMovieSearch={savedMovieSearch}
                               setSearchSavedMovies={setSearchSavedMovies}
                               searchSavedMovies={searchSavedMovies}
+                              handleSearchSubmit={handleSearchSubmit}
+                              searchSubmitAndCheck={searchSubmitAndCheck}
                         />
                         {isLoading ?
                               <Preloader />

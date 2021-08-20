@@ -1,4 +1,5 @@
 import React from 'react';
+import { location } from 'react-router-dom';
 import account from '../../images/account_icon.svg';
 
 function Navigation({ linkToMovies, 
@@ -8,7 +9,10 @@ function Navigation({ linkToMovies,
       linkToLogin,
       isMainPage, 
       openMobileMenu,
-      loggedIn }) {
+      loggedIn, 
+      location
+ }) {
+           
       return (
             (<ul className="header__menu">
                   {!loggedIn ?
@@ -23,8 +27,8 @@ function Navigation({ linkToMovies,
                         :
                         <>
                               <li className="header__button header__menu_movies">
-                                    <button onClick={linkToMovies} className="button">Фильмы</button>
-                                    <button onClick={linkToSavedMovies} className="button">Сохраненные фильмы</button>
+                                    <button onClick={linkToMovies} className={`button ${location.pathname === '/movies' ? "button__active" : ""}`}>Фильмы</button>
+                                    <button onClick={linkToSavedMovies} className={`button ${location.pathname === '/saved-movies' ? "button__active" : ""}`}>Сохраненные фильмы</button>
                               </li>
                               <li className="header__button header__menu_movies_account">
                                     <button onClick={linkToProfile} className="button">Аккаунт</button>

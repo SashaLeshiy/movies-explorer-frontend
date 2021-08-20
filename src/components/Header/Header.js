@@ -12,7 +12,7 @@ function Header({ linkToMovies,
       isMobileMenu, 
       openMobileMenu,
       headlessPage,
-      mainPage
+      mainPage, location
 }) {
       return (
             (<header className={`header ${!mainPage ? "header__dark" : ""} ${headlessPage ? "hidden" : ""}`}>
@@ -27,6 +27,7 @@ function Header({ linkToMovies,
                               linkToRegister={linkToRegister}
                               linkToLogin={linkToLogin}
                               loggedIn={loggedIn}
+                              location={location}
                         />
                   </div>
             </header>)

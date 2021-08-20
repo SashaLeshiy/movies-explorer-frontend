@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Route } from 'react-router-dom';
 import Promo from './Promo/Promo';
 import AboutProject from './AboutProject/AboutProject';
@@ -7,13 +7,14 @@ import AboutMe from './AboutMe/AboutMe';
 
 
 function Main({ setMainPage }) {
-    useEffect(() => {
+
+   useEffect(() => {
         setMainPage(true);
     })
     return (
         <>
-            <Promo />
-            <AboutProject  />
+            <Promo  />
+            <AboutProject   />
             <Route  />
             <Techs  />
             <AboutMe />

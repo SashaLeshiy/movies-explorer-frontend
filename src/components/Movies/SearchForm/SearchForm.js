@@ -38,40 +38,22 @@ function SearchForm({
     setSearchSavedMovies,
     searchSavedMovies,
     setIsLoading,
-    isLoading
+    isLoading,
+    handleSearchSubmit,
+    searchSubmitAndCheck
 }) {
 
     
-    useEffect(() => {
-        // setSearchPhrase('');
-        setIsValid(false);
-    }, [])
+    // useEffect(() => {
+    //     // setSearchPhrase('');
+    //     setIsValid(false);
+    // }, [])
 
-    function handleSearchSubmit(event) {
-        event.preventDefault();
-        if (isValid) {
-            localStorage.setItem('searchPhrase', searchPhrase);
-            searchSubmitAndCheck();
-        }
-    }
+    
 
-    function searchSubmitAndCheck () {
-        if (!savedMoviesPage) {
-            movieSearch();
-            setButtonMore(true);
-            indexByWidth();
-            setIsValid(false);
-        } else if (savedMoviesPage) {
-            savedMovieSearch();
-            // setSavedMovies(JSON.parse(localStorage.getItem('searchSavedMovies')));
-            setIsValid(false);
-        }
-        setSearchMessage('');
-    }
-
-    useEffect(() => {
-            searchSubmitAndCheck();
-    }, [isCheckBox]);
+    // useEffect(() => {
+    //         searchSubmitAndCheck();
+    // }, [isCheckBox]);
 
 
     return (
