@@ -145,7 +145,7 @@ function App() {
 
   function movieSearch() {
     let newMovie = [];
-    if (movies && searchPhrase) {
+    if (movies && searchPhrase.length !== 0) {
       movies.map((movie) => {
         let nameRU = movie.nameRU.toLowerCase();
         if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
@@ -168,7 +168,8 @@ function App() {
   function savedMovieSearch() {
     // setSearchSavedMovies([]);
     let newMovie = [];
-    if (savedMovies) {
+    if (savedMovies && searchPhrase.length !== 0) {
+      console.log(searchPhrase);
       savedMovies.filter((movie) => {
         let nameRU = movie.nameRU.toLowerCase();
         if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
