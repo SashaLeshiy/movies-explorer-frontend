@@ -47,7 +47,9 @@ function Movies({ setMovies,
       indexByWidth,
       movieSearch,
       handleSearchSubmit,
-      searchSubmitAndCheck
+      searchSubmitAndCheck,
+      setSearchSavedMovies,
+      searchSavedMovies
 
 }) {
 
@@ -154,6 +156,8 @@ function Movies({ setMovies,
                               buttonMore={buttonMore}
                               searchMessage={searchMessage}
                               movieSearch={movieSearch}
+                              setSearchSavedMovies={setSearchSavedMovies}
+                              searchSavedMovies={searchSavedMovies}
                         />
                   </div>
             </section>)

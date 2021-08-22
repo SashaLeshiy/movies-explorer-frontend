@@ -33,10 +33,22 @@ function MovieCardList({
     setSearchSavedMovies,
     movieSearch,
     setSearchPhrase,
-    searchPhrase
+    searchPhrase,
+    setIsSearch,
+    isSearch
 }) {
     
     const [inputMovie, setInputMovie] = useState([]);
+    
+
+    // useEffect(() => {
+    //     if(!isSearch) {
+    //         setSearchSavedMovies(JSON.parse(localStorage.getItem('savedMovie')));
+    //     }
+    // }, []);
+     
+    console.log(isSearch);
+    console.log(searchSavedMovies);
 
     function handleMore() {
         if(window.innerWidth >= 1158) {
@@ -73,7 +85,7 @@ function MovieCardList({
         <>
             {savedMoviesPage ?
             (<div className={`movieCardList ${savedMoviesPage ? "movieCardList__saved" : ""}`}>
-                {(savedMovies.map(movie => {
+                {(searchSavedMovies.map(movie => {
                     return <MovieCard key={movie._id}
                         id={movie._id}
                         movieId={movie.id}

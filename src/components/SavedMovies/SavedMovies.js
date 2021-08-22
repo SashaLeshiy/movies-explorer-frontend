@@ -20,6 +20,8 @@ function SavedMovies({
       searchPhrase,
       setIsCheckBox,
       isCheckBox,
+      setIsSearch,
+      isSearch,
       // setCurrentUser,
       // currentUser,
       arrayLikeMovieId,
@@ -28,7 +30,6 @@ function SavedMovies({
       // handleChange,
       isValid,
       setIsValid,
-      setIsSearch,
       // isSearch,
       searchWord,
       // setSearchMovie,
@@ -107,7 +108,8 @@ function SavedMovies({
                               setMovies={setMovies}
                               savedMoviesPage={savedMoviesPage}
                               // isValid={isValid}
-                              // isSearch={isSearch}
+                              isSearch={isSearch}
+                              setIsSearch={setIsSearch}
                               searchMovie={searchMovie}
                               handleMore={handleMore}
                               createMovie={createMovie}

@@ -37,7 +37,7 @@ function App() {
   const [mainPage, setMainPage] = useState(false);
   const [profileMessage, setProfileMessage] = useState('');
   const [isSearch, setIsSearch] = useState(false);
-  const [searchPhrase, setSearchPhrase] = useState(localStorage.getItem('searchPhrase') || []);
+  const [searchPhrase, setSearchPhrase] = useState(localStorage.getItem('searchPhrase') || '');
   const [searchMovie, setSearchMovie] = useState(JSON.parse(localStorage.getItem('searchMovie')) || []);
   const [searchMessage, setSearchMessage] = useState('');
   const [newSearchMovie, setNewSearchMovie] = useState([]);
@@ -46,7 +46,9 @@ function App() {
   const [arrayLikeMovieId, setArrayLikeMovieId] = useState([]);
   const [index, setIndex] = useState(null);
   const [buttonMore, setButtonMore] = useState(true);
-  const [searchSavedMovies, setSearchSavedMovies] = useState([]);
+  const [searchSavedMovies, setSearchSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovie')));
+
+  console.log(searchSavedMovies);
 
   function indexByWidth() {
     if (window.innerWidth >= 1158) {
@@ -63,7 +65,6 @@ function App() {
   useEffect(() => {
     tokenCheck();
     indexByWidth();
-    // getMovieFromApi();
   }, [])
 
   useEffect(() => {
@@ -82,6 +83,7 @@ function App() {
     }
     getUserInfo();
     getSavedMovies();
+
     getMovieFromApi();
     setLoggedIn(true);
     localStorage.setItem('isCheck', false)
@@ -112,6 +114,7 @@ function App() {
         })
         localStorage.setItem('savedMovie', JSON.stringify(res));
         setSavedMovies(res);
+        setSearchSavedMovies(res);
       })
       .then(() => {
         setArrayLikeMovieId(movOwner);
@@ -131,7 +134,7 @@ function App() {
 
   function searchSubmitAndCheck() {
     if (!savedMoviesPage) {
-      localStorage.setItem('searchPhrase', searchPhrase);
+      // localStorage.setItem('searchPhrase', searchPhrase);
       movieSearch();
       setButtonMore(true);
       indexByWidth();
@@ -144,8 +147,9 @@ function App() {
   }
 
   function movieSearch() {
+    localStorage.setItem('searchPhrase', searchPhrase);
     let newMovie = [];
-    if (movies && searchPhrase.length !== 0) {
+    if (movies && searchPhrase) {
       movies.map((movie) => {
         let nameRU = movie.nameRU.toLowerCase();
         if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
@@ -166,9 +170,10 @@ function App() {
   }
 
   function savedMovieSearch() {
-    // setSearchSavedMovies([]);
+    setSearchSavedMovies([]);
+    setIsSearch(true);
     let newMovie = [];
-    if (savedMovies && searchPhrase.length !== 0) {
+    if (savedMovies) {
       console.log(searchPhrase);
       savedMovies.filter((movie) => {
         let nameRU = movie.nameRU.toLowerCase();
@@ -186,7 +191,7 @@ function App() {
         setSearchMessage('Ничего не найдено!')
       }
       localStorage.setItem('searchSavedMovies', JSON.stringify(newMovie));
-      setSavedMovies(newMovie);
+      // setSavedMovies(newMovie);
       setSearchSavedMovies(newMovie);
       // setTimeout(showLoader, 1000);
       setSearchPhrase('');
@@ -444,7 +449,8 @@ function App() {
             indexByWidth={indexByWidth}
             handleSearchSubmit={handleSearchSubmit}
             searchSubmitAndCheck={searchSubmitAndCheck}
-
+            setSearchSavedMovies={setSearchSavedMovies}
+            searchSavedMovies={searchSavedMovies}
           >
           </ProtectedRoute>
 
@@ -452,6 +458,8 @@ function App() {
             // setErrors={setErrors}
             errors={errors}
             isValid={isValid}
+            isSearch={isSearch}
+            setIsSearch={setIsSearch}
             setIsValid={setIsValid}
             loggedIn={loggedIn}
             savedMovies={savedMovies}
