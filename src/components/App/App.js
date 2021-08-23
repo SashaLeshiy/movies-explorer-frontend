@@ -507,6 +507,7 @@ function App() {
             errors={errors}
             isValid={isValid}
             setCurrentUser={setCurrentUser}
+            currentUser={currentUser}
             setProfileMessage={setProfileMessage}
             profileMessage={profileMessage}
             setIsValid={setIsValid}

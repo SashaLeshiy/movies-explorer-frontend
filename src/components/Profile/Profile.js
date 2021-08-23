@@ -10,11 +10,19 @@ function Profile({ setLoggedIn,
       errors,
       isValid,
       setCurrentUser,
+      currentUser,
       setProfileMessage,
       profileMessage,
       setIsValid
 }) {
       const [errorMessage, setErrorMessage] = useState(false);
+      const userInfo = React.useContext(CurrentUserContext);
+
+      useEffect(() => {
+            setLoggedIn(true);
+            setProfileData({ name: userInfo.name, email: userInfo.email });
+            setProfileMessage('');
+      }, [userInfo]);
       
       function patchUserData(newProfile) {
             if(!newProfile.email) {
@@ -36,18 +44,12 @@ function Profile({ setLoggedIn,
                   console.log(err);
                 });
       }
-      const userInfo = React.useContext(CurrentUserContext);
+      
 
       function handleSubmit(event) {
             event.preventDefault();
             patchUserData(profileData);
       }
-
-      useEffect(() => {
-            setLoggedIn(true);
-            setProfileData({ name: userInfo.name, email: userInfo.email });
-            setProfileMessage('');
-      }, [setProfileData]);
 
       return (
             (<section className="profile">
@@ -57,13 +59,13 @@ function Profile({ setLoggedIn,
                               <span className="profile__name">Имя</span>
                               <input type="text" className="profile__input profile__input_name"
                                     name="name" onChange={handleChange}
-                                    minLength="2" maxLength="30" value={profileData.name || userInfo.name} required />
+                                    minLength="2" maxLength="30" value={profileData.name} required />
                               <span className="profile__error">{errors.name}</span>
                               <span className="profile__span"></span>
                               <span className="profile__email">E-Mail</span>
                               <input type="email" className="profile__input profile__input_email"
                                     name="email" onChange={handleChange}
-                                    minLength="2" maxLength="30" value={profileData.email || userInfo.email} required />
+                                    minLength="2" maxLength="30" value={profileData.email} required />
                               <span className="profile__error">{errors.email}</span>
                               <span className={`profile__error profile__message ${errorMessage ? 'profile__message_error' : ''}`}>
                                     {profileMessage}</span>
