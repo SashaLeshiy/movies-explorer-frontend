@@ -166,8 +166,8 @@ function App() {
       localStorage.setItem('searchMovies', JSON.stringify(newMovie));
       setSearchMovie(newMovie);
       console.log(newMovie);
-    } else if(!searchPhrase) {
-    setIsLoading(false);
+    } else if (!searchPhrase) {
+      setIsLoading(false);
     }
   }
 
@@ -241,15 +241,15 @@ function App() {
           localStorage.setItem('logged', true);
           setIsLoading(false);
           setSavedMoviesPage(false);
+          setLoggedIn(true);
+          setErrors('');
+          linkToMovies();
         }
       })
       .catch((err) => {
         setLoggedIn(false);
         setResError(true);
       });
-    setLoggedIn(true);
-    setErrors('');
-    linkToMovies();
   };
 
   function createMovie(props) {
