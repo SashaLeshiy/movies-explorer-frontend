@@ -53,6 +53,9 @@ function Movies({ setMovies,
       setSavedMovies
 
 }) {
+      useEffect(() => {
+            setSearchPhrase('');
+      }, [])
 
       useEffect(() => {
             setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));

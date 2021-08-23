@@ -48,6 +48,8 @@ function App() {
   const [buttonMore, setButtonMore] = useState(true);
   const [searchSavedMovies, setSearchSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovie')));
 
+  console.log(searchMovie);
+
   function indexByWidth() {
     if (window.innerWidth >= 1158) {
       setIndex(3);
@@ -81,7 +83,6 @@ function App() {
     }
     getUserInfo();
     getSavedMovies();
-
     getMovieFromApi();
     setLoggedIn(true);
     localStorage.setItem('isCheck', false)
@@ -147,7 +148,6 @@ function App() {
   function movieSearch() {
     setSearchMessage('');
     setIsLoading(true);
-    console.log(searchPhrase);
     localStorage.getItem('searchPhrase', searchPhrase);
     let newMovie = [];
     if (movies && searchPhrase) {
@@ -167,6 +167,9 @@ function App() {
       localStorage.setItem('searchPhrase', searchPhrase);
       localStorage.setItem('searchMovies', JSON.stringify(newMovie));
       setSearchMovie(newMovie);
+      console.log(newMovie);
+    } else if(!searchPhrase) {
+    setIsLoading(false);
     }
   }
 
