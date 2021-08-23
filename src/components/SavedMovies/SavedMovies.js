@@ -41,6 +41,7 @@ function SavedMovies({
       setNewSearchMovie,
       newSearchMovie,
       isLoading,
+      setIsLoading,
       // compareMovies,
       createMovie,
       handleChangeSearchPhrase,
@@ -51,7 +52,8 @@ function SavedMovies({
       setSearchSavedMovies,
       searchSavedMovies,
       handleSearchSubmit,
-      searchSubmitAndCheck
+      searchSubmitAndCheck,
+            
 }) {
 
       useEffect(() => {

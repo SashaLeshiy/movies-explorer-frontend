@@ -35,20 +35,12 @@ function MovieCardList({
     setSearchPhrase,
     searchPhrase,
     setIsSearch,
-    isSearch
+    isSearch, 
+    setIsLoading
 }) {
     
     const [inputMovie, setInputMovie] = useState([]);
     
-
-    // useEffect(() => {
-    //     if(!isSearch) {
-    //         setSearchSavedMovies(JSON.parse(localStorage.getItem('savedMovie')));
-    //     }
-    // }, []);
-     
-    console.log(isSearch);
-    console.log(searchSavedMovies);
 
     function handleMore() {
         if(window.innerWidth >= 1158) {
@@ -144,7 +136,8 @@ function MovieCardList({
                     }
                 </div>)
                 :
-                <span></span>}
+                <span></span>
+                }
                 <div className="movieCardList__empty">{searchMessage}</div>
         </>        
     );

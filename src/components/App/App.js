@@ -48,7 +48,7 @@ function App() {
   const [buttonMore, setButtonMore] = useState(true);
   const [searchSavedMovies, setSearchSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovie')));
 
-  console.log(searchSavedMovies);
+  console.log(isLoading);
 
   function indexByWidth() {
     if (window.innerWidth >= 1158) {
@@ -147,6 +147,7 @@ function App() {
   }
 
   function movieSearch() {
+    setIsLoading(true);
     localStorage.setItem('searchPhrase', searchPhrase);
     let newMovie = [];
     if (movies && searchPhrase) {
@@ -163,13 +164,16 @@ function App() {
         console.log('ошибка');
         setSearchMessage('Ничего не найдено!')
       }
+      setTimeout(showLoader, 1000);
       localStorage.setItem('searchMovies', JSON.stringify(newMovie));
       setSearchMovie(newMovie);
     }
-    //   setTimeout(showLoader, 1500);
+    
+      
   }
 
   function savedMovieSearch() {
+    setIsLoading(true);
     setSearchSavedMovies([]);
     setIsSearch(true);
     let newMovie = [];
@@ -190,10 +194,10 @@ function App() {
         console.log('ошибка');
         setSearchMessage('Ничего не найдено!')
       }
+      setTimeout(showLoader, 1000);
       localStorage.setItem('searchSavedMovies', JSON.stringify(newMovie));
       // setSavedMovies(newMovie);
       setSearchSavedMovies(newMovie);
-      // setTimeout(showLoader, 1000);
       setSearchPhrase('');
     }
   }
@@ -307,7 +311,7 @@ function App() {
     localStorage.setItem('savedMoviePage', false);
     setMobileMenuPopupOpen(false);
     setMainPage(false);
-    setIsLoading(false);
+    // setIsLoading(false);
     setSearchMessage('');
     setErrors('');
     history.push('/movies');
@@ -467,6 +471,8 @@ function App() {
             savedMoviesPage={savedMoviesPage}
             setSavedMoviesPage={setSavedMoviesPage}
             setLoggedIn={setLoggedIn}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
             setSearchMessage={setSearchMessage}
             searchMessage={searchMessage}
             getSavedMovies={getSavedMovies}

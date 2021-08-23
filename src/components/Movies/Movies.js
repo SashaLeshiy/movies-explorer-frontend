@@ -138,6 +138,7 @@ function Movies({ setMovies,
                               savedMoviesPage={savedMoviesPage}
                               // isValid={isValid}
                               // isSearch={isSearch}
+                              setIsLoading={setIsLoading}
                               searchMovie={searchMovie}
                               setSearchMovie={setSearchMovie}
                               setSearchPhrase={setSearchPhrase}
