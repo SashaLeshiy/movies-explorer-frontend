@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import SavedMovies from '../../SavedMovies/SavedMovies';
+// import SavedMovies from '../../SavedMovies/SavedMovies';
 import MovieCard from '../MoviesCard/MovieCard';
 // import * as mainApi from '../../../utils/MainApi';
 // import SavedMovies from '../../SavedMovies/SavedMovies';
@@ -11,7 +11,7 @@ function MovieCardList({
     // isValid,
     // isSearch,
     searchMovie,
-    setSearchMovie,
+    // setSearchMovie,
     // setNewSearchMovie,
     // newSearchMovie,
     setSavedMovies,
@@ -30,19 +30,16 @@ function MovieCardList({
     searchMessage,
     setSearchMessage,
     searchSavedMovies,
-    setSearchSavedMovies,
-    movieSearch,
-    setSearchPhrase,
-    searchPhrase,
-    setIsSearch,
-    isSearch, 
-    setIsLoading
+    // setSearchSavedMovies,
+    // movieSearch,
+    // setSearchPhrase,
+    // searchPhrase,
+    // setIsSearch,
+    // isSearch, 
+    // setIsLoading
 }) {
     
     const [inputMovie, setInputMovie] = useState([]);
-
-
-    
 
     function handleMore() {
         if(window.innerWidth >= 1158) {

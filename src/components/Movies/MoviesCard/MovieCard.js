@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as mainApi from '../../../utils/MainApi';
 // import SavedMovies from '../../SavedMovies/SavedMovies';
 
@@ -24,7 +24,7 @@ function MovieCard({
         setSavedMovies
 }) {
 
-        
+
         const [isHeartRed, setHeartRed] = useState(false);
 
         useState(() => {
@@ -58,33 +58,32 @@ function MovieCard({
         function heartClick() {
                 setHeartRed(!isHeartRed);
                 if (!isHeartRed) {
-                        // createMovie({
-                        //         movieId,
-                        //         country,
-                        //         director,
-                        //         year,
-                        //         description,
-                        //         image,
-                        //         trailer,
-                        //         nameEN,
-                        //         nameRU,
-                        //         thumbnail,
-                        //         duration,
-                        // });
                         if (!trailer
                                 .match(/^(http|https):\/\/(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\-._~:/?#[\]@!$&'()*+,;=]*)*#?$/)) {
                                 trailer = 'https://www.youtube.com/';
-                              }
-                              mainApi.setMovie({movieId, country, director, year, description, image, trailer, nameRU, nameEN, thumbnail, duration})
+                        }
+                        mainApi.setMovie({
+                                movieId,
+                                country,
+                                director,
+                                year,
+                                description,
+                                image,
+                                trailer,
+                                nameRU,
+                                nameEN,
+                                thumbnail,
+                                duration
+                        })
                                 .then((res) => {
-                                  setSavedMovies([...savedMovies, res]);
+                                        setSavedMovies([...savedMovies, res]);
                                 })
                                 .then(() => {
-                                  localStorage.setItem('savedMovie', JSON.stringify(savedMovies));
-                                  getSavedMovies();
+                                        localStorage.setItem('savedMovie', JSON.stringify(savedMovies));
+                                        getSavedMovies();
                                 })
                                 .catch((err) => {
-                                  console.log(err);
+                                        console.log(err);
                                 });
                 } else {
                         savedMovies.map(mov => {
@@ -99,11 +98,11 @@ function MovieCard({
         return (
                 (<article className="movieCard" >
                         <a href={trailer} className="movieCard__link" target="_blank" rel="noopener noreferrer">
-                        <img className="movieCard__img"
-                                src={savedMoviesPage ? `${thumbnail}` : `https://api.nomoreparties.co${thumbnail}`}
-                                alt="Картинка фильма" />
-                        <h2 className="movieCard__heading">{nameRU}</h2>
-                        <p className="movieCard__time">{newDuration}</p>
+                                <img className="movieCard__img"
+                                        src={savedMoviesPage ? `${thumbnail}` : `https://api.nomoreparties.co${thumbnail}`}
+                                        alt="Картинка фильма" />
+                                <h2 className="movieCard__heading">{nameRU}</h2>
+                                <p className="movieCard__time">{newDuration}</p>
                         </a>
                         {!savedMoviesPage ?
                                 (<button onClick={heartClick} type="button"

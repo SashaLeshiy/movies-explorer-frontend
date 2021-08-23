@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import logo from '../../images/logo_svg.svg';
-import * as mainApi from '../../utils/MainApi';
+// import * as mainApi from '../../utils/MainApi';
 
 function Login({ linkToHome,
       linkToRegister,

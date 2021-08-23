@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import globus from '../../../images/text-logo.svg';
 
 function Promo({ section1 }) {

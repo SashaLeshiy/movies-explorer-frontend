@@ -11,7 +11,7 @@ function SavedMovies({
       // movies,
       errors,
       // setErrors,
-      setSavedMoviesPage,
+      // setSavedMoviesPage,
       savedMoviesPage,
       setSavedMovies,
       savedMovies,
@@ -57,6 +57,7 @@ function SavedMovies({
 }) {
       useEffect(() => {
             getSavedMovie();
+            setSearchPhrase('');
       }, [getSavedMovie]);
 
       useEffect(() => {

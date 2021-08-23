@@ -1,60 +1,47 @@
 import React, { useEffect } from 'react';
-import SavedMovies from '../../SavedMovies/SavedMovies';
+// import SavedMovies from '../../SavedMovies/SavedMovies';
 
 function SearchForm({
     movies,
     // handleChange,
     errors,
     // setErrors,
-    isValid,
-    setIsValid,
-    setSearchPhrase,
+    // isValid,
+    // setIsValid,
+    // setSearchPhrase,
     searchPhrase,
-    setSearchMovie,
-    setSavedMovies,
-    searchMovie,
+    // setSearchMovie,
+    // setSavedMovies,
+    // searchMovie,
     // setMovies,
     // movies,
     // isSearch,
-    setIsSearch,
-    getPhilms,
+    // setIsSearch,
+    // getPhilms,
     // searchMessage,
-    setSearchMessage,
-    setIsCheckBox,
+    // setSearchMessage,
+    // setIsCheckBox,
     isCheckBox,
     // compareMovies,
     handleChangeSearchPhrase,
     // searchMov,
     handlerCheckBox, 
-    savedMovies,
-    movieSearch,
-    savedMoviesPage,
+    // savedMovies,
+    // movieSearch,
+    // savedMoviesPage,
     // setIndex,
     // index,
-    setButtonMore,
+    // setButtonMore,
     // buttonMore,
-    indexByWidth,
-    savedMovieSearch,
-    setSearchSavedMovies,
-    searchSavedMovies,
-    setIsLoading,
-    isLoading,
+    // indexByWidth,
+    // savedMovieSearch,
+    // setSearchSavedMovies,
+    // searchSavedMovies,
+    // setIsLoading,
+    // isLoading,
     handleSearchSubmit,
-    searchSubmitAndCheck
+    // searchSubmitAndCheck
 }) {
-
-    
-    // useEffect(() => {
-    //     // setSearchPhrase('');
-    //     setIsValid(false);
-    // }, [])
-
-    
-
-    // useEffect(() => {
-    //         searchSubmitAndCheck();
-    // }, [isCheckBox]);
-
 
     return (
         <div className="searchForm">

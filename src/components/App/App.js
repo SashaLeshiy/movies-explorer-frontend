@@ -108,7 +108,7 @@ function App() {
     mainApi.getSavedMovie()
       .then((res) => {
         res.map((mov) => {
-          movOwner.push(mov.movieId);
+          return movOwner.push(mov.movieId);
         })
         localStorage.setItem('savedMovie', JSON.stringify(res));
         setSavedMovies(res);
@@ -191,7 +191,7 @@ function App() {
       localStorage.setItem('searchSavedMovies', JSON.stringify(newMovie));
       // setSavedMovies(newMovie);
       setSearchSavedMovies(newMovie);
-      setSearchPhrase('');
+      // setSearchPhrase('');
     }
   }
 

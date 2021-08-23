@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import Promo from './Promo/Promo';
 import AboutProject from './AboutProject/AboutProject';

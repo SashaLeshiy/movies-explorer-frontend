@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MovieCardList from './MoviesCardList/MovieCardList';
 import SearchForm from './SearchForm/SearchForm'
 import Preloader from './Preloader/Preloader';
@@ -59,42 +59,12 @@ function Movies({ setMovies,
       }, [setSearchMovie]);
 
       useEffect(() => {
-            if(searchMovie && searchMovie.length === 0) {
-                setSearchMessage('Ничего не найдено!')
+            if (searchMovie && searchMovie.length === 0) {
+                  setSearchMessage('Ничего не найдено!')
             } else {
                   setSearchMessage('');
             }
-        }, [searchMovie])
-
-      // const [searchMovie, setSearchMovie] = useState(JSON.parse(localStorage.getItem('searchMovie')) || []);
-      
-      // useEffect(() => {
-      //       setSearchMovie(JSON.parse(localStorage.getItem('searchMovie')));
-      // }, [setSearchMovie])
-
-
-      // useEffect(() => {
-      //       if (movies) {
-      //             setSearchPhrase(localStorage.getItem('searchPhrase'));
-      //             movieSearch()
-      //             setSearchMessage('');
-      //       };
-      // }, [movies]);
-
-      
-
-
-
-      // const handleChangeSearchPhrase = (event) => {
-      //       const target = event.target;
-      //       const name = target.name;
-      //       const value = target.value;
-      //       setValues({ ...values, [name]: value });
-      //       setErrors(target.validationMessage);
-      //       setIsValid(target.closest("form").checkValidity());
-      //       setSearchPhrase(event.target.value);
-      // }
-
+      }, [searchMovie])
 
       return (
             (<section className="movies">
