@@ -55,12 +55,17 @@ function SavedMovies({
       searchSubmitAndCheck,
             
 }) {
-      console.log(searchSavedMovies);
-      console.log('savedMovie -->', savedMovies);
-
       useEffect(() => {
             getSavedMovie();
       }, [getSavedMovie]);
+
+      useEffect(() => {
+            if(searchSavedMovies.length === 0) {
+                setSearchMessage('Ничего не найдено!')
+            } else {
+                  setSearchMessage('');
+            }
+        }, [searchSavedMovies]);
 
       return (
             <section className="savedMovies">

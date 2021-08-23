@@ -145,6 +145,7 @@ function App() {
   }
 
   function movieSearch() {
+    setSearchMessage('');
     setIsLoading(true);
     localStorage.setItem('searchPhrase', searchPhrase);
     let newMovie = [];
@@ -158,17 +159,18 @@ function App() {
           newMovie.push(movie);
         }
       })
+      setTimeout(showLoader, 1000);
       if (newMovie.length === 0) {
         console.log('ошибка');
         setSearchMessage('Ничего не найдено!')
       }
-      setTimeout(showLoader, 1000);
       localStorage.setItem('searchMovies', JSON.stringify(newMovie));
       setSearchMovie(newMovie);
     }
   }
 
   function savedMovieSearch() {
+    setSearchMessage('');
     setIsLoading(true);
     setSearchSavedMovies([]);
     setIsSearch(true);

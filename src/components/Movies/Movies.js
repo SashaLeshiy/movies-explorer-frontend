@@ -58,6 +58,16 @@ function Movies({ setMovies,
             setSearchMovie(JSON.parse(localStorage.getItem('searchMovies')));
       }, [setSearchMovie]);
 
+      useEffect(() => {
+            if(searchMovie.length === 0) {
+                setSearchMessage('Ничего не найдено!')
+            } else {
+                  setSearchMessage('');
+            }
+        }, [searchMovie])
+
+      console.log(searchMovie.length);
+
       // const [searchMovie, setSearchMovie] = useState(JSON.parse(localStorage.getItem('searchMovie')) || []);
       
       // useEffect(() => {
