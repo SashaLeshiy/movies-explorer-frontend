@@ -48,8 +48,6 @@ function App() {
   const [buttonMore, setButtonMore] = useState(true);
   const [searchSavedMovies, setSearchSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovie')));
 
-  console.log(searchMovie);
-
   function indexByWidth() {
     if (window.innerWidth >= 1158) {
       setIndex(3);
