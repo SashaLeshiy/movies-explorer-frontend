@@ -55,6 +55,8 @@ function SavedMovies({
       searchSubmitAndCheck,
             
 }) {
+      console.log(searchSavedMovies);
+      console.log('savedMovie -->', savedMovies);
 
       useEffect(() => {
             getSavedMovie();
@@ -106,7 +108,7 @@ function SavedMovies({
                         <MovieCardList
                               getSavedMovies={getSavedMovies}
                               savedMovies={savedMovies}
-                              // setSavedMovies={setSavedMovies}
+                              setSavedMovies={setSavedMovies}
                               setMovies={setMovies}
                               savedMoviesPage={savedMoviesPage}
                               // isValid={isValid}

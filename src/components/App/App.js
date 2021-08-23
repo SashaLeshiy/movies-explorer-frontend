@@ -48,8 +48,6 @@ function App() {
   const [buttonMore, setButtonMore] = useState(true);
   const [searchSavedMovies, setSearchSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovie')));
 
-  console.log(isLoading);
-
   function indexByWidth() {
     if (window.innerWidth >= 1158) {
       setIndex(3);
@@ -168,8 +166,6 @@ function App() {
       localStorage.setItem('searchMovies', JSON.stringify(newMovie));
       setSearchMovie(newMovie);
     }
-    
-      
   }
 
   function savedMovieSearch() {
@@ -178,7 +174,6 @@ function App() {
     setIsSearch(true);
     let newMovie = [];
     if (savedMovies) {
-      console.log(searchPhrase);
       savedMovies.filter((movie) => {
         let nameRU = movie.nameRU.toLowerCase();
         if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
@@ -264,6 +259,9 @@ function App() {
     mainApi.setMovie(props)
       .then((res) => {
         setSavedMovies([...savedMovies, res]);
+      })
+      .then(() => {
+        localStorage.setItem('savedMovie', JSON.stringify(savedMovies));
       })
       .catch((err) => {
         console.log(err);
@@ -433,6 +431,7 @@ function App() {
             // getPhilms={getPhilms}
             setSearchMessage={setSearchMessage}
             searchMessage={searchMessage}
+            setSavedMovies={setSavedMovies}
             setNewSearchMovie={setNewSearchMovie}
             newSearchMovie={newSearchMovie}
             isLoading={isLoading}

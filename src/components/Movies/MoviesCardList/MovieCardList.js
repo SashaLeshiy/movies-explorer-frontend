@@ -14,7 +14,7 @@ function MovieCardList({
     setSearchMovie,
     // setNewSearchMovie,
     // newSearchMovie,
-    // setSavedMovies,
+    setSavedMovies,
     savedMovies,
     getSavedMovies,
     createMovie,
@@ -40,7 +40,6 @@ function MovieCardList({
 }) {
     
     const [inputMovie, setInputMovie] = useState([]);
-    
 
     function handleMore() {
         if(window.innerWidth >= 1158) {
@@ -123,6 +122,7 @@ function MovieCardList({
                             savedMoviesPage={savedMoviesPage}
                             createMovie={createMovie}
                             arrayLikeMovieId={arrayLikeMovieId}
+                            setSavedMovies={setSavedMovies}
                             // setHeartRed={setHeartRed}
                             // isHeartRed={isHeartRed}
                         />

@@ -21,6 +21,7 @@ function MovieCard({
         createMovie,
         arrayLikeMovieId,
         savedMovies,
+        setSavedMovies
 }) {
 
         
@@ -57,19 +58,34 @@ function MovieCard({
         function heartClick() {
                 setHeartRed(!isHeartRed);
                 if (!isHeartRed) {
-                        createMovie({
-                                movieId,
-                                country,
-                                director,
-                                year,
-                                description,
-                                image,
-                                trailer,
-                                nameEN,
-                                nameRU,
-                                thumbnail,
-                                duration,
-                        });
+                        // createMovie({
+                        //         movieId,
+                        //         country,
+                        //         director,
+                        //         year,
+                        //         description,
+                        //         image,
+                        //         trailer,
+                        //         nameEN,
+                        //         nameRU,
+                        //         thumbnail,
+                        //         duration,
+                        // });
+                        if (!trailer
+                                .match(/^(http|https):\/\/(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\-._~:/?#[\]@!$&'()*+,;=]*)*#?$/)) {
+                                trailer = 'https://www.youtube.com/';
+                              }
+                              mainApi.setMovie({movieId, country, director, year, description, image, trailer, nameRU, nameEN, thumbnail, duration})
+                                .then((res) => {
+                                  setSavedMovies([...savedMovies, res]);
+                                })
+                                .then(() => {
+                                  localStorage.setItem('savedMovie', JSON.stringify(savedMovies));
+                                  getSavedMovies();
+                                })
+                                .catch((err) => {
+                                  console.log(err);
+                                });
                 } else {
                         savedMovies.map(mov => {
                                 if (mov.movieId === movieId) {

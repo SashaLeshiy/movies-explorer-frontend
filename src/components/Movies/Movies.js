@@ -49,7 +49,8 @@ function Movies({ setMovies,
       handleSearchSubmit,
       searchSubmitAndCheck,
       setSearchSavedMovies,
-      searchSavedMovies
+      searchSavedMovies,
+      setSavedMovies
 
 }) {
 
@@ -139,6 +140,7 @@ function Movies({ setMovies,
                               // isValid={isValid}
                               // isSearch={isSearch}
                               setIsLoading={setIsLoading}
+                              setSavedMovies={setSavedMovies}
                               searchMovie={searchMovie}
                               setSearchMovie={setSearchMovie}
                               setSearchPhrase={setSearchPhrase}
