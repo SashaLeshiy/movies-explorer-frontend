@@ -147,7 +147,8 @@ function App() {
   function movieSearch() {
     setSearchMessage('');
     setIsLoading(true);
-    localStorage.setItem('searchPhrase', searchPhrase);
+    console.log(searchPhrase);
+    localStorage.getItem('searchPhrase', searchPhrase);
     let newMovie = [];
     if (movies && searchPhrase) {
       movies.map((movie) => {
@@ -163,6 +164,7 @@ function App() {
       if (newMovie.length === 0) {
         setSearchMessage('Ничего не найдено!')
       }
+      localStorage.setItem('searchPhrase', searchPhrase);
       localStorage.setItem('searchMovies', JSON.stringify(newMovie));
       setSearchMovie(newMovie);
     }
