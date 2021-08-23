@@ -17,6 +17,12 @@ function Profile({ setLoggedIn,
       const [errorMessage, setErrorMessage] = useState(false);
       
       function patchUserData(newProfile) {
+            if(!newProfile.email) {
+                  newProfile.email = userInfo.email;
+            }
+            if(!newProfile.name) {
+                  newProfile.name = userInfo.name;
+            }
             mainApi.setUser(newProfile)
             .then((res) => {
                   setCurrentUser({ name: res.name, email: res.email, id: res.id });
@@ -41,7 +47,7 @@ function Profile({ setLoggedIn,
             setLoggedIn(true);
             setProfileData({ name: userInfo.name, email: userInfo.email });
             setProfileMessage('');
-      }, []);
+      }, [setProfileData]);
 
       return (
             (<section className="profile">
@@ -51,13 +57,13 @@ function Profile({ setLoggedIn,
                               <span className="profile__name">Имя</span>
                               <input type="text" className="profile__input profile__input_name"
                                     name="name" onChange={handleChange}
-                                    minLength="2" maxLength="30" value={profileData.name} required />
+                                    minLength="2" maxLength="30" value={profileData.name || userInfo.name} required />
                               <span className="profile__error">{errors.name}</span>
                               <span className="profile__span"></span>
                               <span className="profile__email">E-Mail</span>
                               <input type="email" className="profile__input profile__input_email"
                                     name="email" onChange={handleChange}
-                                    minLength="2" maxLength="30" value={profileData.email} required />
+                                    minLength="2" maxLength="30" value={profileData.email || userInfo.email} required />
                               <span className="profile__error">{errors.email}</span>
                               <span className={`profile__error profile__message ${errorMessage ? 'profile__message_error' : ''}`}>
                                     {profileMessage}</span>

@@ -161,7 +161,6 @@ function App() {
       })
       setTimeout(showLoader, 1000);
       if (newMovie.length === 0) {
-        console.log('ошибка');
         setSearchMessage('Ничего не найдено!')
       }
       localStorage.setItem('searchMovies', JSON.stringify(newMovie));
@@ -179,16 +178,13 @@ function App() {
       savedMovies.filter((movie) => {
         let nameRU = movie.nameRU.toLowerCase();
         if (isCheckBox && nameRU.includes(searchPhrase.toLowerCase())) {
-          // setSearchSavedMovies([...searchSavedMovies, movie])
           newMovie.push(movie);
         } else if (!isCheckBox && nameRU.includes(searchPhrase.toLowerCase())
           && movie.duration >= 40) {
-          // setSearchSavedMovies([...searchSavedMovies, movie])
           newMovie.push(movie);
         }
       })
       if (newMovie.length === 0) {
-        console.log('ошибка');
         setSearchMessage('Ничего не найдено!')
       }
       setTimeout(showLoader, 1000);
