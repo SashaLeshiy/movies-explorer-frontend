@@ -4,6 +4,7 @@
   padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  height: 1px;
   background-color: #202020;
 }
 

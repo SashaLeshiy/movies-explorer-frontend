@@ -124,14 +124,12 @@ function App() {
   function handleSearchSubmit(event) {
     event.preventDefault();
     if (isValid) {
-      // localStorage.setItem('searchPhrase', searchPhrase);
       searchSubmitAndCheck();
     }
   }
 
   function searchSubmitAndCheck() {
     if (!savedMoviesPage) {
-      // localStorage.setItem('searchPhrase', searchPhrase);
       movieSearch();
       setButtonMore(true);
       indexByWidth();
@@ -192,9 +190,7 @@ function App() {
       }
       setTimeout(showLoader, 1000);
       localStorage.setItem('searchSavedMovies', JSON.stringify(newMovie));
-      // setSavedMovies(newMovie);
       setSearchSavedMovies(newMovie);
-      // setSearchPhrase('');
     }
   }
 
@@ -310,7 +306,6 @@ function App() {
     localStorage.setItem('savedMoviePage', false);
     setMobileMenuPopupOpen(false);
     setMainPage(false);
-    // setIsLoading(false);
     setSearchMessage('');
     setErrors('');
     history.push('/movies');
