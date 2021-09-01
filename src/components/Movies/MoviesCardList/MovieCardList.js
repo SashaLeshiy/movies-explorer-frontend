@@ -1,28 +1,14 @@
 import React, { useEffect, useState } from 'react';
-// import SavedMovies from '../../SavedMovies/SavedMovies';
 import MovieCard from '../MoviesCard/MovieCard';
-// import * as mainApi from '../../../utils/MainApi';
-// import SavedMovies from '../../SavedMovies/SavedMovies';
-// import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
 function MovieCardList({ 
-    // movies,
     savedMoviesPage,
-    // isValid,
-    // isSearch,
     searchMovie,
-    // setSearchMovie,
-    // setNewSearchMovie,
-    // newSearchMovie,
     setSavedMovies,
     savedMovies,
     getSavedMovies,
     createMovie,
-    // setCurrentUser,
-    // currentUser,
     arrayLikeMovieId,
-    // setHeartRed,
-    // isHeartRed,
     setIndex,
     index,
     setButtonMore,
@@ -30,13 +16,6 @@ function MovieCardList({
     searchMessage,
     setSearchMessage,
     searchSavedMovies,
-    // setSearchSavedMovies,
-    // movieSearch,
-    // setSearchPhrase,
-    // searchPhrase,
-    // setIsSearch,
-    // isSearch, 
-    // setIsLoading
 }) {
     
     const [inputMovie, setInputMovie] = useState([]);
@@ -94,8 +73,6 @@ function MovieCardList({
                         getSavedMovies={getSavedMovies}
                         createMovie={createMovie}
                         arrayLikeMovieId={arrayLikeMovieId}
-                        // setHeartRed={setHeartRed}
-                        // isHeartRed={isHeartRed}
                     />
 
                 })
@@ -123,8 +100,6 @@ function MovieCardList({
                             createMovie={createMovie}
                             arrayLikeMovieId={arrayLikeMovieId}
                             setSavedMovies={setSavedMovies}
-                            // setHeartRed={setHeartRed}
-                            // isHeartRed={isHeartRed}
                         />
 
                     })

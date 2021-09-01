@@ -1,5 +1,4 @@
 import React from 'react';
-import { location } from 'react-router-dom';
 import account from '../../images/account_icon.svg';
 
 function Navigation({ linkToMovies, 

@@ -8,11 +8,9 @@ function Movies({ setMovies,
       movies,
       savedMovies,
       savedMoviesPage,
-      // handleChange,
       isValid,
       setIsValid,
       errors,
-      // setErrors,
       setIsSearch,
       isSearch,
       setSearchPhrase,
@@ -20,7 +18,6 @@ function Movies({ setMovies,
       searchWord,
       setSearchMovie,
       searchMovie,
-      // getPhilms,
       getSavedMovies,
       setSearchMessage,
       searchMessage,
@@ -31,10 +28,7 @@ function Movies({ setMovies,
       setIsLoading,
       isCheckBox,
       setIsCheckBox,
-      // compareMovies,
       createMovie,
-      //setCurrentUser,
-      //currentUser,
       arrayLikeMovieId,
       handleChangeSearchPhrase,
       handlerCheckBox,
@@ -74,34 +68,24 @@ function Movies({ setMovies,
                   <div className="movies__content content">
                         <SearchForm
                               movies={movies}
-                              // handleChange={handleChange}
                               isValid={isValid}
                               setIsValid={setIsValid}
                               errors={errors}
-                              // setErrors={setErrors}
                               setSearchPhrase={setSearchPhrase}
                               searchPhrase={searchPhrase}
                               searchWord={searchWord}
                               setSearchMovie={setSearchMovie}
                               searchMovie={searchMovie}
-                              // setMovies={setMovies}
                               isSearch={isSearch}
                               setIsSearch={setIsSearch}
-                              // movies={movies}
-                              // getPhilms={getPhilms}
                               setSearchMessage={setSearchMessage}
-                              // searchMessage={searchMessage}
                               setNewSearchMovie={setNewSearchMovie}
                               newSearchMovie={newSearchMovie}
                               setIsCheckBox={setIsCheckBox}
                               isCheckBox={isCheckBox}
-                              // compareMovies={compareMovies}
                               handleChangeSearchPhrase={handleChangeSearchPhrase}
                               handlerCheckBox={handlerCheckBox}
-                              // setIndex={setIndex}
-                              // index={index}
                               setButtonMore={setButtonMore}
-                              // buttonMore={buttonMore}
                               indexByWidth={indexByWidth}
                               movieSearch={movieSearch}
                               setIsLoading={setIsLoading}
@@ -118,8 +102,6 @@ function Movies({ setMovies,
                               getSavedMovies={getSavedMovies}
                               savedMovies={savedMovies}
                               savedMoviesPage={savedMoviesPage}
-                              // isValid={isValid}
-                              // isSearch={isSearch}
                               setIsLoading={setIsLoading}
                               setSavedMovies={setSavedMovies}
                               searchMovie={searchMovie}
@@ -128,8 +110,6 @@ function Movies({ setMovies,
                               earchPhrase={searchPhrase}
                               handleMore={handleMore}
                               createMovie={createMovie}
-                              // setCurrentUser={setCurrentUser}
-                              // currentUser={currentUser}
                               setSearchMessage={setSearchMessage}
                               arrayLikeMovieId={arrayLikeMovieId}
                               setHeartRed={setHeartRed}

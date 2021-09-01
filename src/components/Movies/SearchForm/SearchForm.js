@@ -1,46 +1,13 @@
-import React, { useEffect } from 'react';
-// import SavedMovies from '../../SavedMovies/SavedMovies';
+import React from 'react';
 
 function SearchForm({
     movies,
-    // handleChange,
     errors,
-    // setErrors,
-    // isValid,
-    // setIsValid,
-    // setSearchPhrase,
     searchPhrase,
-    // setSearchMovie,
-    // setSavedMovies,
-    // searchMovie,
-    // setMovies,
-    // movies,
-    // isSearch,
-    // setIsSearch,
-    // getPhilms,
-    // searchMessage,
-    // setSearchMessage,
-    // setIsCheckBox,
     isCheckBox,
-    // compareMovies,
     handleChangeSearchPhrase,
-    // searchMov,
     handlerCheckBox, 
-    // savedMovies,
-    // movieSearch,
-    // savedMoviesPage,
-    // setIndex,
-    // index,
-    // setButtonMore,
-    // buttonMore,
-    // indexByWidth,
-    // savedMovieSearch,
-    // setSearchSavedMovies,
-    // searchSavedMovies,
-    // setIsLoading,
-    // isLoading,
     handleSearchSubmit,
-    // searchSubmitAndCheck
 }) {
 
     return (

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import logo from '../../images/logo_svg.svg';
-// import * as mainApi from '../../utils/MainApi';
 
 function Login({ linkToHome,
       linkToRegister,
@@ -12,11 +11,6 @@ function Login({ linkToHome,
       setLoginData,
       setResError,
       resError,
-      // setCurrentUser,
-      // linkToMovies,
-      // setLoggedIn,
-      // getUserInfo,
-      // tokenCheck,
       onLogin
 }) {
 

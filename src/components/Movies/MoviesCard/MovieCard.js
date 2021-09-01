@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import * as mainApi from '../../../utils/MainApi';
-// import SavedMovies from '../../SavedMovies/SavedMovies';
 
 
 function MovieCard({
