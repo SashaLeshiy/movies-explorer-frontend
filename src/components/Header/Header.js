@@ -12,10 +12,10 @@ function Header({ linkToMovies,
       isMobileMenu, 
       openMobileMenu,
       headlessPage,
-      isMainPage
+      mainPage, location
 }) {
       return (
-            (<header className={`header ${loggedIn ? "header__dark" : ""} ${headlessPage ? "hidden" : ""}`}>
+            (<header className={`header ${!mainPage ? "header__dark" : ""} ${headlessPage ? "hidden" : ""}`}>
                   <div className="header__flex content">
                         <img onClick={linkToHome} src={logo} className="header__logo" alt="логотип Diploma" />
                         <Navigation
@@ -24,9 +24,10 @@ function Header({ linkToMovies,
                               isMobileMenu={isMobileMenu}
                               openMobileMenu={openMobileMenu}
                               linkToProfile={linkToProfile}
-                              isMainPage={isMainPage}
                               linkToRegister={linkToRegister}
                               linkToLogin={linkToLogin}
+                              loggedIn={loggedIn}
+                              location={location}
                         />
                   </div>
             </header>)

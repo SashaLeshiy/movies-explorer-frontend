@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import logo from '../../images/logo_svg.svg';
 import * as mainApi from '../../utils/MainApi';
 
@@ -12,16 +12,24 @@ function Register({ linkToHome,
       registerData,
       setRegisterData, 
       setResError,
-      resError
+      resError,
+      linkToMovies,
+      setLoggedIn,
+      setCurrentUser,
+      onLogin
 }) {
            
       function onRegister(data) {
             mainApi.register(data)
                   .then((res) => {
+                        setCurrentUser({ name: res.name, email: res.email, id: res.id });
+                        setLoggedIn(true);
                         setResError(false);
-                        console.log(res);
+                        onLogin({ email: data.email, password: data.password});
+                        linkToMovies();
                   })
                   .catch((err) => {
+                        console.log(err);
                         setResError(true);
                   });
       };
@@ -34,7 +42,8 @@ function Register({ linkToHome,
       useEffect(() => {
             setHeadlessPage(true);
             setRegisterData({ name: '', email: '', password: '' });
-      }, [ setRegisterData, setHeadlessPage ]);
+            setResError(false);
+      }, [ setRegisterData, setHeadlessPage, setResError ]);
 
       return (
             (<section className="register">

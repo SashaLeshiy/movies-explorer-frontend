@@ -1,7 +1,8 @@
 import React from 'react';
 import globus from '../../../images/text-logo.svg';
 
-function Promo() {
+function Promo({ section1 }) {
+
       return (
             (<section className="promo">
                   <div className="promo__grid content">
@@ -12,7 +13,7 @@ function Promo() {
                         <div >
                               <img className="promo__image" src={globus} alt="картинка глобус" />
                         </div>
-                        <button className="promo__button">Узнать больше</button>
+                        <a href="/#aboutproject" className="promo__button">Узнать больше</a>
                   </div>
             </section>)
       );

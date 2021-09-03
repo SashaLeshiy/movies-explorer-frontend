@@ -1,28 +1,18 @@
 import React, { useEffect } from 'react';
 import logo from '../../images/logo_svg.svg';
-import * as mainApi from '../../utils/MainApi';
 
-function Login({ linkToHome, 
-      linkToRegister, 
-      setHeadlessPage, 
-      handleChange, 
-      errors, 
+function Login({ linkToHome,
+      linkToRegister,
+      setHeadlessPage,
+      handleChange,
+      errors,
       isValid,
       loginData,
-      setLoginData, 
+      setLoginData,
       setResError,
-      resError
- }) {
-
-      function onLogin(data) {
-            mainApi.authorize(data)
-                  .then((res) => {
-                        console.log(res)
-                  })
-                  .catch((err) => {
-                        setResError(true);
-                  });
-      };
+      resError,
+      onLogin
+}) {
 
       function handleSubmit(event) {
             event.preventDefault();
@@ -32,7 +22,8 @@ function Login({ linkToHome,
       useEffect(() => {
             setHeadlessPage(true);
             setLoginData({ email: '', password: '' });
-      }, [setHeadlessPage, setLoginData]);
+            setResError(false);
+      }, [setHeadlessPage, setLoginData, setResError]);
       return (
             (<section className="login">
                   <div className="login__container">
