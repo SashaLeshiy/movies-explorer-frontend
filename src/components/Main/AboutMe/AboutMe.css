@@ -97,10 +97,25 @@
 }
 
 .about__portfolio_link {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: max-content 1fr;
     border-bottom: 1px solid #424242;
     padding: 16px 0;
+}
+
+.about__portfolio_arrow {
+    align-self: center;
+    justify-self: end;
+}
+
+.about__portfolio_description {
+    margin: 0px;
+    color: #8b8b8b;
+    font-size: 14px;
+    line-height: 1.2em;
+    font-weight: 200;
 }
 
 .last-link {
@@ -151,7 +166,7 @@
 
 @media screen and (max-width: 550px) {
     .about {
-        min-height: 1198px;
+        min-height: 1224px;
         padding-bottom: 160px;
     }
     .about__me {

@@ -25,16 +25,22 @@ function AboutMe() {
                               <h3 className="about__portfolio_heading">Портфолио</h3>
                               <ul className="about__portfolio_links">
                                     <li className="about__portfolio_link">
-                                         <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" href="http://dev.roooar.ru">Статичный сайт</a>
-                                         <img src={arrow} alt="стрелка" />
+                                         <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" 
+                                         href="http://dev.roooar.ru">Статичный сайт</a>
+                                         <img className="about__portfolio_arrow" src={arrow} alt="стрелка" />
+                                         <p className="about__portfolio_description">Адаптивная верстка/БЭМ/flex/grid</p>
                                     </li>
                                     <li className="about__portfolio_link">
-                                         <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" href="https://zomlesh.nomoredomains.club">Адаптивный сайт</a>
-                                         <img src={arrow} alt="стрелка" />
+                                         <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" 
+                                         href="https://zomlesh.nomoredomains.club">Адаптивный сайт</a>
+                                         <img className="about__portfolio_arrow" src={arrow} alt="стрелка" />
+                                         <p className="about__portfolio_description">'Инстаграм'</p>
                                     </li>
                                     <li className="about__portfolio_link last-link">
-                                         <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" href="https://zomlesh.nomoredomains.monster">Одностраничное приложение</a>
-                                         <img src={arrow} alt="стрелка" />
+                                         <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" 
+                                         href="https://zomlesh.nomoredomains.monster">Одностраничное приложение</a>
+                                         <img className="about__portfolio_arrow" src={arrow} alt="стрелка" />
+                                         <p className="about__portfolio_description">Дипломная работа</p>
                                     </li>
                               </ul>
                         </div>
