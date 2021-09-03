@@ -163,7 +163,6 @@ function App() {
       localStorage.setItem('searchPhrase', searchPhrase);
       localStorage.setItem('searchMovies', JSON.stringify(newMovie));
       setSearchMovie(newMovie);
-      console.log(newMovie);
     } else if (!searchPhrase) {
       setIsLoading(false);
     }
@@ -412,8 +411,6 @@ function App() {
             savedMoviesPage={savedMoviesPage}
             setLoggedIn={setLoggedIn}
             getSavedMovies={getSavedMovies}
-            // handleChange={handleChange}
-            // setErrors={setErrors}
             errors={errors}
             isValid={isValid}
             setIsValid={setIsValid}
@@ -424,7 +421,6 @@ function App() {
             setSearchMovie={setSearchMovie}
             movieSearch={movieSearch}
             searchMovie={searchMovie}
-            // getPhilms={getPhilms}
             setSearchMessage={setSearchMessage}
             searchMessage={searchMessage}
             setSavedMovies={setSavedMovies}
@@ -435,8 +431,6 @@ function App() {
             setIsCheckBox={setIsCheckBox}
             isCheckBox={isCheckBox}
             createMovie={createMovie}
-            // setCurrentUser={setCurrentUser}
-            // currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
             handleChangeSearchPhrase={handleChangeSearchPhrase}
             handlerCheckBox={handlerCheckBox}
@@ -454,7 +448,6 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/saved-movies" component={SavedMovies}
-            // setErrors={setErrors}
             errors={errors}
             isValid={isValid}
             isSearch={isSearch}
@@ -472,22 +465,16 @@ function App() {
             searchMessage={searchMessage}
             getSavedMovies={getSavedMovies}
             setSearchPhrase={setSearchPhrase}
-            // setSearchMovie={setSearchMovie}
             searchPhrase={searchPhrase}
             setCheckBox={setIsCheckBox}
             isCheckBox={isCheckBox}
-            // setCurrentUser={setCurrentUser}
-            // currentUser={currentUser}
             arrayLikeMovieId={arrayLikeMovieId}
             setArrayLikeMovieId={setArrayLikeMovieId}
-            // movieSearch={movieSearch}
             handleChangeSearchPhrase={handleChangeSearchPhrase}
             savedMovieSearch={savedMovieSearch}
             handlerCheckBox={handlerCheckBox}
             setSearchSavedMovies={setSearchSavedMovies}
             searchSavedMovies={searchSavedMovies}
-            // setHeartRed={setHeartRed}
-            // isHeartRed={isHeartRed}
             handleSearchSubmit={handleSearchSubmit}
             searchSubmitAndCheck={searchSubmitAndCheck}
           >
