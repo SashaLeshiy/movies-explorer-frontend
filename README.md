@@ -23,7 +23,7 @@
 
 **Ссылки**
 * https://zomlesh.nomoredomains.monster
-* backend: https://api.zomlesh.nomoredomains.monster
+* backend: https://api.zomlesh.nomoredomains.monster репозиторий: https://github.com/SashaLeshiy/movies-explorer-api
 
 **IP**
 178.154.200.97
