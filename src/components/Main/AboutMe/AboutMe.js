@@ -26,7 +26,7 @@ function AboutMe() {
                               <ul className="about__portfolio_links">
                                     <li className="about__portfolio_link">
                                          <a className="about__portfolio_out" target="_blank" rel="noopener noreferrer" 
-                                         href="http://dev.roooar.ru">Статичный сайт</a>
+                                         href="https://vacanza-russo.netlify.app/">Статичный сайт</a>
                                          <img className="about__portfolio_arrow" src={arrow} alt="стрелка" />
                                          <p className="about__portfolio_description">Адаптивная верстка/БЭМ/flex/grid</p>
                                     </li>
